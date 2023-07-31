@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Work+Sans&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Work Sans', sans-serif;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+/* parte Cabecalho */
+
+.header-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fc8020;
+    width: 100vw;
+}
+
+.container-header-menu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+}
+
+.container-header-menu button{
+}
+
+.container-header-menu
+
+#logo{
+    width: 120px;
+    height: 120px;
+}
+
+/* Conteudo Principal do Menu */
+
+.container-main-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    flex-direction: column;
+    background-color: rgb(224, 224, 224);
+    width: 70vw;
+    border-radius: 10px;
+}
+
+.tophead-main-menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 700px;
+    margin-top: 20px;
+}
+
+#tophead-info-user{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    width: 400px;
+}
+
+#tophead-info-user p{
+    margin-left: 20px;
+}
+
+#tophead-info-user img{
+    margin-left: 20px;
+}
+
+#tophead-button{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 300px;
+}
+
+#photo-login-user-menu{
+   width: 50px; 
+   border-radius: 50%;
+   height: 50px;
+   border: 1px solid black;
+}
+
+#project-img-menu{
+    width: 700px;
+}
+
+#project-like, #project-comment{
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+#project-like{
+    margin-right: 10px;
+}
+
+.mainhead-main-menu svg{
+    transition: .3s;
+}
+
+.mainhead-main-menu svg:hover{
+    color: rgb(29, 179, 206);
+}
+
+
+
+
+
+

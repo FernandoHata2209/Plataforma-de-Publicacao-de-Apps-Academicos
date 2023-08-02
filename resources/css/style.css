@@ -1,3 +1,5 @@
+
+
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Work+Sans&display=swap');
 
 *{
@@ -12,7 +14,8 @@ body{
     flex-direction: column;
     width: 100vw;
     overflow-x: hidden;
-  overflow-y: scroll;
+    overflow-y: scroll;
+    background-color: #fff1cf;
 }
 
 /* parte Cabecalho */
@@ -21,7 +24,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fc8020;
+    background: #678c99;
     width: 100vw;
 }
 
@@ -31,11 +34,6 @@ body{
     align-items: center;
     width: 100vw;
 }
-
-.container-header-menu button{
-}
-
-.container-header-menu
 
 #logo{
     width: 120px;
@@ -50,7 +48,7 @@ body{
     align-items: center;
     margin: 50px auto;
     flex-direction: column;
-    background-color: rgb(224, 224, 224);
+    background-color: #b8c7cc;
     width: 70vw;
     border-radius: 10px;
 }
@@ -98,9 +96,18 @@ body{
     width: 700px;
 }
 
+.mainhead-main-menu{
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+
 #project-like, #project-comment{
     cursor: pointer;
+}
+
+.container-project-like-comment{
     margin-bottom: 10px;
+
 }
 
 #project-like{

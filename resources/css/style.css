@@ -15,7 +15,7 @@ body{
     width: 100vw;
     overflow-x: hidden;
     overflow-y: scroll;
-    background-color: #fff1cf;
+    background: linear-gradient(#001848 0% ,#604878 100%);
 }
 
 /* parte Cabecalho */
@@ -24,7 +24,6 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #678c99;
     width: 100vw;
 }
 
@@ -40,6 +39,19 @@ body{
     height: 120px;
 }
 
+#header-settings{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#header-settings svg{
+    height: 30px;
+}
+
+#header-login{
+
+}
 /* Conteudo Principal do Menu */
 
 .container-main-menu{
@@ -48,7 +60,7 @@ body{
     align-items: center;
     margin: 50px auto;
     flex-direction: column;
-    background-color: #b8c7cc;
+    background-color: rgba(255, 255, 255, 0.25);
     width: 70vw;
     border-radius: 10px;
 }

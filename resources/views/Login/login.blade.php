@@ -1,27 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt_BR">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/style.css', 'resources/js/script.js'])
-    <title>Plataforma de Publicação de Apps Acadêmicos</title>
+    <title>Login - PPAA</title>
 </head>
 
 <body>
     <div class="header-menu">
         <div class="container-header-menu">
-            <button id="header-settings">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="24"
-                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M4 6l16 0"></path>
-                    <path d="M4 12l16 0"></path>
-                    <path d="M4 18l16 0"></path>
-                </svg>
-            </button>
             <a href="">
                 <svg id="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="255px" height="254px"
@@ -97,51 +87,45 @@
                 MVQxOTowNjoyNSswMzowMMOWpY0AAAAASUVORK5CYII=" />
                 </svg>
             </a>
-            <a href="" id="header-login">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24"
-                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                </svg>
-
-            </a>
         </div>
     </div>
-    <div class="container-main-menu">
-        <div class="tophead-main-menu">
-            <div id="tophead-info-user">
-                <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="Foto Do Usuario"
-                    id="photo-login-user-menu">
-                <p>Nome do Usuario</p>
-            </div>
-        </div>
-        <div class="mainhead-main-menu">
-            <h3>Titudo do Projeto do Usuario</h3>
-            <div class="container-project-user">
-                <img src="{{ Vite::asset('resources/img/teste.jpg') }}" alt="" id="project-img-menu">
-                <p>Informacoes do Projeto do Usuario</p>
-            </div>
-            <div class="container-project-like-comment">
-                <button id="project-like">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-filled" width="32"
-                        height="32" viewBox="0 0 24 24" stroke="#2c3e50" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round" id="like">
+
+    <div class="main-container-login">
+        <form action="LoginUser" class="login-form">
+            <div id="login-user-form">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="44"
+                        height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                            d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z"
-                            stroke-width="0" fill="currentColor" />
-                    </svg>
-                </button>
-                <span id="project-comment">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 1024 1024">
-                        <path fill="currentColor"
-                            d="m174.72 855.68l130.048-43.392l23.424 11.392C382.4 849.984 444.352 864 512 864c223.744 0 384-159.872 384-352c0-192.832-159.104-352-384-352S128 319.168 128 512a341.12 341.12 0 0 0 69.248 204.288l21.632 28.8l-44.16 110.528zm-45.248 82.56A32 32 0 0 1 89.6 896l56.512-141.248A405.12 405.12 0 0 1 64 512C64 299.904 235.648 96 512 96s448 203.904 448 416s-173.44 416-448 416c-79.68 0-150.848-17.152-211.712-46.72l-170.88 56.96z" />
+                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                     </svg>
                 </span>
+                <input type="text" name="" id="login-user">
             </div>
-        </div>
+            <div class="password-user-form">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="44"
+                        height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
+                        <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                        <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
+                    </svg>
+                </span>
+                <input type="password" name="" id="password-user">
+            </div>
+            <div class="button-container-login">
+                <button id="btn-login-user">
+                    Login
+                </button>
+                <button id="btn-register-user">
+                    Register
+                </button>
+            </div>
+        </form>
     </div>
 </body>
 

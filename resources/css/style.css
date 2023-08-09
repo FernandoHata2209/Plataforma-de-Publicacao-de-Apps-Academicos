@@ -1,5 +1,3 @@
-
-
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Work+Sans&display=swap');
 
 *{
@@ -15,7 +13,7 @@ body{
     width: 100vw;
     overflow-x: hidden;
     overflow-y: scroll;
-    background: linear-gradient(#001848 0% ,#604878 100%);
+    background: white
 }
 
 /* parte Cabecalho */
@@ -24,6 +22,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    background:#ff9522;
     width: 100vw;
 }
 
@@ -35,24 +34,132 @@ body{
 }
 
 #logo{
+    width: 100px;
+    height: 100px;
+}
+
+#header-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33vw;
+    height: 120px;
+}
+
+#header-login-menu{
     width: 120px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+#header-login-menu:hover{
+    background-color: #ffb260;
+}
+
+
+#header-settings-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33vw;
     height: 120px;
 }
 
 #header-settings{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: none;
     border: none;
     cursor: pointer;
+    transition: .3s;   
+    width: 120px; 
+    border-radius: 10px;
 }
+
 
 #header-settings svg{
     height: 30px;
 }
 
-#header-login{
-
+#header-settings:hover{
+    background-color: #ffb260;
 }
-/* Conteudo Principal do Menu */
+
+/* Conteudo Principal do Login do Usuario */
+
+.main-container-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20vh auto;
+    background-color: rgba(53, 53, 53, 0.25);
+    width: 30vw;
+    height: 35vh;
+    border-radius: 10px;
+}
+
+.login-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#inp-login-user, #inp-password-user{
+    border: none;
+    border-radius: 3px;
+    height: 20px;
+    width: 240px;
+    font-size: 15px;
+}
+
+#login-user-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#password-user-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#icon-login-user, #icon-password-user{
+    width: 40px;
+    margin-right: 10px;
+}
+
+.button-container-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#btn-login-user, #btn-register-user{
+    margin-top: 10px;
+    width: 120px;
+    height: 20px;
+    border: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+#btn-login-user:hover, #btn-register-user:hover{
+    background-color: rgb(87, 87, 87);
+    color: white;
+}
+
+#btn-login-user{
+    margin-right: 10px;
+}
+/* Conteudo Principal do Menu do Usuario */
 
 .container-main-menu{
     display: flex;
@@ -60,15 +167,12 @@ body{
     align-items: center;
     margin: 50px auto;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(53, 53, 53, 0.25);
     width: 70vw;
     border-radius: 10px;
 }
 
 .tophead-main-menu{
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: row;
     width: 700px;
     margin-top: 20px;
@@ -118,24 +222,37 @@ body{
 }
 
 .container-project-like-comment{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
     margin-bottom: 10px;
+    margin-top: 10px;
+}
 
+.container-project-like-comment p{
+    height: 20px;
 }
 
 #project-like{
-    margin-right: 10px;
+    margin-right: 20px;
+    border: none;
+    background: none;
 }
 
 .mainhead-main-menu svg{
     transition: .3s;
 }
 
-.mainhead-main-menu svg:hover{
-    color: rgb(29, 179, 206);
+#like{
+    color: white;
 }
 
+#like:hover{
+    width: 34px;
+    height: 34px;
+    color: rgb(0, 0, 0);
+}
 
-
-
-
-
+#like:active{
+    color: red;
+}

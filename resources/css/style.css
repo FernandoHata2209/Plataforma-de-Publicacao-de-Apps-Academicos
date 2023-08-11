@@ -142,16 +142,17 @@ body{
     align-items: center;
 }
 
-#btn-login-user, #btn-register-user{
+#btn-login-user, #btn-register-user, #btn-confirm-register{
     margin-top: 10px;
-    width: 120px;
+    padding: 0px 30px;
     height: 20px;
     border: none;
     cursor: pointer;
     transition: .3s;
+    border-radius: 10px;
 }
 
-#btn-login-user:hover, #btn-register-user:hover{
+#btn-login-user:hover, #btn-register-user:hover, #btn-confirm-register:hover{
     background-color: rgb(87, 87, 87);
     color: white;
 }
@@ -184,6 +185,7 @@ body{
     align-items: center;
     flex-direction: row;
     width: 400px;
+    height: 70px;
 }
 
 #tophead-info-user p{
@@ -192,6 +194,17 @@ body{
 
 #tophead-info-user img{
     margin-left: 20px;
+}
+
+#username-project-menu{
+    margin-left: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+#username-project-menu:hover{
+    text-decoration: underline;
+    color: blue;
 }
 
 #tophead-button{
@@ -206,10 +219,21 @@ body{
    border-radius: 50%;
    height: 50px;
    border: 1px solid black;
+   transition: .3s;
+}
+
+#photo-login-user-menu:hover{
+    width: 60px;
+    height: 60px;
 }
 
 #project-img-menu{
     width: 700px;
+}
+
+#title-project-menu{
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
 
 .mainhead-main-menu{

@@ -118,13 +118,15 @@
     <div class="container-main-menu">
         <div class="tophead-main-menu">
             <div id="tophead-info-user">
-                <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="Foto Do Usuario"
+                <a href="">
+                    <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="Foto Do Usuario"
                     id="photo-login-user-menu">
-                <p>Nome do Usuario</p>
+                    <a href="" id="username-project-menu">Nome do Usuario</a>
+                </a>
             </div>
         </div>
         <div class="mainhead-main-menu">
-            <h3>Titudo do Projeto do Usuario</h3>
+            <h3 id="title-project-menu">Titulo do Projeto do Usuario</h3>
             <div class="container-project-user">
                 <img src="{{ Vite::asset('resources/img/teste.jpg') }}" alt="" id="project-img-menu">
                 <p>Informacoes do Projeto do Usuario</p>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     @vite(['resources/css/style.css', 'resources/js/script.js'])
     <title>Perfil Usuario - PPAA</title>
 </head>
+
 <body>
     <div class="header-menu">
         <div class="container-header-menu">
@@ -86,5 +88,21 @@
             </svg>
         </div>
     </div>
+
+    <div class="container-user-perfil-infos">
+        <div class="perfil-img-user">
+            <form action="uploadImg">
+                <input type="file" name="" id="">
+                <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="" id="user-img-perfil">
+            </form>
+        </div>
+        <div class="perfil-infos-user">
+            <form action="">
+                
+                <input type="text" name="" id="">
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>

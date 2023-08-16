@@ -91,6 +91,7 @@
 
     <div class="main-container-login">
         <form action="LoginUser" class="login-form">
+            <label for="">Email Usuario</label>
             <div id="login-user-form">
                 <span>
                     <svg id="icon-login-user" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="44" id="icon-login-user"
@@ -103,6 +104,7 @@
                 </span>
                 <input type="text" name="" id="inp-login-user">
             </div>
+            <label for="">Senha</label>
             <div id="password-user-form">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="44" id="icon-password-user"

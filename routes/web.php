@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/menu', function () {
+Route::get('', function () {
     return view('Menu/menu');
 });
 

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Aluno extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'matricula',
+    ];
 }

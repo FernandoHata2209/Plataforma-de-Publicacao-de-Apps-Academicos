@@ -176,6 +176,38 @@ body{
 #btn-login-user{
     margin-right: 10px;
 }
+
+/* User guest Menu */
+
+.header-form-login-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+}
+
+#form-guest-register-user, #form-guest-login-user{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+#guest-login, #guest-register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: .3s;   
+    width: 120px; 
+    height: 30px;
+    border-radius: 10px;
+}
+
+#guest-login:hover, #guest-register:hover{
+    background-color: #ffb260;
+}
+
 /* Conteudo Principal do Menu do Usuario */
 
 .container-main-menu{

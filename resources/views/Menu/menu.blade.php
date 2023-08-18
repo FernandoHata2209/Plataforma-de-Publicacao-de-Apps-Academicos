@@ -101,7 +101,8 @@
                     </svg>
                 </a>
             </div>
-            <div id="header-login">
+            @auth
+                <div id="header-login">
                 <a href="" id="header-login-menu">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24"
                         viewBox="0 0 24 24" stroke-width="2" stroke="Black" fill="none" stroke-linecap="round"
@@ -110,9 +111,19 @@
                         <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
                     </svg>
-    
                 </a>
             </div>
+            @endauth
+            @guest
+                <div class="header-form-login-user">
+                    <form action="login" id="form-guest-login-user">
+                        <a id="guest-login">Login</a>
+                    </form>
+                    <form action="register" id="form-guest-register-user">
+                        <a id="guest-register">Registrar</a>
+                    </form>
+                </div>
+            @endguest
         </div>
     </div>
     <div class="container-main-menu">

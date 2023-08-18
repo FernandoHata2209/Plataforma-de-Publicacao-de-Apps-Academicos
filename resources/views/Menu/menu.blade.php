@@ -117,10 +117,10 @@
             @guest
                 <div class="header-form-login-user">
                     <form action="login" id="form-guest-login-user">
-                        <a id="guest-login">Login</a>
+                        <a id="guest-login" href="/login"">Login</a>
                     </form>
                     <form action="register" id="form-guest-register-user">
-                        <a id="guest-register">Registrar</a>
+                        <a id="guest-register" href="/register">Registrar</a>
                     </form>
                 </div>
             @endguest

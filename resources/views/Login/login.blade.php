@@ -88,49 +88,57 @@
             </svg>
         </div>
     </div>
-
+    
     <div class="main-container-login">
-        <form action="LoginUser" class="login-form">
-            <label for="">Email Usuario</label>
-            <div id="login-user-form">
-                <span>
-                    <svg id="icon-login-user" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="44" id="icon-login-user"
-                        height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                    </svg>
-                </span>
-                <input type="text" name="" id="inp-login-user">
+        <label for="">Login Aluno / Equipe NPI</label>
+        <form action="{{route('menu.menu')}}" method="POST">
+            @csrf
+        <div class="login-form">
+            <div class="container-login-user">
+                <label for="">Email Usuario</label>
+                <div id="login-user-form">
+                    <span>
+                        <svg id="icon-login-user" xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-user" width="44" id="icon-login-user" height="44"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                        </svg>
+                    </span>
+                    <input type="text" name="" id="inp-login-user">
+                </div>
             </div>
-            <label for="">Senha</label>
-            <div id="password-user-form">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="44" id="icon-password-user"
-                        height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
-                        <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
-                        <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
-                    </svg>
-                </span>
-                <input type="password" name="" id="inp-password-user">
+            <div class="container-password-user">
+                <label for="">Senha</label>
+                <div id="password-user-form">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="44"
+                            id="icon-password-user" height="44" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
+                            <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                            <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
+                        </svg>
+                    </span>
+                    <input type="password" name="" id="inp-password-user">
+                </div>
             </div>
             <div class="button-container-login">
-                <a href="">
+                <a href="/">
                     <button id="btn-login-user">
                         Login
                     </button>
                 </a>
-                <a href="">
-                    <button id="btn-register-user">
-                        Register
-                    </button>
+            </form>
+                <a href="/register" id="btn-register-user">
+                    <p>Registrar</p>
                 </a>
             </div>
-        </form>
+        </div>
+    
     </div>
 </body>
 

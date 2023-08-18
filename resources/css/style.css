@@ -97,6 +97,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    padding-top: 10px;
     margin: 20vh auto;
     background-color: rgba(53, 53, 53, 0.25);
     border-radius: 10px;
@@ -107,14 +109,25 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 30px;
+    margin: 10px 50px;
+}
+
+.container-login-user, .container-password-user, .container-register-email, .container-register-password, .container-register-again-password{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 5px 0;
+    padding: 10px 10px;
+    border-radius: 10px;
+    background-color: rgba(153, 153, 153, 0.5);
 }
 
 #inp-login-user, #inp-password-user{
     border: none;
     border-radius: 3px;
-    height: 20px;
-    width: 240px;
+    height: 30px;
+    width: 340px;
     font-size: 15px;
 }
 
@@ -149,11 +162,30 @@ body{
     align-items: center;
 }
 
-#btn-login-user, #btn-register-user, #btn-confirm-register, #btn-cancel-register{
+#btn-register-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 10px;
     padding: 0px 30px;
-    height: 20px;
+    height: 30px;
     border: none;
+    width: 150px;
+    cursor: pointer;
+    transition: .3s;
+    border-radius: 10px;
+    background-color: white;
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+}
+
+#btn-login-user, #btn-confirm-register, #btn-cancel-register{
+    margin-top: 10px;
+    padding: 0px 30px;
+    height: 30px;
+    border: none;
+    width: 150px;
     cursor: pointer;
     transition: .3s;
     border-radius: 10px;
@@ -163,8 +195,13 @@ body{
     margin-right: 10px;
 }
 
-#btn-login-user:hover, #btn-register-user:hover, #btn-confirm-register:hover{
+#btn-register-user:hover{
     background-color: rgb(87, 87, 87);
+    color: white;
+}
+
+#btn-confirm-register:hover, #btn-login-user:hover{
+    background-color: rgb(53, 187, 53);
     color: white;
 }
 
@@ -195,9 +232,11 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    color: black;
     background: none;
     border: none;
     cursor: pointer;
+    text-decoration: none;
     transition: .3s;   
     width: 120px; 
     height: 30px;

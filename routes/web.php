@@ -22,10 +22,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AplicativoController::class, 'index'])->name('menu.menu');
 
 Route::get('/login', [UsuarioController::class, 'index'])->name('login.login');
-Route::post('/login', [UsuarioController::class, 'auth'])->name('login.login');
+Route::post('/auth', [UsuarioController::class, 'auth'])->name('login.auth');
 
 Route::get('/register', [UsuarioController::class, 'create'])->name('login.register');
-Route::post('/', [UsuarioController::class, 'store'])->name('login.store');
+Route::post('/store', [UsuarioController::class, 'store'])->name('login.store');
 
 Route::get('perfilUser', function(){
     return view('UserAccount/userPerfil');

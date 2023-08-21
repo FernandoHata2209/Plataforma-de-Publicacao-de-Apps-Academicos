@@ -43,8 +43,10 @@ class UsuarioController extends Controller
         $validatedData = $request->validate([
             'nome' => 'required|string',
             'email' => 'required|email',
-            'senha' => 'required|min:6',
+            'senha' => 'required|min:6', 'confirmed',
+            'cargo' => 'required|in:equipe_NPI,ciencia_Computacao,engenharia_Software',
         ]);
+
 
         Usuario::create($validatedData);
 

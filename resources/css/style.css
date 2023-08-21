@@ -200,6 +200,13 @@ body{
     color: white;
 }
 
+#select-charge-user-register{
+    width: 340px;
+    height: 30px;
+    margin: 10px 0;
+    text-align: center;
+}
+
 #btn-confirm-register:hover, #btn-login-user:hover{
     background-color: rgb(53, 187, 53);
     color: white;

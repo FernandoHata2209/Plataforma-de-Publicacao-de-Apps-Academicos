@@ -10,8 +10,13 @@ class Aplicativo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name_Aplicativo',
+        'id',
+        'criador',
+        'aprovacao_Projeto',
+        'qtd_Curtidas',
+        'Imagem',
+        'Descricao',
+        'tipo_Postagem',
     ];
 }

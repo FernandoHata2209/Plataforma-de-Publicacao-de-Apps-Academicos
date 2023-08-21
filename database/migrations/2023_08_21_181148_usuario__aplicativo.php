@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('aplicativos', function (Blueprint $table) {
+        Schema::create('usuario_aplicativo', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_Usuario');
+            $table->integer('id_Aplicativo');
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('aplicativos');
+        //
     }
 };

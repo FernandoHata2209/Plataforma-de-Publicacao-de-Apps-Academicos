@@ -133,7 +133,7 @@
                     </button>
                 </a>
             </form>
-                <a href="/register" id="btn-register-user">
+                <a href="{{route('login.register')}}" id="btn-register-user">
                     <p>Registrar</p>
                 </a>
             </div>

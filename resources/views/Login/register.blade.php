@@ -108,7 +108,7 @@
                                 <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                             </svg>
                         </span>
-                        <input type="text" name="nome" id="inp-login-user">
+                        <input type="text" name="nome" id="inp-login-user" placeholder="Nome Completo">
                     </div>
                 </div>
             </div>
@@ -125,8 +125,16 @@
                             <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                         </svg>
                     </span>
-                    <input type="text" name="email" id="inp-login-user">
+                    <input type="text" name="email" id="inp-login-user" placeholder="Email do Usuario">
                 </div>
+            </div>
+            <div class="charge-user-register">
+                <select name="cargo" id="select-charge-user-register">
+                    <option value="" selected hidden>Cargo</option>
+                    <option value="equipe_NPI">Equipe NPI</option>
+                    <option value="ciencia_Computacao">Ciência da Computação</option>
+                    <option value="engenharia_Software">Engenharia de Software</option>
+                </select>
             </div>
             <div class="container-register-password">
                 <label for="senha">Digite a senha</label>
@@ -141,7 +149,7 @@
                             <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
                         </svg>
                     </span>
-                    <input type="password" name="senha" id="inp-password-user">
+                    <input type="password" name="senha" id="inp-password-user" placeholder="Digite a Senha">
                 </div>
             </div>
             <div class="container-register-again-password">
@@ -158,18 +166,12 @@
                             <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
                         </svg>
                     </span>
-                    <input type="password" name="senha" id="inp-password-user">
+                    <input type="password" name="senha_confirmation" id="inp-password-user" placeholder="Repita a Senha">
                 </div>
             </div>
 
-            <div class="terms-privacy">
-                <p>Para criar a conta deve concordar com os nossos <a href="#">Terms & Privacy</a>.</p>
-                <label>
-                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-                </label>
-            </div>
             <div class="button-container-login">
-                <a href="">
+                <a href="{{ route('login.login') }}">
                     <button id="btn-cancel-register">
                         Cancelar
                     </button>

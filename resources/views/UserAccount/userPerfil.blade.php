@@ -92,14 +92,21 @@
     <div class="container-user-perfil-infos">
         <div class="perfil-img-user">
             <form action="uploadImg">
-                <input type="file" name="" id="">
                 <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="" id="user-img-perfil">
+                <input type="file" name="image" id="inp-upload-img-user">
             </form>
         </div>
         <div class="perfil-infos-user">
-            <form action="">
-                
-                <input type="text" name="" id="">
+            <a href="">
+                Editar Perfil
+            </a>
+            <form action="" id="form-user-perfil">
+                <label for="">Nome do Usuario</label>
+                <input type="text" name="nome" class="inp-perfil-user" disabled placeholder="Fernando Hata">
+                <label for="">Email do Usuario</label>
+                <input type="text" name="email" class="inp-perfil-user" disabled placeholder="fernandohata220@gmail.com">
+                <label for="">Link Redes Sociais</label>
+                <input type="text" name="rede_social" class='inp-perfil-user'disabled placeholder="link tal tal tal">
             </form>
         </div>
     </div>

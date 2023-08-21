@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AplicativoController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\userAccountController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,4 @@ Route::post('/auth', [UsuarioController::class, 'auth'])->name('login.auth');
 Route::get('/register', [UsuarioController::class, 'create'])->name('login.register');
 Route::post('/store', [UsuarioController::class, 'store'])->name('login.store');
 
-Route::get('perfilUser', function(){
-    return view('UserAccount/userPerfil');
-});
+Route::get('/perfilUser', [userAccountController::class, 'index'])->name('user.perfil');

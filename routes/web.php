@@ -16,14 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('', function () {
-//     return view('Login/login');
-// });
-
 Route::get('/', [AplicativoController::class, 'index'])->name('menu.menu');
+Route::get('/menu', [AplicativoController::class, 'index'])->name('menu.menu');
 
 Route::get('/login', [UsuarioController::class, 'index'])->name('login.login');
-Route::post('/auth', [UsuarioController::class, 'auth'])->name('login.auth');
+Route::post('/auth', [UsuarioController::class, 'auth'])->name('auth.user');
 
 Route::get('/register', [UsuarioController::class, 'create'])->name('login.register');
 Route::post('/store', [UsuarioController::class, 'store'])->name('login.store');

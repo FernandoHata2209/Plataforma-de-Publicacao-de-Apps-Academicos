@@ -171,10 +171,8 @@
             </div>
 
             <div class="button-container-login">
-                <a href="{{ route('login.login') }}">
-                    <button id="btn-cancel-register">
+                <a href="{{ route('login.login') }}" id="btn-cancel-register">
                         Cancelar
-                    </button>
                 </a>
                 <button id="btn-confirm-register" type="submit">
                     Registrar

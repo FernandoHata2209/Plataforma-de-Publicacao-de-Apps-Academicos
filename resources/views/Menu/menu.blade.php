@@ -5,23 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/css/style.css', 'resources/js/script.js'])
+    @vite(['resources/css/style.css', 'resources/js/app.js'])
     <title>Plataforma de Publicação de Apps Acadêmicos</title>
 </head>
 
 <body>
     <div class="header-menu">
         <div class="container-header-menu">
-            <div id="header-settings-menu">
-                <button id="header-settings">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="24"
-                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <path d="M4 6l16 0"></path>
-                        <path d="M4 12l16 0"></path>
-                        <path d="M4 18l16 0"></path>
-                    </svg>
+            <div id="header-settings-menu" >
+                <button id="header-settings" class="door-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-door-closed door-icon" viewBox="0 0 16 16">
+                        <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
+                        <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+                      </svg>
                 </button>
             </div>
             <div id="header-logo">

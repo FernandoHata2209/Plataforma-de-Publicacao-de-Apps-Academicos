@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class UsuarioController extends Controller
+
+class UsuarioController extends Controller 
 {
     public function index()
     {
@@ -17,20 +18,17 @@ class UsuarioController extends Controller
     public function auth(Request $request)
     {
 
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->senha,
+        ];
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            return redirect()->intended('dashboard');
+            // Autenticação bem-sucedida
+            return redirect()->route('menu.menu');
+        } else {
+            // Autenticação mal-sucedida
+            return redirect()->route('login.login')->with('error', 'Credenciais inválidas. Tente novamente.');
         }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
     }
 
     public function create()
@@ -47,6 +45,7 @@ class UsuarioController extends Controller
             'cargo' => 'required|in:equipe_NPI,ciencia_Computacao,engenharia_Software',
         ]);
 
+        $validatedData['senha'] = bcrypt($validatedData['senha']);
 
         Usuario::create($validatedData);
 

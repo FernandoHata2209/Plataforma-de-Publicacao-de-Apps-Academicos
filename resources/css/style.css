@@ -243,6 +243,10 @@ body {
     width: 30vw;
 }
 
+.guest-header-menu{
+    width: 33vw;
+}
+
 #form-guest-register-user,
 #form-guest-login-user {
     margin-right: 20px;
@@ -276,11 +280,38 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 50px auto;
+    margin: 40px auto;
     flex-direction: column;
     background-color: rgba(53, 53, 53, 0.25);
     width: 70vw;
     border-radius: 10px;
+}
+
+.container-menu-button-publish{
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+    margin-right: 60px;
+}
+
+#publish-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #ffb260;
+    transition: 0.3s;
+    width: 130px;
+    height: 35px;
+    border-radius: 10px;
+}
+
+#publish-user:hover {
+    background-color: #fd8300;
 }
 
 .tophead-main-menu {
@@ -295,7 +326,7 @@ body {
     align-items: center;
     flex-direction: row;
     width: 400px;
-    height: 70px;
+    height: 75px;
 }
 
 #tophead-info-user p {
@@ -324,12 +355,20 @@ body {
     width: 300px;
 }
 
+#img-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+}
+
 #photo-login-user-menu {
     width: 50px;
     border-radius: 50%;
     height: 50px;
     border: 1px solid black;
-    transition: 0.3s;
+    transition: 0.2s ease-in-out;
 }
 
 #photo-login-user-menu:hover {

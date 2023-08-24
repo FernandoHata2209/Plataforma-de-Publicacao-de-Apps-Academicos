@@ -12,14 +12,24 @@
 <body>
     <div class="header-menu">
         <div class="container-header-menu">
-            <div id="header-settings-menu" >
-                <button id="header-settings" class="door-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-door-closed door-icon" viewBox="0 0 16 16">
-                        <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
-                        <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
-                      </svg>
-                </button>
-            </div>
+        @auth
+        <form action="{{route('auth.logout')}}" method="POST">
+        <div id="header-settings-menu" >
+            @csrf
+            <button id="header-settings" class="door-button" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-door-closed door-icon" viewBox="0 0 16 16">
+                    <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
+                    <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+                  </svg>
+            </button>
+        </div>
+        </form>
+        @endauth
+        @guest
+        <div class="guest-header-menu">
+            
+        </div>
+        @endguest
             <div id="header-logo">
                 <a href="">
                     <svg id="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
@@ -122,10 +132,16 @@
             @endguest
         </div>
     </div>
+    @auth
+        <div class="container-menu-button-publish">
+            <a href="{{route('publicar.publicar')}}" id="publish-user">Publicar Apps</a>
+        </div>
+    @endauth
+    
     <div class="container-main-menu">
         <div class="tophead-main-menu">
             <div id="tophead-info-user">
-                <a href="">
+                <a href="" id="img-user">
                     <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="Foto Do Usuario"
                     id="photo-login-user-menu">
                     <a href="" id="username-project-menu">Nome do Usuario</a>
@@ -134,6 +150,7 @@
         </div>
         <div class="mainhead-main-menu">
             <h3 id="title-project-menu">Titulo do Projeto do Usuario</h3>
+            <p style="font-size:12px">12/12/2023 13:54</p>
             <div class="container-project-user">
                 <img src="{{ Vite::asset('resources/img/teste.jpg') }}" alt="" id="project-img-menu">
                 <p>Informacoes do Projeto do Usuario</p>

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->binary('imagem');
             $table->string('descricao');
             $table->string('tipo_Postagem');
+            $table->string('link_Projeto');
             $table->timestamps();
         });
     }

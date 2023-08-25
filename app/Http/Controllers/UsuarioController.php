@@ -43,8 +43,7 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-        
-
+    
         $validatedData = $request->validate([
             'nome' => 'required|string',
             'email' => 'required|email',

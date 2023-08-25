@@ -31,3 +31,4 @@ Route::post('/store', [UsuarioController::class, 'store'])->name('login.store');
 Route::get('/perfilUser', [userAccountController::class, 'index'])->name('user.perfil');
 
 Route::get('/publicar', [PublicarAppController::class, 'index'])->name('publicar.publicar');
+Route::post('/publicar/app', [PublicarAppController::class, 'store'])->name('publicar.store');

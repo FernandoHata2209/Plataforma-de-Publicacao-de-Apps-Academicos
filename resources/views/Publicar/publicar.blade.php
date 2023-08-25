@@ -7,11 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     @vite(['resources/css/style.css', 'resources/js/script.js'])
-    <title>Login - PPAA</title>
+    <title>Publicar App - PPAA</title>
 </head>
 
 <body>
     <div class="header-menu">
+        <div class="header-form-login-user">
+            <a id="back-to-menu" href="{{route('menu.menu')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                  </svg>
+            </a>
+        </div>
         <div class="container-header-menu">
             <svg id="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="255px" height="254px"
@@ -88,8 +95,45 @@
                 MVQxOTowNjoyNSswMzowMMOWpY0AAAAASUVORK5CYII=" />
             </svg>
         </div>
+        <div class="guest-header-menu">
+        </div>
     </div>
-    
+
+    <div class="container-publish">
+        {{-- @if ($errors->any())
+            <div class="alert alert-danger" style="margin-top: 10px">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif --}}
+        <form action="{{route('publicar.store')}}" id="form-publish" method="POST">
+            @csrf
+            <label for="name_Aplicativo">
+                Nome Projeto:
+            </label>
+            <input type="text" name="nome_Aplicativo" id="name-project-publish" placeholder="Nome do Projeto">
+            <label for="descricao">
+                Descricao Projeto:
+            </label>
+            <textarea name="descricao" id="description-project-publish" cols="50" rows="4">
+            </textarea>
+            <div id="contador-space">
+                <small id="contador">0/255 caracteres</small>
+            </div>
+            <label for="image">
+                Imagem do Projeto:
+            </label>
+            <input type="file" name="imagem" id="image-project-publish">
+            <label for="link_projeto">
+                Link do Projeto:
+            </label>
+            <input type="text" name="link_Projeto" id="link-project-publish" placeholder="Link">
+            <button type="submit" id="btn-publish-app">Publicar Aplicativo</button>
+        </form>
+    </div>
 </body>
 
 </html>

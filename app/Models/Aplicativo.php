@@ -18,5 +18,6 @@ class Aplicativo extends Model
         'Imagem',
         'Descricao',
         'tipo_Postagem',
+        'link_Projeto',
     ];
 }

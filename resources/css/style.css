@@ -254,7 +254,8 @@ body {
 }
 
 #guest-login,
-#guest-register {
+#guest-register,
+#back-to-menu {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -270,7 +271,8 @@ body {
 }
 
 #guest-login:hover,
-#guest-register:hover {
+#guest-register:hover,
+#back-to-menu:hover {
     background-color: #ffb260;
 }
 
@@ -455,3 +457,69 @@ body {
 #user-img-perfil {
     width: 100px;
 }
+
+/* Parte de Publicar Aplicativo */
+
+.container-publish{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 15vh auto;
+    background-color: rgba(53, 53, 53, 0.25);
+    border-radius: 10px;
+}
+
+#form-publish{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 30px;
+}
+
+#form-publish input{
+    margin: 10px;
+}
+
+#form-publish label{
+    font-weight: bold;
+}
+
+#contador-space{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    width: 500px;
+}
+
+#name-project-publish,
+#link-project-publish{
+    width: 467px;
+    border-radius: 3px;
+    border: 1px solid black;
+    text-align: center;
+    height: 30px;
+}
+
+#description-project-publish{
+    text-align: start;
+}
+
+#btn-publish-app{
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    padding: 0 20px;
+    margin-top: 10px;
+    transition: .3s;
+}
+
+#btn-publish-app:hover{
+    background-color: rgb(53, 187, 53);
+}
+
+
+

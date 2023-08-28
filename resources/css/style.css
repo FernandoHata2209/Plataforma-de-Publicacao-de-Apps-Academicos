@@ -279,10 +279,9 @@ body {
 /* Conteudo Principal do Menu do Usuario */
 
 .container-main-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px auto;
+    display: grid;
+    place-items: center;
+    margin: 15vh auto;
     flex-direction: column;
     background-color: rgba(53, 53, 53, 0.25);
     width: 70vw;
@@ -400,13 +399,33 @@ body {
 .container-project-like-comment {
     display: flex;
     align-items: center;
+    justify-content: start;
     flex-direction: row;
-    margin-bottom: 10px;
-    margin-top: 10px;
 }
 
-.container-project-like-comment p {
-    height: 20px;
+#field-qtd-like,
+#field-content-like,
+#field-content-comment{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 3px;
+}
+
+#field-content-like{
+    width: 36px;
+    height: 36px;
+}
+
+#like{
+    transition: .3s;
+    color: white;
+}
+
+#qtd-like-project{
+    font-size: 20px;
+    margin-bottom: 3px;
+
 }
 
 #project-like {
@@ -415,13 +434,7 @@ body {
     background: none;
 }
 
-.mainhead-main-menu svg {
-    transition: 0.3s;
-}
 
-#like {
-    color: white;
-}
 
 #like:hover {
     width: 34px;
@@ -431,6 +444,22 @@ body {
 
 #like:active {
     color: red;
+}
+
+#text-area-comment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#btn-comment-project{
+    margin-left: 10px;
+    width: 120px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
 }
 
 /* Parte do Perfil do Usuario quando o Proprio Usuario entra */

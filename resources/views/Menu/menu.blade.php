@@ -27,7 +27,7 @@
         @endauth
         @guest
         <div class="guest-header-menu">
-            
+
         </div>
         @endguest
             <div id="header-logo">
@@ -137,7 +137,7 @@
             <a href="{{route('publicar.publicar')}}" id="publish-user">Publicar Apps</a>
         </div>
     @endauth
-    
+
     <div class="container-main-menu">
         <div class="tophead-main-menu">
             <div id="tophead-info-user">
@@ -156,24 +156,34 @@
                 <p>Informacoes do Projeto do Usuario</p>
             </div>
             <div class="container-project-like-comment">
-                <p>1</p>
-                <button id="project-like">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-filled" width="32"
-                        height="32" viewBox="0 0 24 24" stroke="#2c3e50" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round" id="like">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                            d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z"
-                            stroke-width="0" fill="currentColor" />
-                    </svg>
-                </button>
-                <span id="project-comment">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 1024 1024">
-                        <path fill="currentColor"
-                            d="m174.72 855.68l130.048-43.392l23.424 11.392C382.4 849.984 444.352 864 512 864c223.744 0 384-159.872 384-352c0-192.832-159.104-352-384-352S128 319.168 128 512a341.12 341.12 0 0 0 69.248 204.288l21.632 28.8l-44.16 110.528zm-45.248 82.56A32 32 0 0 1 89.6 896l56.512-141.248A405.12 405.12 0 0 1 64 512C64 299.904 235.648 96 512 96s448 203.904 448 416s-173.44 416-448 416c-79.68 0-150.848-17.152-211.712-46.72l-170.88 56.96z" />
-                    </svg>
-                </span>
-                
+                <div id="field-qtd-like">
+                    <p id="qtd-like-project">1</p>
+                </div>
+                <div id="field-content-like">
+                    <button id="project-like">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-filled" width="32"
+                            height="32" viewBox="0 0 24 24" stroke="#2c3e50" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round" id="like">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z"
+                                stroke-width="0" fill="currentColor" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="field-content-comment">
+                    <span id="project-comment" name="comment">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 1024 1024">
+                            <path fill="currentColor"
+                                d="m174.72 855.68l130.048-43.392l23.424 11.392C382.4 849.984 444.352 864 512 864c223.744 0 384-159.872 384-352c0-192.832-159.104-352-384-352S128 319.168 128 512a341.12 341.12 0 0 0 69.248 204.288l21.632 28.8l-44.16 110.528zm-45.248 82.56A32 32 0 0 1 89.6 896l56.512-141.248A405.12 405.12 0 0 1 64 512C64 299.904 235.648 96 512 96s448 203.904 448 416s-173.44 416-448 416c-79.68 0-150.848-17.152-211.712-46.72l-170.88 56.96z" />
+                        </svg>
+                    </span>
+                </div>
+
+            </div>
+            <div id="text-area-comment">
+                <textarea name="" id="textarea-comment" cols="80" rows="7"></textarea>
+                <button type="submit" id="btn-comment-project">Comentar</button>
             </div>
         </div>
     </div>

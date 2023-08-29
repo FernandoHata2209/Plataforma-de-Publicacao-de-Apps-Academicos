@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('aplicativo', function (Blueprint $table) {
+        Schema::create('aplicativos', function (Blueprint $table) {
             $table->id();
             $table->string('nome_Aplicativo');
             $table->string('criador');
-            $table->boolean('aprovacao_Projeto');
-            $table->integer('qtd_Curtidas');
+            $table->boolean('aprovacao_Projeto')->nullable();
+            $table->integer('qtd_Curtidas')->nullable();
             $table->binary('imagem');
-            $table->string('descricao');
-            $table->string('tipo_Postagem');
+            $table->text('descricao');
+            $table->string('tipo_Postagem')->nullable();
             $table->string('link_Projeto');
             $table->timestamps();
         });

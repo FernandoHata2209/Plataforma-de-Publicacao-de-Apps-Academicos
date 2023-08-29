@@ -9,14 +9,16 @@ class Aplicativo extends Model
 {
     use HasFactory;
 
+    protected $table = 'aplicativos';
+
     protected $fillable = [
-        'name_Aplicativo',
+        'nome_Aplicativo',
         'id',
         'criador',
         'aprovacao_Projeto',
         'qtd_Curtidas',
-        'Imagem',
-        'Descricao',
+        'imagem',
+        'descricao',
         'tipo_Postagem',
         'link_Projeto',
     ];

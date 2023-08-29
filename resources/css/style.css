@@ -281,7 +281,7 @@ body {
 .container-main-menu {
     display: grid;
     place-items: center;
-    margin: 15vh auto;
+    margin: 10vh auto;
     flex-direction: column;
     background-color: rgba(53, 53, 53, 0.25);
     width: 70vw;
@@ -460,6 +460,12 @@ body {
     height: 30px;
     border-radius: 10px;
     border: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+#btn-comment-project:hover{
+    box-shadow: 10px 10px 8px -6px rgba(0,0,0,0.75);
 }
 
 /* Parte do Perfil do Usuario quando o Proprio Usuario entra */
@@ -548,6 +554,10 @@ body {
 
 #btn-publish-app:hover{
     background-color: rgb(53, 187, 53);
+}
+
+textarea{
+    resize:none;
 }
 
 

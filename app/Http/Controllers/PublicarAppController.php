@@ -9,31 +9,42 @@ use Illuminate\Support\Facades\Auth;
 
 class PublicarAppController extends Controller
 {
-    public function index(){
-        return view('Publicar/publicar');
+    public function index()
+    {
+        $aplicativos = Aplicativo::all(); // Recupera todos os aplicativos
+
+        return view('aplicativos.index', ['aplicativos' => $aplicativos]);
     }
 
-    public function store(Request $request){
-
+    public function store(Request $request)
+    {
+        // Validação dos dados
         $validatedData = $request->validate([
             'nome_Aplicativo' => 'required|string',
+            'imagem' => 'required|image|mimes:jpeg,png,jpg',
             'descricao' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg',
             'link_Projeto' => 'required|string',
         ]);
-    
-        $imagem = $request->file('imagem'); // Obter a imagem do request
-        $imagemBinaria = file_get_contents($imagem->getRealPath()); // Obter o conteúdo binário da imagem
-    
-        // Criar um novo registro na tabela Aplicativo
+
+        // Obtém o usuário autenticado
+        $user = Auth::user();
+
+        // Salva a imagem
+        if ($request->hasFile('imagem')) {
+            $path = $request->file('imagem')->store('images');
+        } else {
+            $path = null;
+        }
+
+        // Cria um novo registro de aplicativo associando o criador (usuário autenticado)
         Aplicativo::create([
             'nome_Aplicativo' => $validatedData['nome_Aplicativo'],
+            'criador' => $user->id, // Associa o ID do usuário autenticado à coluna 'criador'
+            'imagem' => $path, // Salva o caminho da imagem
             'descricao' => $validatedData['descricao'],
-            'imagem' => $imagemBinaria, // Salvar a imagem em formato binário
             'link_Projeto' => $validatedData['link_Projeto'],
         ]);
-    
+
         return redirect()->route('menu.menu');
-    
     }
 }

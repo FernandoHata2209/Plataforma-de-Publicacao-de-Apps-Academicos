@@ -137,8 +137,9 @@
             <a href="{{route('publicar.publicar')}}" id="publish-user">Publicar Apps</a>
         </div>
     @endauth
-
+       
     <div class="container-main-menu">
+        @foreach($aplicativos as $aplicativo)
         <div class="tophead-main-menu">
             <div id="tophead-info-user">
                 <a href="" id="img-user">
@@ -182,11 +183,13 @@
 
             </div>
             <div id="text-area-comment">
-                <textarea name="" id="textarea-comment" cols="80" rows="7"></textarea>
+                <textarea name="" id="textarea-comment" cols="80" rows="4"></textarea>
                 <button type="submit" id="btn-comment-project">Comentar</button>
             </div>
         </div>
+        @endforeach
     </div>
+    
 </body>
 
 </html>

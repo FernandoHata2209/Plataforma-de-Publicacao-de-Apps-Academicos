@@ -100,7 +100,7 @@
     </div>
 
     <div class="container-publish">
-        {{-- @if ($errors->any())
+        @if ($errors->any())
             <div class="alert alert-danger" style="margin-top: 10px">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -108,14 +108,14 @@
                     @endforeach
                 </ul>
             </div>
-        @endif --}}
-        <form action="{{route('publicar.store')}}" id="form-publish" method="POST">
+        @endif
+        <form action="{{route('publicar.store')}}" id="form-publish" method="POST" enctype="multipart/form-data"> 
             @csrf
-            <label for="name_Aplicativo">
+            <label for="">
                 Nome Projeto:
             </label>
             <input type="text" name="nome_Aplicativo" id="name-project-publish" placeholder="Nome do Projeto">
-            <label for="descricao">
+            <label for="">
                 Descricao Projeto:
             </label>
             <textarea name="descricao" id="description-project-publish" cols="50" rows="4">
@@ -123,10 +123,10 @@
             <div id="contador-space">
                 <small id="contador">0/255 caracteres</small>
             </div>
-            <label for="image">
+            <label for="">
                 Imagem do Projeto:
             </label>
-            <input type="file" name="imagem" id="image-project-publish">
+            <input type="file" name="imagem" id="image-project-publish" >
             <label for="link_projeto">
                 Link do Projeto:
             </label>

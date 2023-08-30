@@ -90,6 +90,9 @@
     </div>
 
     <div class="container-user-perfil-infos">
+        <div id="edit-perfil-container">
+            <a href="">Editar Perfil</a>
+        </div>
         <div class="perfil-img-user">
             <form action="uploadImg">
                 <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="" id="user-img-perfil">

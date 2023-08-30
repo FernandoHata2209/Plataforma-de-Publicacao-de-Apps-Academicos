@@ -311,6 +311,10 @@ body {
     border-radius: 10px;
 }
 
+#none-publish{
+    margin: 15px;
+}
+
 #publish-user:hover {
     background-color: #fd8300;
 }
@@ -389,6 +393,7 @@ body {
 .mainhead-main-menu {
     border-bottom: 1px solid black;
     margin-bottom: 10px;
+    width: 55vw;
 }
 
 #project-like,

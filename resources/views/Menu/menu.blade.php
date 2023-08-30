@@ -139,26 +139,39 @@
     @endauth
        
     <div class="container-main-menu">
+        @if($aplicativos->isEmpty())
+        <h3 id="none-publish">Nenhuma publicacao realizada</h3>
+        @else
         @foreach($aplicativos as $aplicativo)
         <div class="tophead-main-menu">
             <div id="tophead-info-user">
                 <a href="" id="img-user">
                     <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="Foto Do Usuario"
                     id="photo-login-user-menu">
-                    <a href="" id="username-project-menu">Nome do Usuario</a>
+                    <a href="" id="username-project-menu">{{ $aplicativo->criadorRelacao->nome }}</a>
                 </a>
             </div>
         </div>
         <div class="mainhead-main-menu">
-            <h3 id="title-project-menu">Titulo do Projeto do Usuario</h3>
-            <p style="font-size:12px">12/12/2023 13:54</p>
+            <h3 id="title-project-menu">{{$aplicativo->nome_Aplicativo}}</h3>
+            <p style="font-size:12px">Publicado: {{$aplicativo->created_at}}</p>
             <div class="container-project-user">
-                <img src="{{ Vite::asset('resources/img/teste.jpg') }}" alt="" id="project-img-menu">
-                <p>Informacoes do Projeto do Usuario</p>
+                <a href="">
+                    <img src="{{ asset($aplicativo->imagem) }}" alt="" id="project-img-menu">
+                </a>
+                <p>{{$aplicativo->descricao}}</p>
             </div>
             <div class="container-project-like-comment">
                 <div id="field-qtd-like">
-                    <p id="qtd-like-project">1</p>
+                    @if($aplicativo->qtd_Curtidas == null)
+                    <p id="qtd-like-project">
+                        Nenhuma Curtida
+                    </p>
+                        @else
+                    <p id="qtd-like-project">
+                        {{$aplicativo->qtd_Curtidas}}
+                    </p>
+                    @endif
                 </div>
                 <div id="field-content-like">
                     <button id="project-like">
@@ -188,6 +201,7 @@
             </div>
         </div>
         @endforeach
+        @endif
     </div>
     
 </body>

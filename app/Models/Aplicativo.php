@@ -11,6 +11,11 @@ class Aplicativo extends Model
 
     protected $table = 'aplicativos';
 
+    public function criadorRelacao()
+    {
+        return $this->belongsTo(Usuario::class, 'criador', 'id');
+    }
+
     protected $fillable = [
         'nome_Aplicativo',
         'id',

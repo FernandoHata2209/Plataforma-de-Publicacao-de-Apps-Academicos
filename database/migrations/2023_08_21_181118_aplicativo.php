@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('criador');
             $table->boolean('aprovacao_Projeto')->nullable();
             $table->integer('qtd_Curtidas')->nullable();
-            $table->binary('imagem');
+            $table->string('imagem');
             $table->text('descricao');
             $table->string('tipo_Postagem')->nullable();
             $table->string('link_Projeto');

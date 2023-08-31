@@ -428,7 +428,7 @@ body {
 }
 
 #qtd-like-project{
-    font-size: 20px;
+    font-size: 15px;
     margin-bottom: 3px;
 
 }
@@ -438,8 +438,6 @@ body {
     border: none;
     background: none;
 }
-
-
 
 #like:hover {
     width: 34px;

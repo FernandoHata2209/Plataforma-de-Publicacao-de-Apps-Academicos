@@ -32,8 +32,9 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('public\storage'),
-            'throw' => false,
+            'root' => storage_path('app/public'),// Caminho para a pasta de armazenamento público
+            'url' => env('APP_URL').'/storage', // URL para os arquivos armazenados publicamente
+            'visibility' => 'public',
         ],
 
         'public' => [
@@ -41,7 +42,6 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
-            'throw' => false,
         ],
 
         's3' => [

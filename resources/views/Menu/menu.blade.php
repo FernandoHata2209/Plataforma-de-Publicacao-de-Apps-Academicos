@@ -156,15 +156,15 @@
             <h3 id="title-project-menu">{{$aplicativo->nome_Aplicativo}}</h3>
             <p style="font-size:12px">Publicado: {{$aplicativo->created_at}}</p>
             <div class="container-project-user">
-                <a href="">
-                    <img src="{{ asset($aplicativo->imagem) }}" alt="" id="project-img-menu">
+                <a href="{{$aplicativo->link_Projeto}}" target="__blank">
+                    <img src="{{  asset('images/' . $aplicativo->imagem) }}" alt="" id="project-img-menu">
                 </a>
                 <p>{{$aplicativo->descricao}}</p>
             </div>
             <div class="container-project-like-comment">
                 <div id="field-qtd-like">
                     @if($aplicativo->qtd_Curtidas == null)
-                    <p id="qtd-like-project">
+                    <p id="qtd-like-project" style="widht: 10px">
                         Nenhuma Curtida
                     </p>
                         @else

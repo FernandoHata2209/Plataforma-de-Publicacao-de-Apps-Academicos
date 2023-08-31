@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class MenuController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $aplicativos = Aplicativo::all();
 
         return view('menu.menu', ['aplicativos' => $aplicativos]);
@@ -36,17 +37,15 @@ class MenuController extends Controller
         $user = Auth::user();
 
         // Salva a imagem
-        if ($request->hasFile('imagem')) {
-            $path = $request->file('imagem')->store('images');
-        } else {
-            $path = null;
-        }
+        $image = $request->file('imagem');
+        $imageName = $image->getClientOriginalName();
+        $image->move(public_path('images'), $imageName);
 
         // Cria um novo registro de aplicativo associando o criador (usuário autenticado)
         Aplicativo::create([
             'nome_Aplicativo' => $validatedData['nome_Aplicativo'],
-            'criador' => $user->id, // Associa o ID do usuário autenticado à coluna 'criador'
-            'imagem' => $path, // Salva o caminho da imagem
+            'criador' => $user->id,
+            'imagem' => $imageName, // Salva apenas o nome do arquivo da imagem
             'descricao' => $validatedData['descricao'],
             'link_Projeto' => $validatedData['link_Projeto'],
         ]);

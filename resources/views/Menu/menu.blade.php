@@ -12,29 +12,27 @@
 <body>
     <div class="header-menu">
         <div class="container-header-menu">
-        @auth
-        <form action="{{route('auth.logout')}}" method="POST">
-        <div id="header-settings-menu" >
-            @csrf
-            <button id="header-settings" class="door-button" type="submit">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-door-closed door-icon" viewBox="0 0 16 16">
-                    <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
-                    <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
-                  </svg>
-            </button>
-        </div>
-        </form>
-        @endauth
-        @guest
-        <div class="guest-header-menu">
+            @auth
+            <form action="{{route('auth.logout')}}" method="POST">
+                <div id="header-settings-menu">
+                    @csrf
+                    <button id="header-settings" class="door-button" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-door-closed door-icon" viewBox="0 0 16 16">
+                            <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z" />
+                            <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+            @endauth
+            @guest
+            <div class="guest-header-menu">
 
-        </div>
-        @endguest
+            </div>
+            @endguest
             <div id="header-logo">
                 <a href="">
-                    <svg id="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="255px" height="254px"
-                        viewBox="0 0 255 254" enable-background="new 0 0 255 254" xml:space="preserve">
+                    <svg id="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="255px" height="254px" viewBox="0 0 255 254" enable-background="new 0 0 255 254" xml:space="preserve">
                         <image id="image0" width="255" height="254" x="0" y="0" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP8AAAD+CAMAAADCiiNdAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
                     AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAC4lBMVEX///8aIiwaIiwaIiwa
                     IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
@@ -108,11 +106,9 @@
                 </a>
             </div>
             @auth
-                <div id="header-login">
+            <div id="header-login">
                 <a href="{{route('user.perfil')}}" id="header-login-menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="Black" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="Black" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
@@ -121,23 +117,22 @@
             </div>
             @endauth
             @guest
-                <div class="header-form-login-user">
-                    <form action="login" id="form-guest-login-user">
-                        <a id="guest-login" href="/login"">Login</a>
-                    </form>
-                    <form action="register" id="form-guest-register-user">
-                        <a id="guest-register" href="/register">Registrar</a>
-                    </form>
-                </div>
+            <div class="header-form-login-user">
+                <form action="login" id="form-guest-login-user">
+                    <a id="guest-login" href="/login">Login</a>
+                </form>
+                <form action=" register" id="form-guest-register-user">
+                    <a id="guest-register" href="/register">Registrar</a>
+                </form>
+            </div>
             @endguest
         </div>
     </div>
     @auth
-        <div class="container-menu-button-publish">
-            <a href="{{route('publicar.publicar')}}" id="publish-user">Publicar Apps</a>
-        </div>
+    <div class="container-menu-button-publish">
+        <a href="{{route('publicar.publicar')}}" id="publish-user">Publicar Apps</a>
+    </div>
     @endauth
-       
     <div class="container-main-menu">
         @if($aplicativos->isEmpty())
         <h3 id="none-publish">Nenhuma publicacao realizada</h3>
@@ -146,64 +141,61 @@
         <div class="tophead-main-menu">
             <div id="tophead-info-user">
                 <a href="" id="img-user">
-                    <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="Foto Do Usuario"
-                    id="photo-login-user-menu">
+                    <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="Foto Do Usuario" id="photo-login-user-menu">
                     <a href="" id="username-project-menu">{{ $aplicativo->criadorRelacao->nome }}</a>
                 </a>
             </div>
         </div>
         <div class="mainhead-main-menu">
-            <h3 id="title-project-menu">{{$aplicativo->nome_Aplicativo}}</h3>
-            <p style="font-size:12px">Publicado: {{$aplicativo->created_at}}</p>
+            <div id="title-project">
+                <h3 id="title-project-menu">{{$aplicativo->nome_Aplicativo}}</h3>
+                <p style="font-size:12px">Publicado: {{$aplicativo->created_at}}</p>
+            </div>
             <div class="container-project-user">
                 <a href="{{$aplicativo->link_Projeto}}" target="__blank">
-                    <img src="{{  asset('images/' . $aplicativo->imagem) }}" alt="" id="project-img-menu">
+                    <img src="{{  asset('imagesProject/' . $aplicativo->imagem) }}" alt="" id="project-img-menu">
                 </a>
-                <p>{{$aplicativo->descricao}}</p>
+                <p id="description-project">{{$aplicativo->descricao}}</p>
             </div>
             <div class="container-project-like-comment">
                 <div id="field-qtd-like">
                     @if($aplicativo->qtd_Curtidas == null)
-                    <p id="qtd-like-project" style="widht: 10px">
+                    <p id="qtd-like-project">
                         Nenhuma Curtida
                     </p>
-                        @else
+                    @else
                     <p id="qtd-like-project">
                         {{$aplicativo->qtd_Curtidas}}
                     </p>
                     @endif
                 </div>
-                <div id="field-content-like">
-                    <button id="project-like">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-filled" width="32"
-                            height="32" viewBox="0 0 24 24" stroke="#2c3e50" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round" id="like">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z"
-                                stroke-width="0" fill="currentColor" />
-                        </svg>
-                    </button>
+                <div id="content-like-comment">
+                    <div id="field-content-like">
+                        <button id="project-like">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-filled" width="32" height="32" viewBox="0 0 24 24" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round" id="like">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z" stroke-width="0" fill="currentColor" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="field-content-comment">
+                        <span id="project-comment" name="comment">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 1024 1024">
+                                <path fill="currentColor" d="m174.72 855.68l130.048-43.392l23.424 11.392C382.4 849.984 444.352 864 512 864c223.744 0 384-159.872 384-352c0-192.832-159.104-352-384-352S128 319.168 128 512a341.12 341.12 0 0 0 69.248 204.288l21.632 28.8l-44.16 110.528zm-45.248 82.56A32 32 0 0 1 89.6 896l56.512-141.248A405.12 405.12 0 0 1 64 512C64 299.904 235.648 96 512 96s448 203.904 448 416s-173.44 416-448 416c-79.68 0-150.848-17.152-211.712-46.72l-170.88 56.96z" />
+                            </svg>
+                        </span>
+                    </div>
                 </div>
-                <div id="field-content-comment">
-                    <span id="project-comment" name="comment">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 1024 1024">
-                            <path fill="currentColor"
-                                d="m174.72 855.68l130.048-43.392l23.424 11.392C382.4 849.984 444.352 864 512 864c223.744 0 384-159.872 384-352c0-192.832-159.104-352-384-352S128 319.168 128 512a341.12 341.12 0 0 0 69.248 204.288l21.632 28.8l-44.16 110.528zm-45.248 82.56A32 32 0 0 1 89.6 896l56.512-141.248A405.12 405.12 0 0 1 64 512C64 299.904 235.648 96 512 96s448 203.904 448 416s-173.44 416-448 416c-79.68 0-150.848-17.152-211.712-46.72l-170.88 56.96z" />
-                        </svg>
-                    </span>
-                </div>
-
             </div>
             <div id="text-area-comment">
-                <textarea name="" id="textarea-comment" cols="80" rows="4"></textarea>
+                <textarea name="" id="textarea-comment"></textarea>
                 <button type="submit" id="btn-comment-project">Comentar</button>
             </div>
         </div>
         @endforeach
         @endif
     </div>
-    
+
 </body>
 
 </html>

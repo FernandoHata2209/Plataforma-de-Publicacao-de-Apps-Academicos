@@ -90,8 +90,9 @@
     </div>
 
     <div class="container-user-perfil-infos">
+        @foreach($usuarios as $usuario)
         <div id="edit-perfil-container">
-            <a href="">Editar Perfil</a>
+            <a href="" id="edit-perfil-user">Editar Perfil</a>
         </div>
         <div class="perfil-img-user">
             <form action="uploadImg">
@@ -100,18 +101,16 @@
             </form>
         </div>
         <div class="perfil-infos-user">
-            <a href="">
-                Editar Perfil
-            </a>
             <form action="" id="form-user-perfil">
                 <label for="">Nome do Usuario</label>
-                <input type="text" name="nome" class="inp-perfil-user" disabled placeholder="Fernando Hata">
+                <input type="text" name="nome" class="inp-perfil-user" disabled placeholder="{{$usuario->nome}}">
                 <label for="">Email do Usuario</label>
-                <input type="text" name="email" class="inp-perfil-user" disabled placeholder="fernandohata220@gmail.com">
+                <input type="text" name="email" class="inp-perfil-user" disabled placeholder="{{$usuario->email}}">
                 <label for="">Link Redes Sociais</label>
                 <input type="text" name="rede_social" class='inp-perfil-user'disabled placeholder="link tal tal tal">
             </form>
         </div>
+        @endforeach
     </div>
 </body>
 

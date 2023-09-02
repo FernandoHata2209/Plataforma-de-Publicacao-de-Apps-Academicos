@@ -279,12 +279,13 @@ body {
 /* Conteudo Principal do Menu do Usuario */
 
 .container-main-menu {
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10vh auto;
     flex-direction: column;
     background-color: rgba(53, 53, 53, 0.25);
-    width: 70vw;
+    width: 80rem;
     border-radius: 10px;
 }
 
@@ -321,25 +322,16 @@ body {
 
 .tophead-main-menu {
     flex-direction: row;
-    width: 700px;
+    width: 55rem;
     margin-top: 20px;
 }
 
 #tophead-info-user {
     display: flex;
     justify-content: start;
-    align-items: center;
     flex-direction: row;
-    width: 400px;
-    height: 75px;
-}
-
-#tophead-info-user p {
-    margin-left: 20px;
-}
-
-#tophead-info-user img {
-    margin-left: 20px;
+    align-items: center;
+    width: 60rem;
 }
 
 #username-project-menu {
@@ -382,7 +374,14 @@ body {
 }
 
 #project-img-menu {
-    width: 700px;
+    width: 60rem
+}
+
+#description-project{
+    background-color: rgba(88, 88, 88, 0.25);
+    padding: .5rem;
+    margin-top: .5rem;
+    border-radius: 5px;
 }
 
 #title-project-menu {
@@ -390,10 +389,30 @@ body {
     margin-bottom: 7px;
 }
 
+#title-project{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    width: 60rem;
+}
+
+.container-publish{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .mainhead-main-menu {
-    border-bottom: 1px solid black;
+    display: grid;
+    place-items: center;
     margin-bottom: 10px;
-    width: 55vw;
+    width: 80rem;
+}
+
+#content-like-comment{
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
 }
 
 #project-like,
@@ -406,6 +425,7 @@ body {
     align-items: center;
     justify-content: start;
     flex-direction: row;
+    width: 60rem;
 }
 
 #field-qtd-like,
@@ -455,6 +475,13 @@ body {
     align-items: center;
     margin-top: 5px;
     margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+#textarea-comment{
+    width: 51rem;
+    height: 5rem;
 }
 
 #btn-comment-project{
@@ -474,26 +501,37 @@ body {
 /* Parte do Perfil do Usuario quando o Proprio Usuario entra */
 
 .container-user-perfil-infos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-items: center;
     flex-direction: column;
     background-color: rgba(53, 53, 53, 0.25);
-    width: 60vw;
+    width: 60rem;
     margin: 20vh auto;
     border-radius: 10px;
 }
 
 .perfil-infos-user,
 #form-user-perfil {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-items: center;
     flex-direction: column;
+    width: 50rem;
+}
+
+.perfil-img-user{
+    
+}
+
+#edit-perfil-user{
+    text-decoration: none;
+    padding: .5rem;
+    background-color: rebeccapurple;
 }
 
 #user-img-perfil {
-    width: 100px;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
 }
 
 /* Parte de Publicar Aplicativo */

@@ -28,7 +28,7 @@ class MenuController extends Controller
         // Validação dos dados
         $validatedData = $request->validate([
             'nome_Aplicativo' => 'required|string',
-            'imagem' => 'required|image|mimes:jpeg,png,jpg',
+            'imagem' => 'required|image|mimes:jpeg,png,jpg,webp',
             'descricao' => 'required|string',
             'link_Projeto' => 'required|string',
         ]);
@@ -39,7 +39,7 @@ class MenuController extends Controller
         // Salva a imagem
         $image = $request->file('imagem');
         $imageName = $image->getClientOriginalName();
-        $image->move(public_path('images'), $imageName);
+        $image->move(public_path('imagesProject'), $imageName);
 
         // Cria um novo registro de aplicativo associando o criador (usuário autenticado)
         Aplicativo::create([

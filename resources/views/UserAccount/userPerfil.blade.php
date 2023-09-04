@@ -11,6 +11,13 @@
 
 <body>
     <div class="header-menu">
+        <div class="header-form-login-user">
+            <a id="back-to-menu" href="{{route('menu.menu')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                  </svg>
+            </a>
+        </div>
         <div class="container-header-menu">
             <svg id="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="255px" height="254px"
@@ -87,11 +94,14 @@
                 MVQxOTowNjoyNSswMzowMMOWpY0AAAAASUVORK5CYII=" />
             </svg>
         </div>
+        <div class="guest-header-menu">
+        </div>
     </div>
 
     <div class="container-user-perfil-infos">
+        @auth
         <div id="edit-perfil-container">
-            <a href="">Editar Perfil</a>
+            <a href="" id="edit-perfil-user">Editar Perfil</a>
         </div>
         <div class="perfil-img-user">
             <form action="uploadImg">
@@ -100,19 +110,21 @@
             </form>
         </div>
         <div class="perfil-infos-user">
-            <a href="">
-                Editar Perfil
-            </a>
             <form action="" id="form-user-perfil">
                 <label for="">Nome do Usuario</label>
-                <input type="text" name="nome" class="inp-perfil-user" disabled placeholder="Fernando Hata">
+                <input type="text" name="nome" class="inp-perfil-user" disabled placeholder="{{ Auth::user()->nome }}">
                 <label for="">Email do Usuario</label>
-                <input type="text" name="email" class="inp-perfil-user" disabled placeholder="fernandohata220@gmail.com">
+                <input type="text" name="email" class="inp-perfil-user" disabled placeholder="{{ Auth::user()->email }}">
                 <label for="">Link Redes Sociais</label>
-                <input type="text" name="rede_social" class='inp-perfil-user'disabled placeholder="link tal tal tal">
+                <input type="text" name="rede_social" class='inp-perfil-user' disabled placeholder="link tal tal tal">
             </form>
         </div>
+        <div class="container-show-project">
+            <h3>{{}}</h3>
+        </div>
+        @endauth
     </div>
+    
 </body>
 
 </html>

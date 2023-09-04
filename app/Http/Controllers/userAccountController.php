@@ -25,4 +25,5 @@ class userAccountController extends Controller
         Usuario::where('id', $id)->update($data);
         return redirect()->route('user.perfil');
     }
+
 }

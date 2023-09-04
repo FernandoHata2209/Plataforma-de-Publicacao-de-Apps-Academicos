@@ -29,7 +29,7 @@ class MenuController extends Controller
         // Validação dos dados
         $validatedData = $request->validate([
             'nome_Aplicativo' => 'required|string',
-            'imagem' => 'required|image|mimes:jpeg,png,jpg',
+            'imagem' => 'required|image|mimes:jpeg,png,jpg,webp',
             'descricao' => 'required|string',
             'link_Projeto' => 'required|string',
         ]);

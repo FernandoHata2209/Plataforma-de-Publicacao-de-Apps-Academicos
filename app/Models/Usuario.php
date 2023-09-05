@@ -50,6 +50,7 @@ class Usuario extends Model implements Authenticatable
 
     protected $fillable = [
         'nome',
+        'sobrenome',
         'email',
         'senha',
         'id',

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 
-class UsuarioController extends Controller 
+class UsuarioController extends Controller
 {
     public function index()
     {
@@ -32,7 +32,7 @@ class UsuarioController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->route('menu.menu');
         } else {
-            return redirect()->route('login.login');
+            return redirect()->route('login.login')->withErrors(['senha' => 'Email ou senha incorretos']);
         }
     }
 
@@ -43,24 +43,29 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-    
+        // Validação dos dados
         $validatedData = $request->validate([
             'nome' => 'required|string',
-            'email' => 'required|email',
-            'senha' => 'required|min:6', 'confirmed',
+            'sobrenome' => 'required|string',
+            'email' => 'required|email|unique:usuarios', // Verifica a unicidade do email na tabela 'usuarios'
+            'senha' => 'required|min:6|confirmed',
             'cargo' => 'required|in:equipe_NPI,ciencia_Computacao,engenharia_Software',
+        ], [
+            'email.unique' => 'Este email já está em uso.', // Mensagem personalizada para a regra 'unique'
         ]);
 
+        // Hash da senha
         $validatedData['senha'] = bcrypt($validatedData['senha']);
 
+        // Criação do usuário
         Usuario::create($validatedData);
 
         return redirect()->route('login.login');
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('menu.menu');
-    
     }
 }

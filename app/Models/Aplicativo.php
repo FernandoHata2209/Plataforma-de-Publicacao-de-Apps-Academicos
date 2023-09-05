@@ -24,7 +24,7 @@ class Aplicativo extends Model
         'qtd_Curtidas',
         'imagem',
         'descricao',
-        'tipo_Postagem',
+        'tipo',
         'link_Projeto',
     ];
 }

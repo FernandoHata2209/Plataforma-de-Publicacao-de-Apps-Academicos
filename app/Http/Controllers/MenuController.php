@@ -12,7 +12,7 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $aplicativos = Aplicativo::all();
+        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
 
         return view('menu.menu', ['aplicativos' => $aplicativos]);
     }
@@ -31,6 +31,7 @@ class MenuController extends Controller
             'nome_Aplicativo' => 'required|string',
             'imagem' => 'required|image|mimes:jpeg,png,jpg,webp',
             'descricao' => 'required|string',
+            'tipo' => 'required|in:matematica,jogos,programacao,redes_computadores,outros',
             'link_Projeto' => 'required|string',
         ]);
 
@@ -48,8 +49,13 @@ class MenuController extends Controller
             'criador' => $user->id,
             'imagem' => $imageName, // Salva apenas o nome do arquivo da imagem
             'descricao' => $validatedData['descricao'],
+            'tipo' => $validatedData['tipo'],
             'link_Projeto' => $validatedData['link_Projeto'],
         ]);
+
+        // Incremente a quantidade de postagens do usuário
+        $user->qtd_Postagens += 1;
+        $user->save();
 
         return redirect()->route('menu.menu');
     }
@@ -67,24 +73,25 @@ class MenuController extends Controller
             $user = Auth::user();
         } else {
             // Caso o usuário não esteja autenticado, você pode lidar com isso de acordo com suas necessidades.
-            // Por exemplo, redirecionar para a página de login.
             return redirect()->route('login.login')->with('error', 'Faça login para acessar perfis de usuários.');
         }
+
+        $aplicativos = $user->aplicativos ?? collect();
+
+        return view('UserAccount\userPerfil', compact('user', 'aplicativos'));;
 
         // Verifique se o ID fornecido é o mesmo do usuário autenticado
         if ($id == $user->id) {
             // Se o ID for o mesmo do usuário autenticado, exiba seu próprio perfil
             return view('UserAccount\userPerfil', compact('user'));
         } else {
-            // Se o ID não for o mesmo, tente encontrar o usuário de destino
             $usuarioDestino = Usuario::find($id);
-
             // Verifique se o usuário de destino foi encontrado
             if ($usuarioDestino) {
-                return view('UserAccount\UserPerfilEnter', ['usuarioDestino' => $usuarioDestino]);
+                return view('UserAccount/UserPerfilEnter', ['usuario' => $usuarioDestino]);
             } else {
                 // Lide com o caso em que o usuário de destino não foi encontrado
-                return redirect()->route('menu.menu')->with('error', 'Perfil não encontrado');
+                return redirect()->route('home')->with('error', 'Perfil não encontrado');
             }
         }
     }

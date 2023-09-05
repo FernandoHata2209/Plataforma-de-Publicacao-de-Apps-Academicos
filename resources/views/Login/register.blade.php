@@ -106,7 +106,7 @@
             @csrf
             <div class="container-register-name-user">
                 <div class="container-register-email">
-                    <label for="nome">Digite seu Nome Completo:</label>
+                    <label for="nome">Digite seu Nome:</label>
                     <div id="login-user-form">
                         <span>
                             <svg id="icon-login-user" xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +118,25 @@
                                 <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                             </svg>
                         </span>
-                        <input type="text" name="nome" id="inp-login-user" placeholder="Nome Completo">
+                        <input type="text" name="nome" id="inp-login-user" placeholder="Nome">
+                    </div>
+                </div>
+            </div>
+            <div class="container-register-name-user">
+                <div class="container-register-email">
+                    <label for="nome">Digite seu Sobrenome:</label>
+                    <div id="login-user-form">
+                        <span>
+                            <svg id="icon-login-user" xmlns="http://www.w3.org/2000/svg"
+                                class="icon icon-tabler icon-tabler-user" width="44" id="icon-login-user"
+                                height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                            </svg>
+                        </span>
+                        <input type="text" name="sobrenome" id="inp-login-user" placeholder="Sobrenome">
                     </div>
                 </div>
             </div>
@@ -126,14 +144,9 @@
                 <label for="email">Digite seu Email:</label>
                 <div id="login-user-form">
                     <span>
-                        <svg id="icon-login-user" xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-user" width="44" id="icon-login-user" height="44"
-                            viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16" id="icon-login-user">
+                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                          </svg>
                     </span>
                     <input type="text" name="email" id="inp-login-user" placeholder="Email do Usuario">
                 </div>
@@ -160,6 +173,22 @@
                         </svg>
                     </span>
                     <input type="password" name="senha" id="inp-password-user" placeholder="Digite a Senha">
+                </div>
+            </div>
+            <div class="container-register-password">
+                <label for="senha">Confirme a sua senha</label>
+                <div id="password-user-form">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="44"
+                            id="icon-password-user" height="44" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
+                            <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                            <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
+                        </svg>
+                    </span>
+                    <input type="password" name="senha_confirmation" id="inp-password-user" placeholder="Novamente Senha">
                 </div>
             </div>
             <div class="button-container-login">

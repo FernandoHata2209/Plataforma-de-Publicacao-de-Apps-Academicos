@@ -149,7 +149,7 @@
             <div id="tophead-info-user">
                 <a href="{{ route('user.perfil', ['id' => $aplicativo->criadorRelacao->id]) }}" id="img-user">
                     <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="Foto Do Usuario" id="photo-login-user-menu">
-                    <a href="{{ route('user.perfil', ['id' => $aplicativo->criadorRelacao->id]) }}" id="username-project-menu">{{ $aplicativo->criadorRelacao->nome }}</a>
+                    <a href="{{ route('user.perfil', ['id' => $aplicativo->criadorRelacao->id]) }}" id="username-project-menu">{{ $aplicativo->criadorRelacao->nome }} {{$aplicativo->criadorRelacao->sobrenome}}</a>
                 </a>
             </div>
         </div>

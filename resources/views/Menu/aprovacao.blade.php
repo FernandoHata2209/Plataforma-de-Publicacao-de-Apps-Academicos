@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     @vite(['resources/css/style.css', 'resources/js/script.js'])
-    <title>Perfil Usuario - PPAA</title>
+    <title>Publicar App - PPAA</title>
 </head>
 
 <body>
@@ -98,46 +99,41 @@
         </div>
     </div>
 
-    <div class="container-user-perfil-infos">
-        @auth
-        <div id="edit-perfil-container">
-            <a href="" id="edit-perfil-user">Editar Perfil</a>
-        </div>
-        <div class="perfil-img-user">
-            <form action="uploadImg">
-                <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="" id="user-img-perfil">
-                <input type="file" name="image" id="inp-upload-img-user">
-            </form>
-        </div>
-        <div class="perfil-infos-user">
-            <form action="" id="form-user-perfil">
-                <label for="">Nome do Usuario</label>
-                <input type="text" name="nome" class="inp-perfil-user" disabled placeholder="{{ Auth::user()->nome }} {{ Auth::user()->sobrenome }}">
-                <label for="">Email do Usuario</label>
-                <input type="text" name="email" class="inp-perfil-user" disabled placeholder="{{ Auth::user()->email }}">
-                <label for="">Link Redes Sociais</label>
-                <input type="text" name="rede_social" class='inp-perfil-user' disabled placeholder="link tal tal tal">
-            </form>
-        </div>
-        <div class="container-show-apps">
-            <h3>Aplicativos Postados:</h3>
-            @if ($aplicativos->count() > 0)
+    <div class="container-publish">
+        @if ($errors->any())
+            <div class="alert alert-danger" style="margin-top: 10px">
                 <ul>
-                    @foreach ($aplicativos as $aplicativo)
-                        <li>
-                            <h4>{{ $aplicativo->nome_Aplicativo }}</h4>
-                            <p>{{ $aplicativo->descricao }}</p>
-                            <a href="{{ $aplicativo->link_Projeto }}">Link do Projeto</a>
-                        </li>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-            @else
-                <p>Nenhum aplicativo foi postado.</p>
-            @endif
-        </div>
-        @endauth
+            </div>
+        @endif
+        <form action="{{route('publicar.store')}}" id="form-publish" method="POST" enctype="multipart/form-data"> 
+            @csrf
+            <label for="">
+                Nome Projeto:
+            </label>
+            <input type="text" name="nome_Aplicativo" id="name-project-publish" placeholder="Nome do Projeto">
+            <label for="">
+                Descricao Projeto:
+            </label>
+            <textarea name="descricao" id="description-project-publish" cols="50" rows="4">
+            </textarea>
+            <div id="contador-space">
+                <small id="contador">0/255 caracteres</small>
+            </div>
+            <label for="">
+                Imagem do Projeto:
+            </label>
+            <input type="file" name="imagem" id="image-project-publish" >
+            <label for="link_projeto">
+                Link do Projeto:
+            </label>
+            <input type="text" name="link_Projeto" id="link-project-publish" placeholder="Link">
+            <button type="submit" id="btn-publish-app">Publicar Aplicativo</button>
+        </form>
     </div>
-    
 </body>
 
 </html>

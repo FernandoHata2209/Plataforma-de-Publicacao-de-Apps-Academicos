@@ -123,6 +123,14 @@
             <div id="contador-space">
                 <small id="contador">0/255 caracteres</small>
             </div>
+            <select name="tipo" id="select-type-project">
+                <option value="" selected hidden>Tipo da Postagem</option>
+                <option value="matematica">Matemática</option>
+                <option value="jogos">Jogos</option>
+                <option value="programacao">Programação</option>
+                <option value="redes_computadores">Redes e Computadores</option>
+                <option value="outros">Outros</option>
+            </select>
             <label for="">
                 Imagem do Projeto:
             </label>

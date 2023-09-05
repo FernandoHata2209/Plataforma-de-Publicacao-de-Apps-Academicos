@@ -374,7 +374,7 @@ body {
 }
 
 #project-img-menu {
-    width: 60rem
+    width: 60rem;
 }
 
 #description-project{
@@ -400,6 +400,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#select-type-project{
+    height: 30px;
+    margin: 10px 0;
+    text-align: center;
 }
 
 .mainhead-main-menu {

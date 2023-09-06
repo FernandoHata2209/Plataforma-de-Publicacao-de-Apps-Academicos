@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AprovacaoController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\userAccountController;
@@ -25,12 +26,14 @@ Route::get('/login', [UsuarioController::class, 'index'])->name('login.login');
 Route::post('/auth', [UsuarioController::class, 'auth'])->name('auth.user');
 Route::post('/logout', [UsuarioController::class, 'logout'])->name('auth.logout');
 
+Route::get('/aprovar', [AprovacaoController::class, 'index'])->name('menu.aprovacao');
 
 Route::get('/register', [UsuarioController::class, 'create'])->name('login.register');
 Route::post('/store', [UsuarioController::class, 'store'])->name('login.store');
 
 Route::get('/perfil/{id}', [MenuController::class, 'show'])->name('user.perfil');
-Route::get('/perfil/teste', [MenuController::class, 'userIndex'])->name('user.perfil.principal');
 
 Route::get('/publicar', [MenuController::class, 'publish'])->name('publicar.publicar');
 Route::post('publicar/app', [MenuController::class, 'store'])->name('publicar.store');
+
+

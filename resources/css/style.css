@@ -11,6 +11,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100vw;
+    height: fit-content;
     overflow-x: hidden;
     overflow-y: scroll;
     background: white;
@@ -605,4 +606,52 @@ body {
 
 textarea{
     resize:none;
+}
+
+/* Aprovacao do Projeto */
+
+.container-main-approve{
+    display: flex;
+    width: 75rem;
+    margin: 20px auto;
+    flex-wrap: wrap;
+    background-color: rgba(53, 53, 53, 0.25);
+    border-radius: 10px;
+}
+
+.main-approve{
+    display: flex;
+    width: min-content;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.header-approve-project{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ff9522;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.section-approve-infos{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    margin: 10px 0px;
+}
+
+#section-img-approve{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#img-project-approve{
+    width: 20rem;
 }

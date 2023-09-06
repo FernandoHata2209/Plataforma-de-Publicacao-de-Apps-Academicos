@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('qtd_Curtidas')->nullable();
             $table->string('imagem');
             $table->text('descricao');
+            $table->string('status')->nullable();
             $table->string('tipo');
             $table->string('link_Projeto');
             $table->timestamps();

@@ -125,11 +125,11 @@
             </div>
             <select name="tipo" id="select-type-project">
                 <option value="" selected hidden>Tipo da Postagem</option>
-                <option value="matematica">Matemática</option>
-                <option value="jogos">Jogos</option>
-                <option value="programacao">Programação</option>
-                <option value="redes_computadores">Redes e Computadores</option>
-                <option value="outros">Outros</option>
+                <option value="Matematica">Matemática</option>
+                <option value="Jogos">Jogos</option>
+                <option value="Programacao">Programação</option>
+                <option value="Redes_computadores">Redes e Computadores</option>
+                <option value="Outros">Outros</option>
             </select>
             <label for="">
                 Imagem do Projeto:

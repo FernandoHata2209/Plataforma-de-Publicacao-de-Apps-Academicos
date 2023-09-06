@@ -114,7 +114,7 @@
                 <form action="" id="form-user-perfil">
                     <label for="">Nome do Usuario</label>
                     <input type="text" name="nome" class="inp-perfil-user" disabled
-                        placeholder="{{ $usuario->nome }}">
+                        placeholder="{{ $usuario->nome }} {{$usuario->sobrenome}}">
                     <label for="">Email do Usuario</label>
                     <input type="text" name="email" class="inp-perfil-user" disabled
                         placeholder="{{ $usuario->email }}">

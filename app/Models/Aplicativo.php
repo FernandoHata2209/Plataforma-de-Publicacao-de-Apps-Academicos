@@ -26,5 +26,6 @@ class Aplicativo extends Model
         'descricao',
         'tipo',
         'link_Projeto',
+        'status',
     ];
 }

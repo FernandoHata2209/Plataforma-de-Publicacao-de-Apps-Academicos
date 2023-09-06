@@ -13,10 +13,12 @@
 <body>
     <div class="header-menu">
         <div class="header-form-login-user">
-            <a id="back-to-menu" href="{{route('menu.menu')}}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                  </svg>
+            <a id="back-to-menu" href="{{ route('menu.menu') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                    class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg>
             </a>
         </div>
         <div class="container-header-menu">
@@ -99,40 +101,29 @@
         </div>
     </div>
 
-    <div class="container-publish">
-        @if ($errors->any())
-            <div class="alert alert-danger" style="margin-top: 10px">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+    <div class="container-main-approve">
+        @foreach ($aplicativos as $aplicativo)
+            <div class="main-approve">
+                <div class="header-approve-project">
+                    <h3 id="name-project-aprove">
+                    Titulo do Projeto: {{$aplicativo->nome_Aplicativo}}</h3>
+                    <p id="name-user-project-aprove">
+                        Nome do Usuario: {{$aplicativo->criadorRelacao->nome}} {{$aplicativo->criadorRelacao->sobrenome}}</p>
+                </div>
+                <div class="section-approve-infos">
+                    <p id="description-approve-project">Descricao do Projeto: {{$aplicativo->descricao}}</p>
+                    <p id="type-approve-project">Tema do Projeto: {{$aplicativo->tipo}}</p>
+                    <div id="section-img-approve">
+                        <img src="{{asset('imagesProject/' . $aplicativo->imagem) }}" alt="Imagem do Projeto" id="img-project-approve">
+                    </div>                    
+                </div>
+                <div id="confirmation-btn-approve">
+                    <button id="approve-project">Aprovar Projeto</button>
+                    <button id="reject-project">Cancelar Projeto</button>
+                    <button id="edit-project-approve">Realizar Alteracoes</button>
+                </div>
             </div>
-        @endif
-        <form action="{{route('publicar.store')}}" id="form-publish" method="POST" enctype="multipart/form-data"> 
-            @csrf
-            <label for="">
-                Nome Projeto:
-            </label>
-            <input type="text" name="nome_Aplicativo" id="name-project-publish" placeholder="Nome do Projeto">
-            <label for="">
-                Descricao Projeto:
-            </label>
-            <textarea name="descricao" id="description-project-publish" cols="50" rows="4">
-            </textarea>
-            <div id="contador-space">
-                <small id="contador">0/255 caracteres</small>
-            </div>
-            <label for="">
-                Imagem do Projeto:
-            </label>
-            <input type="file" name="imagem" id="image-project-publish" >
-            <label for="link_projeto">
-                Link do Projeto:
-            </label>
-            <input type="text" name="link_Projeto" id="link-project-publish" placeholder="Link">
-            <button type="submit" id="btn-publish-app">Publicar Aplicativo</button>
-        </form>
+        @endforeach
     </div>
 </body>
 

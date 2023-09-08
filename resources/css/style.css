@@ -297,7 +297,7 @@ body {
     margin-right: 60px;
 }
 
-#publish-user{
+#publish-user, #approve-user{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -305,10 +305,11 @@ body {
     background: none;
     border: none;
     cursor: pointer;
+    margin-right: 10px;
     text-decoration: none;
     background-color: #ffb260;
     transition: 0.3s;
-    width: 130px;
+    width: 140px;
     height: 35px;
     border-radius: 10px;
 }

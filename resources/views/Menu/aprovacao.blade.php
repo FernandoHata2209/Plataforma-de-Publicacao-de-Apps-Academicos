@@ -118,8 +118,8 @@
                     </div>                    
                 </div>
                 <div id="confirmation-btn-approve">
-                    <button id="approve-project">Aprovar Projeto</button>
-                    <button id="reject-project">Cancelar Projeto</button>
+                    <button id="approve-project">Aprovar</button>
+                    <button id="reject-project">Cancelar</button>
                     <button id="edit-project-approve">Realizar Alteracoes</button>
                 </div>
             </div>

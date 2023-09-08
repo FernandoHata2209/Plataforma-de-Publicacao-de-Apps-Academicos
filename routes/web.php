@@ -31,7 +31,7 @@ Route::get('/aprovar', [AprovacaoController::class, 'index'])->name('menu.aprova
 Route::get('/register', [UsuarioController::class, 'create'])->name('login.register');
 Route::post('/store', [UsuarioController::class, 'store'])->name('login.store');
 
-Route::get('/perfil/{id}', [MenuController::class, 'show'])->name('user.perfil');
+Route::get('/perfil/{id}', [MenuController::class, 'show'])->name('user.userperfil');
 
 Route::get('/publicar', [MenuController::class, 'publish'])->name('publicar.publicar');
 Route::post('publicar/app', [MenuController::class, 'store'])->name('publicar.store');

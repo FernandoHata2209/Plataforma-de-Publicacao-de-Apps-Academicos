@@ -112,7 +112,7 @@
             </div>
             @auth
                 <div id="header-login">
-                    <a href="{{ route('user.perfil', ['id' => Auth::user()->id]) }}" id="header-login-menu">
+                    <a href="{{ route('user.userperfil', ['id' => Auth::user()->id]) }}" id="header-login-menu">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24"
                             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="Black" fill="none"
                             stroke-linecap="round" stroke-linejoin="round">
@@ -124,82 +124,98 @@
                 </div>
             @endauth
             @guest
-            <div class="header-form-login-user">
-                <form action="login" id="form-guest-login-user">
-                    <a id="guest-login" href="/login">Login</a>
-                </form>
-                <form action=" register" id="form-guest-register-user">
-                    <a id="guest-register" href="/register">Registrar</a>
-                </form>
-            </div>
+                <div class="header-form-login-user">
+                    <form action="login" id="form-guest-login-user">
+                        <a id="guest-login" href="/login">Login</a>
+                    </form>
+                    <form action=" register" id="form-guest-register-user">
+                        <a id="guest-register" href="/register">Registrar</a>
+                    </form>
+                </div>
             @endguest
+
         </div>
     </div>
     @auth
-    <div class="container-menu-button-publish">
-        <a href="{{route('publicar.publicar')}}" id="publish-user">Publicar Apps</a>
-    </div>
+        <div class="container-menu-button-publish">
+            <a href="{{ route('publicar.publicar') }}" id="publish-user">Publicar Apps</a>
+            @if (auth()->user()->cargo == 'equipe_NPI')
+                <a href="{{route('menu.aprovacao')}}" id="approve-user">Aprovar Projetos</a>
+            @endif
+        </div>
     @endauth
     <div class="container-main-menu">
-        @if($aplicativos->isEmpty())
-        <h3 id="none-publish">Nenhuma publicacao realizada</h3>
+        @if ($aplicativos->isEmpty())
+            <h3 id="none-publish">Nenhuma publicacao realizada</h3>
         @else
-        @foreach($aplicativos as $aplicativo)
-        <div class="tophead-main-menu">
-            <div id="tophead-info-user">
-                <a href="{{ route('user.perfil', ['id' => $aplicativo->criadorRelacao->id]) }}" id="img-user">
-                    <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="Foto Do Usuario" id="photo-login-user-menu">
-                    <a href="{{ route('user.perfil', ['id' => $aplicativo->criadorRelacao->id]) }}" id="username-project-menu">{{ $aplicativo->criadorRelacao->nome }} {{$aplicativo->criadorRelacao->sobrenome}}</a>
-                </a>
-            </div>
-        </div>
-        <div class="mainhead-main-menu">
-            <div id="title-project">
-                <h3 id="title-project-menu">{{$aplicativo->nome_Aplicativo}}</h3>
-                <p id="description-project">{{$aplicativo->descricao}}</p>
-                <p style="font-size:12px">Publicado: {{$aplicativo->created_at}}</p>
-            </div>
-            <div class="container-project-user">
-                <a href="{{$aplicativo->link_Projeto}}" target="__blank">
-                    <img src="{{  asset('imagesProject/' . $aplicativo->imagem) }}" alt="" id="project-img-menu">
-                </a>
-            </div>
-            <div class="container-project-like-comment">
-                <div id="field-qtd-like">
-                    @if($aplicativo->qtd_Curtidas == null)
-                    <p id="qtd-like-project">
-                        Nenhuma Curtida
-                    </p>
-                    @else
-                    <p id="qtd-like-project">
-                        {{$aplicativo->qtd_Curtidas}}
-                    </p>
-                    @endif
-                </div>
-                <div id="content-like-comment">
-                    <div id="field-content-like">
-                        <button id="project-like">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-filled" width="32" height="32" viewBox="0 0 24 24" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round" id="like">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z" stroke-width="0" fill="currentColor" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div id="field-content-comment">
-                        <span id="project-comment" name="comment">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 1024 1024">
-                                <path fill="currentColor" d="m174.72 855.68l130.048-43.392l23.424 11.392C382.4 849.984 444.352 864 512 864c223.744 0 384-159.872 384-352c0-192.832-159.104-352-384-352S128 319.168 128 512a341.12 341.12 0 0 0 69.248 204.288l21.632 28.8l-44.16 110.528zm-45.248 82.56A32 32 0 0 1 89.6 896l56.512-141.248A405.12 405.12 0 0 1 64 512C64 299.904 235.648 96 512 96s448 203.904 448 416s-173.44 416-448 416c-79.68 0-150.848-17.152-211.712-46.72l-170.88 56.96z" />
-                            </svg>
-                        </span>
+            @foreach ($aplicativos as $aplicativo)
+                <div class="tophead-main-menu">
+                    <div id="tophead-info-user">
+                        <a href="{{ route('user.userperfil', ['id' => $aplicativo->criadorRelacao->id]) }}"
+                            id="img-user">
+                            <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="Foto Do Usuario"
+                                id="photo-login-user-menu">
+                            <a href="{{ route('user.userperfil', ['id' => $aplicativo->criadorRelacao->id]) }}"
+                                id="username-project-menu">{{ $aplicativo->criadorRelacao->nome }}
+                                {{ $aplicativo->criadorRelacao->sobrenome }}</a>
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div id="text-area-comment">
-                <textarea name="" id="textarea-comment"></textarea>
-                <button type="submit" id="btn-comment-project">Comentar</button>
-            </div>
-        </div>
-        @endforeach
+                <div class="mainhead-main-menu">
+                    <div id="title-project">
+                        <h3 id="title-project-menu">{{ $aplicativo->nome_Aplicativo }}</h3>
+                        <p id="description-project">{{ $aplicativo->descricao }}</p>
+                        <p style="font-size:12px">Publicado: {{ $aplicativo->created_at }}</p>
+                    </div>
+                    <div class="container-project-user">
+                        <a href="{{ $aplicativo->link_Projeto }}" target="__blank">
+                            <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}" alt=""
+                                id="project-img-menu">
+                        </a>
+                    </div>
+                    <div class="container-project-like-comment">
+                        <div id="field-qtd-like">
+                            @if ($aplicativo->qtd_Curtidas == null)
+                                <p id="qtd-like-project">
+                                    Nenhuma Curtida
+                                </p>
+                            @else
+                                <p id="qtd-like-project">
+                                    {{ $aplicativo->qtd_Curtidas }}
+                                </p>
+                            @endif
+                        </div>
+                        <div id="content-like-comment">
+                            <div id="field-content-like">
+                                <button id="project-like">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="icon icon-tabler icon-tabler-heart-filled" width="32"
+                                        height="32" viewBox="0 0 24 24" stroke="#2c3e50" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" id="like">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z"
+                                            stroke-width="0" fill="currentColor" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div id="field-content-comment">
+                                <span id="project-comment" name="comment">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                        viewBox="0 0 1024 1024">
+                                        <path fill="currentColor"
+                                            d="m174.72 855.68l130.048-43.392l23.424 11.392C382.4 849.984 444.352 864 512 864c223.744 0 384-159.872 384-352c0-192.832-159.104-352-384-352S128 319.168 128 512a341.12 341.12 0 0 0 69.248 204.288l21.632 28.8l-44.16 110.528zm-45.248 82.56A32 32 0 0 1 89.6 896l56.512-141.248A405.12 405.12 0 0 1 64 512C64 299.904 235.648 96 512 96s448 203.904 448 416s-173.44 416-448 416c-79.68 0-150.848-17.152-211.712-46.72l-170.88 56.96z" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="text-area-comment">
+                        <textarea name="" id="textarea-comment"></textarea>
+                        <button type="submit" id="btn-comment-project">Comentar</button>
+                    </div>
+                </div>
+            @endforeach
         @endif
     </div>
 

@@ -13,9 +13,11 @@ class MenuController extends Controller
     public function index()
     {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+        $usuarios = Usuario::all();
 
-        return view('menu.menu', ['aplicativos' => $aplicativos]);
+        return view('menu.menu', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
     }
+
 
     public function publish()
     {
@@ -81,12 +83,12 @@ class MenuController extends Controller
         // Verifique se o ID fornecido é o mesmo do usuário autenticado
         if ($id == $user->id) {
             // Se o ID for o mesmo do usuário autenticado, exiba seu próprio perfil
-            return view('UserAccount\userPerfil', compact('user', 'aplicativos'));
+            return view('user.userperfil', compact('user', 'aplicativos'));
         } else {
             $usuarioDestino = Usuario::find($id);
             // Verifique se o usuário de destino foi encontrado
             if ($usuarioDestino) {
-                return view('UserAccount\UserPerfilEnter', ['usuario' => $usuarioDestino, 'aplicativos' => $aplicativos]);
+                return view('User\UserPerfilEnter', ['usuario' => $usuarioDestino, 'aplicativos' => $aplicativos]);
             } else {
                 // Lide com o caso em que o usuário de destino não foi encontrado
                 return redirect()->route('home')->with('error', 'Perfil não encontrado');

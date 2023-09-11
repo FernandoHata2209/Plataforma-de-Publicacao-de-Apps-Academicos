@@ -102,28 +102,44 @@
     </div>
 
     <div class="container-main-approve">
-        @foreach ($aplicativos as $aplicativo)
-            <div class="main-approve">
-                <div class="header-approve-project">
-                    <h3 id="name-project-aprove">
-                    Titulo do Projeto: {{$aplicativo->nome_Aplicativo}}</h3>
-                    <p id="name-user-project-aprove">
-                        Nome do Usuario: {{$aplicativo->criadorRelacao->nome}} {{$aplicativo->criadorRelacao->sobrenome}}</p>
+        @if ($aplicativos->count() > 0)
+            @foreach ($aplicativos as $aplicativo)
+                <div class="main-approve">
+                    <div class="header-approve-project">
+                        <h3 id="name-project-aprove">
+                            Titulo do Projeto: {{ $aplicativo->nome_Aplicativo }}</h3>
+                        <p id="name-user-project-aprove">
+                            Nome do Usuario: {{ $aplicativo->criadorRelacao->nome }}
+                            {{ $aplicativo->criadorRelacao->sobrenome }}</p>
+                    </div>
+                    <div class="section-approve-infos">
+                        <p id="description-approve-project">Descricao do Projeto: {{ $aplicativo->descricao }}</p>
+                        <p id="type-approve-project">Tema do Projeto: {{ $aplicativo->tipo }}</p>
+                        <div id="section-img-approve">
+                            <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}" alt="Imagem do Projeto"
+                                id="img-project-approve">
+                        </div>
+                    </div>
+                    <div id="confirmation-btn-approve">
+                        <form action="{{ route('menu.aprovar', ['id' => $aplicativo->id]) }}" method="POST">
+                            @csrf
+                            <button type="submit" id="approve-project">Aprovar</button>
+                        </form>
+                        <form action="{{ route('menu.rejeitar', ['id' => $aplicativo->id]) }}" method="POST">
+                            @csrf
+                            <button type="submit" id="reject-project">Cancelar</button>
+                        </form>
+                        <a href="{{ route('aprovacao.editar', ['id' => $aplicativo->id]) }}"
+                            id="edit-project">
+                            Editar</a>
+                    </div>
                 </div>
-                <div class="section-approve-infos">
-                    <p id="description-approve-project">Descricao do Projeto: {{$aplicativo->descricao}}</p>
-                    <p id="type-approve-project">Tema do Projeto: {{$aplicativo->tipo}}</p>
-                    <div id="section-img-approve">
-                        <img src="{{asset('imagesProject/' . $aplicativo->imagem) }}" alt="Imagem do Projeto" id="img-project-approve">
-                    </div>                    
-                </div>
-                <div id="confirmation-btn-approve">
-                    <button id="approve-project">Aprovar</button>
-                    <button id="reject-project">Cancelar</button>
-                    <button id="edit-project-approve">Realizar Alteracoes</button>
-                </div>
-            </div>
-        @endforeach
+            @endforeach
+
+
+        @else
+            <h3 id="none-publish">Nenhuma aplicativo para aprovar no momento</h3>
+        @endif
     </div>
 </body>
 

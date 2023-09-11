@@ -48,6 +48,12 @@ class Usuario extends Model implements Authenticatable
         return 'remember_token'; // Substitua 'remember_token' pelo nome do campo de token de lembrança na tabela
     }
 
+    public function aplicativos()
+    {
+        return $this->hasMany(Aplicativo::class, 'criador');
+    }
+
+
     protected $fillable = [
         'nome',
         'sobrenome',

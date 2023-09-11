@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     @vite(['resources/css/style.css', 'resources/js/script.js'])
-    <title>Perfil Usuario - PPAA</title>
+    <title>Publicar App - PPAA</title>
 </head>
 
 <body>
@@ -99,56 +100,50 @@
         <div class="guest-header-menu">
         </div>
     </div>
-    <div class="container-user-perfil-infos">
-        @auth
-            <div id="edit-perfil-container">
-                <a href="" id="edit-perfil-user">Editar Perfil</a>
-            </div>
-            <div class="perfil-img-user">
-                <form action="uploadImg">
-                    <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="" id="user-img-perfil">
-                    <input type="file" name="image" id="inp-upload-img-user">
-                </form>
-            </div>
-            <div class="perfil-infos-user">
-                <form action="" id="form-user-perfil">
-                    <label for="">Nome do Usuario</label>
-                    <input type="text" name="nome" class="inp-perfil-user" disabled
-                        placeholder="{{ $usuario->nome }} {{$usuario->sobrenome}}">
-                    <label for="">Email do Usuario</label>
-                    <input type="text" name="email" class="inp-perfil-user" disabled
-                        placeholder="{{ $usuario->email }}">
-                    <label for="">Link Redes Sociais</label>
-                    <input type="text" name="rede_social" class='inp-perfil-user' disabled
-                        placeholder="link tal tal tal">
-                </form>
-            </div>
-            <h3>Aplicativos Postados:</h3>
-            <div class="container-show-apps">
-                @if ($aplicativos->count() > 0)
-                    @foreach ($aplicativos as $aplicativo)
-                        <div class="main-perfil-projects">
-                            <div class="header-perfil-project">
-                                <h3 id="name-perfil-project">
-                                    Titulo do Projeto: {{ $aplicativo->nome_Aplicativo }}
-                                </h3>
-                            </div>
-                            <div class="section-perfil-project-infos">
-                                <p id="description-perfil-project">Descricao do Projeto: {{ $aplicativo->descricao }}</p>
-                                <p id="type-approve-project">Tema do Projeto: {{ $aplicativo->tipo }}</p>
-                                <div id="section-img-approve">
-                                    <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}" alt="Imagem do Projeto"
-                                        id="img-project-approve">
-                                </div>
-                            </div>
-                        </div>
+
+    <div class="container-publish">
+        @if ($errors->any())
+            <div class="alert alert-danger" style="margin-top: 10px">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
                     @endforeach
-                @else
-                    <p>Nenhum aplicativo foi postado.</p>
-                @endif
+                </ul>
             </div>
-        @endauth
+        @endif
+        <form action="{{route('aprovacao.update', ['id' => $aplicativos->id]) }}" id="form-publish" method="POST" enctype="multipart/form-data"> 
+            @csrf
+            @method('PUT')
+            <label for="">
+                Nome Projeto:
+            </label>
+            <input type="text" name="nome_Aplicativo" id="name-project-publish" placeholder="{{$aplicativos->nome_Aplicativo}}">
+            <label for="">
+                Descricao Projeto:
+            </label>
+            <textarea name="descricao" id="description-project-publish" cols="50" rows="4">
+                {{$aplicativos->descricao}}"
+            </textarea>
+            <div id="contador-space">
+                <small id="contador">0/255 caracteres</small>
+            </div>
+            <select name="tipo" id="select-type-project">
+                <option value="" selected hidden>{{$aplicativos->tipo}}</option>
+                <option value="Matematica">Matemática</option>
+                <option value="Jogos">Jogos</option>
+                <option value="Programacao">Programação</option>
+                <option value="Redes_computadores">Redes e Computadores</option>
+                <option value="Outros">Outros</option>
+            </select>
+            <label for="">
+                Imagem do Projeto:
+            </label>
+            <input type="text" name="link_Projeto" id="link-project-publish" placeholder="{{$aplicativos->link_Projeto}}">
+            <button id="btn-publish-app">Realizar Alterações</button>
+        </form>
     </div>
+
+
 </body>
 
 </html>

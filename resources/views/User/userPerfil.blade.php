@@ -12,10 +12,12 @@
 <body>
     <div class="header-menu">
         <div class="header-form-login-user">
-            <a id="back-to-menu" href="{{route('menu.menu')}}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                  </svg>
+            <a id="back-to-menu" href="{{ route('menu.menu') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                    class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg>
             </a>
         </div>
         <div class="container-header-menu">
@@ -100,44 +102,66 @@
 
     <div class="container-user-perfil-infos">
         @auth
-        <div id="edit-perfil-container">
-            <a href="" id="edit-perfil-user">Editar Perfil</a>
-        </div>
-        <div class="perfil-img-user">
-            <form action="uploadImg">
-                <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="" id="user-img-perfil">
-                <input type="file" name="image" id="inp-upload-img-user">
-            </form>
-        </div>
-        <div class="perfil-infos-user">
-            <form action="" id="form-user-perfil">
-                <label for="">Nome do Usuario</label>
-                <input type="text" name="nome" class="inp-perfil-user" disabled placeholder="{{ Auth::user()->nome }} {{ Auth::user()->sobrenome }}">
-                <label for="">Email do Usuario</label>
-                <input type="text" name="email" class="inp-perfil-user" disabled placeholder="{{ Auth::user()->email }}">
-                <label for="">Link Redes Sociais</label>
-                <input type="text" name="rede_social" class='inp-perfil-user' disabled placeholder="link tal tal tal">
-            </form>
-        </div>
-        <div class="container-show-apps">
+            <div id="edit-perfil-container">
+                <a href="" id="edit-perfil-user">Editar Perfil</a>
+            </div>
+            <div class="perfil-img-user">
+                <form action="uploadImg">
+                    <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="" id="user-img-perfil">
+                    <input type="file" name="image" id="inp-upload-img-user">
+                </form>
+            </div>
+            <div class="perfil-infos-user">
+                <form action="" id="form-user-perfil">
+                    <label for="">Nome do Usuario</label>
+                    <input type="text" name="nome" class="inp-perfil-user" disabled
+                        placeholder="{{ Auth::user()->nome }} {{ Auth::user()->sobrenome }}">
+                    <label for="">Email do Usuario</label>
+                    <input type="text" name="email" class="inp-perfil-user" disabled
+                        placeholder="{{ Auth::user()->email }}">
+                    <label for="">Link Redes Sociais</label>
+                    <input type="text" name="rede_social" class='inp-perfil-user' disabled
+                        placeholder="link tal tal tal">
+                </form>
+            </div>
             <h3>Aplicativos Postados:</h3>
-            @if ($aplicativos->count() > 0)
-                <ul>
+            <div class="container-show-apps">
+                @if ($aplicativos->count() > 0)
                     @foreach ($aplicativos as $aplicativo)
-                        <li>
-                            <h4>{{ $aplicativo->nome_Aplicativo }}</h4>
-                            <p>{{ $aplicativo->descricao }}</p>
-                            <a href="{{ $aplicativo->link_Projeto }}">Link do Projeto</a>
-                        </li>
+                        <div class="main-perfil-projects">
+                            <div class="header-perfil-project">
+                                <h3 id="name-perfil-project">
+                                    Titulo do Projeto: {{ $aplicativo->nome_Aplicativo }}
+                                </h3>
+                            </div>
+                            <div class="section-perfil-project-infos">
+                                <p id="description-perfil-project">Descricao do Projeto: {{ $aplicativo->descricao }}</p>
+                                <p id="type-approve-project">Tema do Projeto: {{ $aplicativo->tipo }}</p>
+                                <div id="section-img-approve">
+                                    <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}" alt="Imagem do Projeto"
+                                        id="img-project-approve">
+                                </div>
+                                <div id="settings-perfil-project">
+                                    <a id="btn-settings-project" href="{{route('user.editarproject', ['id' => $aplicativo->id])}}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                            fill="Black" class="bi bi-gear" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                            <path
+                                                d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
-                </ul>
-            @else
-                <p>Nenhum aplicativo foi postado.</p>
-            @endif
-        </div>
+                @else
+                    <p>Nenhum aplicativo foi postado.</p>
+                @endif
+            </div>
         @endauth
     </div>
-    
+
 </body>
 
 </html>

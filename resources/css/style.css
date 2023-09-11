@@ -542,6 +542,68 @@ body {
     border-radius: 50%;
 }
 
+.container-show-apps{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.main-perfil-projects{
+    display: flex;
+    width: min-content;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.header-perfil-project{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ff9522;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.section-perfil-project-infos{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    margin: 10px 0px;
+}
+
+#section-img-perfil-project{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#img-project-approve{
+    width: 20rem;
+}
+
+#settings-perfil-project{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+#settings-perfil-project a{
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgba(36, 36, 36, 0.25);
+}
+
 /* Parte de Publicar Aplicativo */
 
 .container-publish{
@@ -598,6 +660,7 @@ body {
     border-radius: 10px;
     padding: 0 20px;
     margin-top: 10px;
+    cursor: pointer;
     transition: .3s;
 }
 
@@ -655,4 +718,33 @@ textarea{
 
 #img-project-approve{
     width: 20rem;
+}
+
+#confirmation-btn-approve{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+#reject-project, #approve-project, #edit-project{
+    border: none;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    background-color: white;
+    text-decoration: none;
+    color: black;
+}
+
+#reject-project:hover{
+    background-color: red;
+    color: white;
+}
+
+#approve-project:hover{
+    background-color: green;
+    color: white;
 }

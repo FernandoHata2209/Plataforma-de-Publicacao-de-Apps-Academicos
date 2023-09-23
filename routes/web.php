@@ -31,6 +31,8 @@ Route::post('/aprovacao/aprovar/{id}', [AprovacaoController::class, 'aprovar'])-
 Route::post('/aprovacao/rejeitar/{id}', [AprovacaoController::class, 'rejeitar'])->name('menu.rejeitar');
 Route::get('/aprovacao/{id}/editar', [AprovacaoController::class, 'editar'])->name('aprovacao.editar');
 Route::put('/aprovacao/{id}', [AprovacaoController::class, 'atualizar'])->name('aprovacao.update');
+Route::get('/teste', [MenuController::class , 'teste'])->name('menu.teste');
+Route::get('/testando', [MenuController::class , 'teste2'])->name('menu.outroteste');
 
 Route::get('/register', [UsuarioController::class, 'create'])->name('login.register');
 Route::post('/store', [UsuarioController::class, 'store'])->name('login.store');

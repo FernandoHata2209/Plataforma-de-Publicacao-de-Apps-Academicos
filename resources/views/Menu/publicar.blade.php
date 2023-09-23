@@ -13,18 +13,21 @@
 <body>
     <div class="header-menu">
         <div class="header-form-login-user">
-            <a id="back-to-menu" href="{{route('menu.menu')}}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                  </svg>
+            <a id="back-to-menu" href="{{ route('menu.menu') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                    class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg>
             </a>
         </div>
         <div class="container-header-menu">
-            <svg id="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="255px" height="254px"
-                viewBox="0 0 255 254" enable-background="new 0 0 255 254" xml:space="preserve">
-                <image id="image0" width="255" height="254" x="0" y="0"
-                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP8AAAD+CAMAAADCiiNdAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+            <a href="{{ route('menu.menu') }}">
+                <svg id="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="255px"
+                    height="254px" viewBox="0 0 255 254" enable-background="new 0 0 255 254" xml:space="preserve">
+                    <image id="image0" width="255" height="254" x="0" y="0"
+                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP8AAAD+CAMAAADCiiNdAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
                 AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAC4lBMVEX///8aIiwaIiwaIiwa
                 IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
                 IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
@@ -93,7 +96,8 @@
                 Go1Go9FoNBqNRqPRaDQajUaj0Wg0Go1GE9D8D1bfIA/dC1K5AAAAJXRFWHRkYXRlOmNyZWF0ZQAy
                 MDE5LTA4LTIxVDE5OjA2OjI1KzAzOjAwsssdMQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxOS0wOC0y
                 MVQxOTowNjoyNSswMzowMMOWpY0AAAAASUVORK5CYII=" />
-            </svg>
+                </svg>
+            </a>
         </div>
         <div class="guest-header-menu">
         </div>
@@ -109,7 +113,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{route('publicar.store')}}" id="form-publish" method="POST" enctype="multipart/form-data"> 
+        <form action="{{ route('publicar.store') }}" id="form-publish" method="POST" enctype="multipart/form-data">
             @csrf
             <label for="">
                 Nome Projeto:
@@ -134,7 +138,7 @@
             <label for="">
                 Imagem do Projeto:
             </label>
-            <input type="file" name="imagem" id="image-project-publish" >
+            <input type="file" name="imagem" id="image-project-publish">
             <label for="link_projeto">
                 Link do Projeto:
             </label>

@@ -21,11 +21,12 @@
             </a>
         </div>
         <div class="container-header-menu">
-            <svg id="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="255px" height="254px"
-                viewBox="0 0 255 254" enable-background="new 0 0 255 254" xml:space="preserve">
-                <image id="image0" width="255" height="254" x="0" y="0"
-                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP8AAAD+CAMAAADCiiNdAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+            <a href="{{ route('menu.menu') }}">
+                <svg id="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="255px"
+                    height="254px" viewBox="0 0 255 254" enable-background="new 0 0 255 254" xml:space="preserve">
+                    <image id="image0" width="255" height="254" x="0" y="0"
+                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP8AAAD+CAMAAADCiiNdAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
                 AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAC4lBMVEX///8aIiwaIiwaIiwa
                 IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
                 IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
@@ -94,7 +95,8 @@
                 Go1Go9FoNBqNRqPRaDQajUaj0Wg0Go1GE9D8D1bfIA/dC1K5AAAAJXRFWHRkYXRlOmNyZWF0ZQAy
                 MDE5LTA4LTIxVDE5OjA2OjI1KzAzOjAwsssdMQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxOS0wOC0y
                 MVQxOTowNjoyNSswMzowMMOWpY0AAAAASUVORK5CYII=" />
-            </svg>
+                </svg>
+            </a>
         </div>
         <div class="guest-header-menu">
         </div>

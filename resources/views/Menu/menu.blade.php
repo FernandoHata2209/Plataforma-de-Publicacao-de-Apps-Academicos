@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt_BR">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/css/style.css', 'resources/js/app.js'])
-    <title>Plataforma de Publicação de Apps Acadêmicos</title>
+    <title>Menu - Plataforma de Publicação de Apps Acadêmicos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    @vite(['resources/css/style.css', 'resources/js/script.js'])
 </head>
 
 <body>
-    <div class="header-menu">
-        <div class="container-header-menu">
+    <div class="container-header-menu">
+        <div class="container-menu">
             @auth
                 <form action="{{ route('auth.logout') }}" method="POST">
                     <div id="header-settings-menu">
@@ -28,197 +29,126 @@
                 </form>
             @endauth
             @guest
-                <div class="guest-header-menu">
+                <div class="section-infos">
 
                 </div>
             @endguest
-            <div id="header-logo">
-                <a href="">
-                    <svg id="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="255px"
-                        height="254px" viewBox="0 0 255 254" enable-background="new 0 0 255 254" xml:space="preserve">
-                        <image id="image0" width="255" height="254" x="0" y="0"
-                            xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP8AAAD+CAMAAADCiiNdAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-                    AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAC4lBMVEX///8aIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwa
-                    IiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiwaIiz///9nzeMIAAAA9HRSTlMAACRl
-                    msDm9fvtzqd7OwQmhd3zpUYDPLhoBiPgUgJ6+LUYFrroQiXe/GAu63PpYxHb/UcBr+wca8IZ8mKk
-                    ECr+f6AM+Wm/CltEm82cvDDSwRd91EuhEtDlZwk+jiEv33In9JDXatUFTFVJMjpe43g32JW777MO
-                    IvbZZlF34mxNqsTars85OFCEttPxGjWPD3mfxsookcXh7l2p9/orSsOCqLIHPz2GC1e0XB6Io28V
-                    FMvkdjQgnjMNdTZALOfcsDGtjbEpk5SBomRBnROmuU9aH9bJmayJvlQdbi1whwhDt3zqSJZhvZKD
-                    TserbfCYdFaMyIBZQIxdeAAAAAFiS0dEAIgFHUgAAAAHdElNRQfjCBUTBhkn4j2PAAAKX0lEQVR4
-                    2u3d+38U5RUH4BwgkkAIEgy3kAZDkBAQjCuUgCQQUhAUShGFAEpBiARKI4UQpBeRSyw3QVTAS0GC
-                    1RpFCigXlRaE2loqRWxtbcW21Futrb3MH9AkpGGz2d055z1nbnzO99fNzHueN7vZzMyZdxISNBqN
-                    RqPRaDQajUaj0Wg0Go1Go9FoNBqNRqPRaDQajUaj0Wg0Go1Go9EELoBIq9ZtEq9oa/k8Scnt2qd0
-                    SI2one3veGUnr2WUpHW+Kl3Q36Wr1yB6OnXrLuTvEUB9fTJ6Svgzv5TlNcQ4va5m+7N7e43gJKcP
-                    039NX68JvOT2Y/nz+nsNYGcAw9/jWq+rF8hAY/+g67yuXSL51xv6Qzd4XbpMBg8x83/Z68KlMjRk
-                    4i8Y5nXdYhlu4r/R66rlMngE3V9Y5HXVghlJ94/yumbJDC6m+geN9rpm0Qyk+ku8rlg2iVT/V7yu
-                    WDZFV9P8Yy6vt79ljaX5b/K6XumMo/kHeF2vdMbT/Dd7Xa900mj+W7yuVzzZJH87r8sVTw+S/7I4
-                    8m+WCSR/htfleuyf6HW54ikk+b/qdbnimUTyX0YH/xczOkTyf83reqUzmfb9f6vX9UpnCs1/2+3e
-                    ZeLUfHn/NJrf25ROnzFY2D8zSP66FI8Uvewc//DHh36AO+4U9M8Knh+GyLXctL0tgH74+mwp/5yE
-                    IPrFTsLOLgimP/MuGX9KQjD9MFeEP68snv3ufozML19Q7KA/W4JftDDu9e9vcPe/qOs3K9L51qi5
-                    R8C/2Kb/4VsCYyxp0yHkhH8pv7SplTb+ZVUCE2BZy+/tzvdGRuAq7Aqw63/5tojfsr7z3VQ2OCLf
-                    W3zfyvvTOEWtAlt/6mqhCbBWr3HiQwClM9dWlzzQ5vvr1pMrGrbB3p+wUeyAs2iTAx+CsDyYt2Lz
-                    locIb4gSQPgTNkn5LWvrTEcnoCGZD499ZB2qmkczUf7ibXITsL2D8xNQn4Idjz1uV8sTTwLKDz+Q
-                    81tVd7szAXWfhoE745eyC5B+eEpwAvJ7slSkbNwdp5DlNWj/pO2CE5C1x70JgKdj/yVoKsPeDwMF
-                    /db6J12cgLIfxmjVG9f0Iwh/KFFyAuY94+IEwK1RvxBzBlH80FH0hOMoN/1QEe0fo2cvvY7xC1/z
-                    qXZ1Ata0/Cr8UdjLKH/ZZEn/Nlc/AfBc5Piza6l+WCja8vu8q354IWL4veEv4vywWNL/+Iuu+vct
-                    aTb6j03u/6zcH+A3wIHwsXPvaPYa0g8rJP1pla76i8PfABFzj/XDKskJaO3uG+CRSyN3GmPo30A/
-                    wxA7O931H7w08k0RL6H9sn3vL7k7AU1/vaZEvoL3Zz4q6O/mrv/lxmH77zP3Q+ETcv7H3PVPaxx2
-                    R4tXCH7YJefv767/0MVRe7d8heKvkbjm0pghrvoPN4xZtYznhz1y/j6u+qHhbvUjUV4g+WGcmL9E
-                    AFVcePSV+iyc0JRXX2pK7Yj6NP6zO69uyNXRrsHQ/CNypPwP8OihCQd6vYYZp6jvjT3r3EMtK/9g
-                    tB3R/PCslH8OR1+7i9QAdKwafmJZM6LuiuiXuOzakFHm+p8eJ1+UOvG6tS16NwLVXyvUeWTsP/m6
-                    yXBVVnn03VH9sNdTf+WpXLPxnoqxQ7I/fauI/2dG/OorDIfbPknKD3mGv4HmecNA/+DPjYcbHmuf
-                    dD88L+H/BZ1/1LztNTFmC46Bv/SYgP9NMn+u+eFXVseYezXwi9wCTD0F2v2XjMFSYu/XxA9T2Pxt
-                    RP7pnYzBJpcJ+0+zF7/6FY3f437GWEXxWo+M/LCD6+9H4k/I4YwV96vWzA9v8fj5pI//Wtap1/1x
-                    T7Yb+pmdkb2BkD68sc7E3bmhH46wavq1e/xV8fdu6k/l3Ad/LaEVkMlfv8EZPxxkdEamADoVrBZX
-                    +xPtxn6YYVxT8gg0v5D5TdvY5eiE/xnjlQBmoflnmZedRxfajWDuh3LDot5Gf/pf5B5p7LIdguGH
-                    9mZFdcHyx5xj8u+psR2D48826ox8B8sP/YbJt6bbD8Lxw3CDml5D//H7LZc/DjEIyx96l17U77D8
-                    1lx+DmamWX6DzsjdWP6bSVz/fMwwPD+kEGsa9nsk/yz7EHspahymvwx3s0VT3kPyS8dz+Wm1qIGY
-                    flhD6ow8Z/fv2P/zAmWvnJnm+uEUoaakPyD5f2TztyLvO2X7KZ2R7yP5XdiXGJLykEOx/XAGXdR1
-                    53E17eM3m6I7TPl+OI4t6gNcSZl/YvOPlbrox3ZGbkGW9Gc2HzvTMn7ohqrpL6dxFe3h33I6BTeS
-                    lD+0ElPUWFxBp/kf/v7ImZbyQyFiTeCuyIJuYPOt5/B8GT+8YVtTW2TH7718/lsEvpC/xnY5lgG4
-                    HZ3kP0atinSbtYwfptsUNR63/kGNwHoDR1AjCfvhnbg15S7A7UWgtaIdbaUJKX/8zsgTuJ0s5H/1
-                    5R4i8cX8MD9OUXeOQe2iWGBt4RmokRzwQ5zbzS/g9vBXPj+Dem+lnL825pWqzrgdXM/nY2faCT+8
-                    F6OmZNzF/sqpfH57Kl/SnxmjM/JD3OYCvfXJ2V76IS/qKduPcMtfXSXw7h+OGskxP7wfpaasVqhN
-                    JdaZeddgoTFR//ko1ys34zYVuME66xo6X9YPH7QoamIZakOJO4sIXRVO+WFLRE1FFajNzi/n89fh
-                    ZtpZf2Rn5Me4zT7h84vWmvCl/TC2WVGLDqM2epV9rc+yThnxxf3Q7JHQn6I2yfwbn7/IcEkBcf/M
-                    sH61z3Cb/J3Pt+lydNEf9oCozwtQGwwReJzmcUO+A/5LnZHTcBsIrCyBnGlX/HCo8erdTty/Y9UC
-                    737z5QQc8MOJhppGn0T98OFFfP5K8xV2nfBf7IwcifvhOXw+cqZd88OFuqLusu+9q88hgQVWTe6l
-                    c9QPnbFdjunsPhf0TLvpz07+B+4HZ/H51tMMvkN+OIPrcpS4mxrdT+qmH5ndfD6+n9R//p4C735U
-                    l6M//RKLyu1m1uCl/xSfn4btJ/Wh/6jAopLYflIf+lNv5/PR/aQ+9P+Tz0d3OfrQf5bf6YHuJ/Wj
-                    vxefj+0n9aP/Cz6f0OXoP/8FPh/bT+pLf/0hIi/YflKf+rOTmX5kP6lf/fAhj4/tJ/WtP/QRh18l
-                    tIKsd35oxXmsALKf1M9+2GzOR/aT+ttfZvwseWqXoz/9UGF6BHhCrARP/fCxGT8D10/qf7/hxR9y
-                    l6Nf/fCpCR/ZTxoEP3xG5xt0OfrXX/A52Y/sJw2Gv2lpdnSQ/aRB8YeG0vhGXY4+9sNJxM1zYUH2
-                    kwbHDyMpfGQ/aZD8NYSna+VuFB7cB35YgF/Z1X5BpwD68WtqJ4o/TdwXfuy9H8dETvn50J+OWtR9
-                    P+5WigD6oft99vwMB/h+8UP6v+z45zbwR/GvH+CL+EcCiwUudvnaD7VLY+v7Ch7y+9UPUB7j9vcl
-                    B9DruQTaD6HyXi37Qd/eW8zfczD8dSkoWRr2uMakf38idqo3GP66ZC47M/c/m+ZceeS/Cxx732P9
-                    Go1Go9FoNBqNRqPRaDQajUaj0Wg0Go1GE9D8D1bfIA/dC1K5AAAAJXRFWHRkYXRlOmNyZWF0ZQAy
-                    MDE5LTA4LTIxVDE5OjA2OjI1KzAzOjAwsssdMQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxOS0wOC0y
-                    MVQxOTowNjoyNSswMzowMMOWpY0AAAAASUVORK5CYII=" />
+            <div id="logo">
+                <svg version="1.1" id="svg2" xml:space="preserve" width="440" height="98.666664"
+                    viewBox="0 0 440 98.666664" sodipodi:docname="logo-unifil.eps"
+                    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                    <defs id="defs6" />
+                    <sodipodi:namedview id="namedview4" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0"
+                        inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" />
+                    <g id="g8" inkscape:groupmode="layer" inkscape:label="ink_ext_XXXXXX"
+                        transform="matrix(1.3333333,0,0,-1.3333333,0,98.666667)">
+                        <g id="g10" transform="scale(0.1)">
+                            <path
+                                d="m 330.41,357.852 1.762,2.828 1.84,3.379 1.777,3.402 1.652,3.508 1.571,3.492 1.418,3.648 1.34,3.68 1.121,3.789 1.097,3.742 0.934,3.879 0.707,3.852 0.66,3.91 0.531,4.039 0.321,3.988 0.25,4.114 0.089,4.988 -0.531,10.371 -1.66,11.09 -2.809,10.738 -3.789,10.301 -4.679,9.789 -5.66,9.223 -6.411,8.546 -7.121,7.922 -7.961,7.149 -8.609,6.429 -9.148,5.59 -9.793,4.703 -10.27,3.809 -10.809,2.77 -11.05,1.71 -9.93,0.52 H 32.7813 L 235.789,208.531 330.41,357.852"
+                                style="fill:#737779;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path12" />
+                            <path
+                                d="m 104.539,575.359 0.281,-3.148 0.43,-3.051 0.48,-3.148 0.622,-3.082 0.726,-2.989 0.231,-1.05 h 421.242 l 0.07,-0.071 c 21.801,-0.621 39.32,-18.601 39.32,-40.531 v -2.148 l 0.598,-0.379 c 81.602,-8.043 156.481,-7.032 155.82,-98.434 h -0.121 c -5.66,6.961 -15.859,11.594 -27.359,11.594 h -1.117 L 588.441,429.52 C 522.551,429.84 449.75,337.891 387.359,238.23 l -40.531,-64.671 39.352,-62.118 2.531,-3.832 3.238,-4.32 3.563,-4.289 3.949,-4.0391 4.039,-3.7812 4.328,-3.5899 4.633,-3.2812 4.769,-2.9492 4.981,-2.668 5.16,-2.3906 5.449,-2.0625 5.45,-1.6875 5.691,-1.3203 5.859,-1 5.871,-0.6016 5.93,-0.1289 5.981,0.1289 5.91,0.6016 5.797,1 5.679,1.3203 5.453,1.6875 5.457,2.0625 5.204,2.3906 5,2.668 4.738,2.9492 4.59,3.2812 4.34,3.5899 4.109,3.8516 3.883,3.9687 3.558,4.289 3.121,4.09 2.579,3.883 268.402,423.386 1.359,2.313 1.528,2.641 1.441,2.789 1.281,2.687 1.25,2.852 1.098,2.879 1.051,2.972 0.941,2.918 0.859,2.961 0.692,3.129 0.656,3.039 0.481,3.192 0.339,3.171 0.301,3.129 0.231,3.192 0.019,3.968 -0.39,8.329 -1.348,8.793 -2.16,8.527 -3.082,8.199 -3.719,7.801 -4.43,7.262 -5.211,6.847 -5.648,6.293 -6.281,5.707 -6.801,5.09 -7.301,4.453 -7.789,3.758 -8.168,3.039 -8.582,2.172 -8.777,1.32 -7.942,0.43 H 192.078 l -8.047,-0.43 -8.761,-1.32 -8.61,-2.172 -8.211,-3.039 -7.687,-3.758 -7.352,-4.453 -6.851,-5.066 -6.27,-5.731 -5.66,-6.293 -5.141,-6.808 -4.429,-7.301 -3.758,-7.801 -2.973,-8.199 -2.258,-8.527 -1.34,-8.793 -0.39,-8.387 0.039,-3.91 0.16,-3.153"
+                                style="fill:#f08223;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path14" />
+                            <path
+                                d="m 2924.42,70.7813 77.61,435.4377 H 2833.91 L 2756.32,70.7813 Z m -500.62,0 40.26,224.2577 209.7,-1.758 25.1,132.16 -210.98,1.758 20.13,104.77 h 263.76 l 26.06,136.332 H 2336.24 L 2226.26,70.7813 Z m -786.19,0 41.17,229.0977 c 5.32,28.73 14.26,49.93 26.93,63.672 12.69,13.648 29.57,20.558 50.71,20.558 16.4,0 29.3,-4.519 38.84,-13.531 9.56,-8.93 14.12,-20.68 13.64,-35.098 -0.13,-2.371 -0.34,-5.14 -0.61,-8.351 -0.46,-3.039 -1.3,-7.629 -2.65,-13.719 L 1763.33,70.7813 h 170.91 l 43.4,247.7187 c 1.96,10.52 3.47,20.68 4.63,30.172 1.08,9.629 1.9,18.418 2.15,26.308 1.39,42.149 -10.48,75.559 -35.97,100.411 -25.24,24.668 -60.33,37.089 -105.06,37.089 -28.73,0 -55.46,-5.5 -80.15,-16.691 -24.49,-11.219 -48.2,-28.609 -70.61,-52.027 l 9.68,56.547 H 1546.47 L 1466.84,70.7813 Z M 2240.32,506.23 H 2072.14 L 1994.59,70.7891 h 168.24 z M 3097.73,668.309 2996.61,70.7891 h 170.24 L 3267.22,668.309 Z M 1143.8,71.6914 c 173.5,0.6992 272.59,78.3396 303.06,242.7886 l 65.49,353.829 h -189.78 l -66.98,-346.438 c -7.78,-40.191 -19.39,-67.641 -35.03,-82.43 -30.07,-28.48 -101.75,-32.632 -131.67,-1.64 -13.35,13.711 -19.56,33.609 -18.6,59.738 0.16,4.731 0.36,9.289 0.98,13.723 0.57,4.449 1.44,8.847 2.42,13.457 l 66.09,343.59 H 948.469 L 887.539,359 c -2.711,-13.941 -4.5,-25.949 -5.68,-36.148 -1.14,-10.114 -1.898,-19.372 -2.218,-27.723 C 874.262,136.949 934.828,70.7695 1143.8,71.6914 Z M 2269.44,668.309 H 2101.36 L 2079.34,547.91 h 169.76 z m 761.76,0 H 2863.06 L 2841.04,547.91 h 169.85 l 20.31,120.399"
+                                style="fill:#737779;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path16" />
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <div id="section-search-project">
+                <a id="search" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="mx-3">
+                        <circle cx="10.5" cy="10.5" r="7.5"></circle>
+                        <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
                     </svg>
                 </a>
+                <div id="section-login-user">
+                    <button id="login-account" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    
+                </div>
             </div>
-            @auth
-                <div id="header-login">
-                    <a href="{{ route('user.userperfil', ['id' => Auth::user()->id]) }}" id="header-login-menu">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24"
-                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="Black" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                        </svg>
+        </div>
+
+          <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    @csrf
+                    <div class="mb-3">
+                      <label for="loginEmail" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="loginEmail" required name="email">
+                    </div>
+                    <div class="mb-3">
+                      <label for="loginPassword" class="form-label">Senha</label>
+                      <input type="password" class="form-control" id="loginPassword" required name="senha">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="container-menu-project">
+            <div class="section-type-project">
+                <a id="type-project" href="#">Tecnologia</a>
+                <a id="type-project" href="#">Matematica</a>
+                <a id="type-project" href="#">Redes</a>
+                <a id="type-project" href="#">Outros</a>
+            </div>
+        </div>
+
+        <div class="container-project-publish-principal">
+            <div id="infos-project-principal">
+                <h1 id="title-project-principal">Titulo do Projeto</h1>
+                <p id="description-project-principal">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quos repellat voluptatum eaque
+                    nemo? Ipsam, delen
+                </p>
+                <div id="more-infos-project">
+                    <a id="more-info">
+                        Mais informacoes
                     </a>
                 </div>
-            @endauth
-            @guest
-                <div class="header-form-login-user">
-                    <form action="login" id="form-guest-login-user">
-                        <a id="guest-login" href="/login">Login</a>
-                    </form>
-                    <form action=" register" id="form-guest-register-user">
-                        <a id="guest-register" href="/register">Registrar</a>
-                    </form>
-                </div>
-            @endguest
+            </div>
+        </div>
 
+        <div class="container-project-publish">
+            <div id="section-info-project">
+                <p id="type-project-publish">
+                    Tipo do Projeto
+                </p>
+                <div id="title-project-publish">
+                    <h4 id="title-project">Titulo do Projeto</h4>
+                </div>
+                <div id="description-project-publish">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, eaque, quo odio consequatur
+                        omnis, adipisci quidem dicta magnam libero totam ipsa quia. Obcaecati hic nesciunt molestias
+                        dolore quis libero eligendi.</p>
+                </div>
+                <div id="more-infos-project">
+                    <a id="more-info-publish">
+                        Mais informacoes
+                    </a>
+                </div>
+            </div>
+            <div id="section-img-project">
+                <img src="" alt="">
+            </div>
         </div>
     </div>
-    @auth
-        <div class="container-menu-button-publish">
-            <a href="{{ route('publicar.publicar') }}" id="publish-user">Publicar Apps</a>
-            @if (auth()->user()->cargo == 'equipe_NPI')
-                <a href="{{route('menu.aprovacao')}}" id="approve-user">Aprovar Projetos</a>
-            @endif
-        </div>
-    @endauth
-    <div class="container-main-menu">
-        @if ($aplicativos->isEmpty())
-            <h3 id="none-publish">Nenhuma publicacao realizada</h3>
-        @else
-            @foreach ($aplicativos as $aplicativo)
-                <div class="tophead-main-menu">
-                    <div id="tophead-info-user">
-                        <a href="{{ route('user.userperfil', ['id' => $aplicativo->criadorRelacao->id]) }}"
-                            id="img-user">
-                            <img src="{{ Vite::asset('resources/img/fotoLogin.webp') }}" alt="Foto Do Usuario"
-                                id="photo-login-user-menu">
-                            <a href="{{ route('user.userperfil', ['id' => $aplicativo->criadorRelacao->id]) }}"
-                                id="username-project-menu">{{ $aplicativo->criadorRelacao->nome }}
-                                {{ $aplicativo->criadorRelacao->sobrenome }}</a>
-                        </a>
-                    </div>
-                </div>
-                <div class="mainhead-main-menu">
-                    <div id="title-project">
-                        <h3 id="title-project-menu">{{ $aplicativo->nome_Aplicativo }}</h3>
-                        <p id="description-project">{{ $aplicativo->descricao }}</p>
-                        <p style="font-size:12px">Publicado: {{ $aplicativo->created_at }}</p>
-                    </div>
-                    <div class="container-project-user">
-                        <a href="{{ $aplicativo->link_Projeto }}" target="__blank">
-                            <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}" alt=""
-                                id="project-img-menu">
-                        </a>
-                    </div>
-                    <div class="container-project-like-comment">
-                        <div id="field-qtd-like">
-                            @if ($aplicativo->qtd_Curtidas == null)
-                                <p id="qtd-like-project">
-                                    Nenhuma Curtida
-                                </p>
-                            @else
-                                <p id="qtd-like-project">
-                                    {{ $aplicativo->qtd_Curtidas }}
-                                </p>
-                            @endif
-                        </div>
-                        <div id="content-like-comment">
-                            <div id="field-content-like">
-                                <button id="project-like">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-heart-filled" width="32"
-                                        height="32" viewBox="0 0 24 24" stroke="#2c3e50" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round" id="like">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z"
-                                            stroke-width="0" fill="currentColor" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <div id="field-content-comment">
-                                <span id="project-comment" name="comment">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                        viewBox="0 0 1024 1024">
-                                        <path fill="currentColor"
-                                            d="m174.72 855.68l130.048-43.392l23.424 11.392C382.4 849.984 444.352 864 512 864c223.744 0 384-159.872 384-352c0-192.832-159.104-352-384-352S128 319.168 128 512a341.12 341.12 0 0 0 69.248 204.288l21.632 28.8l-44.16 110.528zm-45.248 82.56A32 32 0 0 1 89.6 896l56.512-141.248A405.12 405.12 0 0 1 64 512C64 299.904 235.648 96 512 96s448 203.904 448 416s-173.44 416-448 416c-79.68 0-150.848-17.152-211.712-46.72l-170.88 56.96z" />
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="text-area-comment">
-                        <textarea name="" id="textarea-comment"></textarea>
-                        <button type="submit" id="btn-comment-project">Comentar</button>
-                    </div>
-                </div>
-            @endforeach
-        @endif
-    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

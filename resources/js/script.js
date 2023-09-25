@@ -20,3 +20,12 @@ function updateCaracteres() {
         contadorCaracteres.textContent = `${numCaracteres}/255 caracteres`;
     }
 }
+
+function openRegisterModal() {
+    $("#registerModal").modal("show");
+}
+
+// Função para abrir o modal de login
+function openLoginModal() {
+    $("#loginModal").modal("show");
+}

@@ -1,750 +1,144 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Work+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,300&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
+*{
+    width: 100%;
     box-sizing: border-box;
-    font-family: "Work Sans", sans-serif;
+    font-size: 1rem;
+    /* font-family: 'Lato'; */
 }
 
-body {
+/* Cabecalho do Projeto */
+
+.container-header-menu{
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    height: fit-content;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    background: white;
+    width: 80vw;
+    margin: 0 auto;
 }
 
-/* parte Cabecalho */
-
-.header-menu {
+.container-menu{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #ff9522;
-    width: 100vw;
-}
-
-.container-header-menu {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100vw;
-}
-
-#logo {
-    width: 100px;
-    height: 100px;
-}
-
-#header-login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 33vw;
-    height: 120px;
-}
-
-#header-login-menu {
-    width: 120px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30px;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-#header-login-menu:hover {
-    background-color: #ffb260;
-}
-
-#header-settings-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 33vw;
-    height: 120px;
-}
-
-#header-settings {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
-    width: 120px;
-    border-radius: 10px;
-}
-
-#header-settings svg {
-    height: 30px;
-}
-
-#header-settings:hover {
-    background-color: #ffb260;
-}
-
-/* Conteudo Principal do Login do Usuario */
-
-.main-container-login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding-top: 10px;
-    margin: 20vh auto;
-    background-color: rgba(53, 53, 53, 0.25);
-    border-radius: 10px;
-}
-
-.login-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 10px 50px;
-}
-
-.container-login-user,
-.container-password-user,
-.container-register-email,
-.container-register-password,
-.container-register-again-password {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 5px 0;
-    padding: 10px 10px;
-    border-radius: 10px;
-    background-color: rgba(153, 153, 153, 0.5);
-}
-
-#inp-login-user,
-#inp-password-user {
-    border: none;
-    border-radius: 3px;
-    height: 30px;
-    width: 340px;
-    font-size: 15px;
-}
-
-#login-user-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#password-user-form,
-#password-user-form-confirm {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#icon-login-user,
-#icon-password-user {
-    width: 40px;
-    margin-right: 10px;
-}
-
-.button-container-login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#btn-register-user,
-#btn-cancel-register {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    padding: 0px 30px;
-    height: 30px;
-    border: none;
-    width: 150px;
-    cursor: pointer;
-    transition: 0.3s;
-    border-radius: 10px;
-    background-color: white;
-    text-decoration: none;
-    color: black;
-    font-size: 15px;
-}
-
-.door-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    padding: 0;
-}
-
-.door-icon {
-    transition: transform 0.3s ease-in-out;
-}
-
-
-#btn-login-user,
-#btn-confirm-register {
-    margin-top: 10px;
-    padding: 0px 30px;
-    height: 30px;
-    border: none;
-    width: 150px;
-    cursor: pointer;
-    transition: 0.3s;
-    border-radius: 10px;
-}
-
-#button-confirm-register,
-#btn-cancel-register {
-    margin-right: 10px;
-}
-
-#btn-register-user:hover {
-    background-color: rgb(87, 87, 87);
-    color: white;
-}
-
-#select-charge-user-register {
-    width: 340px;
-    height: 30px;
-    margin: 10px 0;
-    text-align: center;
-}
-
-#btn-confirm-register:hover,
-#btn-login-user:hover {
-    background-color: rgb(53, 187, 53);
-    color: white;
-}
-
-#btn-cancel-register:hover {
-    background-color: red;
-    color: white;
-}
-
-#btn-login-user {
-    margin-right: 10px;
-}
-
-/* User guest Menu */
-
-.header-form-login-user {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30vw;
-}
-
-.guest-header-menu{
-    width: 33vw;
-}
-
-#form-guest-register-user,
-#form-guest-login-user {
-    margin-right: 20px;
-    margin-left: 20px;
-}
-
-#guest-login,
-#guest-register,
-#back-to-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    transition: 0.3s;
-    width: 120px;
-    height: 30px;
-    border-radius: 10px;
-}
-
-#guest-login:hover,
-#guest-register:hover,
-#back-to-menu:hover {
-    background-color: #ffb260;
-}
-
-/* Conteudo Principal do Menu do Usuario */
-
-.container-main-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10vh auto;
-    flex-direction: column;
-    background-color: rgba(53, 53, 53, 0.25);
-    width: 80rem;
-    border-radius: 10px;
-}
-
-.container-menu-button-publish{
-    display: flex;
-    justify-content: end;
-    margin-top: 20px;
-    margin-right: 60px;
-}
-
-#publish-user, #approve-user{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin-right: 10px;
-    text-decoration: none;
-    background-color: #ffb260;
-    transition: 0.3s;
-    width: 140px;
-    height: 35px;
-    border-radius: 10px;
-}
-
-#none-publish{
-    margin: 15px;
-}
-
-#publish-user:hover {
-    background-color: #fd8300;
-}
-
-.tophead-main-menu {
     flex-direction: row;
-    width: 55rem;
-    margin-top: 20px;
+    border-bottom: 1.5px solid gray;
 }
 
-#tophead-info-user {
+#logo{
+    width: 60%;
+}
+
+/* Menu */
+
+#section-search-project{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#section-login-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+#section-login-user button{
+    width: 120px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    background: none;
+    margin: 10px;
+    transition: .3s;
+}
+
+#section-login-user button:hover{
+    background-color: rgb(224, 224, 224);
+}
+
+.container-menu-project{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.section-type-project{
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 10px auto;
+}
+
+#type-project{
+    text-decoration: none;
+    color: rgb(82, 82, 82);
+}
+
+#type-project:hover{
+    text-decoration: underline
+}
+
+#search{
+    margin: 10px;
+}
+
+.container-project-publish-principal{
     display: flex;
     justify-content: start;
-    flex-direction: row;
-    align-items: center;
-    width: 60rem;
+    border-radius: 6px;
+    background: linear-gradient(rgb(60, 62, 66), rgb(110, 114, 121));
+    margin-top: 10px;
 }
 
-#username-project-menu {
-    margin-left: 10px;
-    text-decoration: none;
-    color: black;
+#infos-project-principal{
+    color: white;
+    padding: 30px;
+    width: 50vw;
 }
 
-#username-project-menu:hover {
+#title-project-principal{
+    font-style: italic!important;
+    font-size: 70px;
+}
+
+#more-info{
     text-decoration: underline;
-    color: blue;
+    font-weight: bolder;
+    font-size: 20px;
+    cursor: pointer;
 }
 
-#tophead-button {
+/* Conteudo da Publicacao do Projeto */
+
+.container-project-publish{
     display: flex;
-    justify-content: end;
-    align-items: center;
-    width: 300px;
+    flex-wrap: wrap;
+    width: 40vw;
+    border-radius: 3px;
+    border: 1px solid rgb(187, 187, 187);
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-#img-user{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 70px;
-    height: 70px;
-}
-
-#photo-login-user-menu {
-    width: 50px;
-    border-radius: 50%;
-    height: 50px;
-    border: 1px solid black;
-    transition: 0.2s ease-in-out;
-}
-
-#photo-login-user-menu:hover {
-    width: 60px;
-    height: 60px;
-}
-
-#project-img-menu {
-    width: 60rem;
-}
-
-#description-project{
-    background-color: rgba(88, 88, 88, 0.25);
-    padding: .5rem;
-    margin-top: .5rem;
-    border-radius: 5px;
-}
-
-#title-project-menu {
-    margin-top: 7px;
-    margin-bottom: 7px;
+#section-info-project{
+    padding: 10px;
+    width: 25vw;
 }
 
 #title-project{
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-    width: 60rem;
+    font-family: Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;
+    font-size: 30px;
 }
 
-.container-publish{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#select-type-project{
-    height: 30px;
-    margin: 10px 0;
-    text-align: center;
-}
-
-.mainhead-main-menu {
-    display: grid;
-    place-items: center;
-    margin-bottom: 10px;
-    width: 80rem;
-}
-
-#content-like-comment{
-    display: flex;
-    justify-content: start;
-    align-items: flex-start;
-}
-
-#project-like,
-#project-comment {
-    cursor: pointer;
-}
-
-.container-project-like-comment {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    flex-direction: row;
-    width: 60rem;
-}
-
-#field-qtd-like,
-#field-content-like,
-#field-content-comment{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    margin: 3px;
-}
-
-#field-content-like{
-    width: 36px;
-    height: 36px;
-}
-
-#like{
-    transition: .3s;
-    color: white;
-}
-
-#qtd-like-project{
+#more-info-publish{
+    text-decoration: underline;
+    font-weight: bolder;
     font-size: 15px;
-    margin-bottom: 3px;
-
-}
-
-#project-like {
-    margin-right: 20px;
-    border: none;
-    background: none;
-}
-
-#like:hover {
-    width: 34px;
-    height: 34px;
-    color: rgb(0, 0, 0);
-}
-
-#like:active {
-    color: red;
-}
-
-#text-area-comment{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid black;
-}
-
-#textarea-comment{
-    width: 51rem;
-    height: 5rem;
-}
-
-#btn-comment-project{
-    margin-left: 10px;
-    width: 120px;
-    height: 30px;
-    border-radius: 10px;
-    border: none;
     cursor: pointer;
-    transition: .3s;
-}
-
-#btn-comment-project:hover{
-    box-shadow: 10px 10px 8px -6px rgba(0,0,0,0.75);
-}
-
-/* Parte do Perfil do Usuario quando o Proprio Usuario entra */
-
-.container-user-perfil-infos {
-    display: grid;
-    place-items: center;
-    flex-direction: column;
-    background-color: rgba(53, 53, 53, 0.25);
-    width: 60rem;
-    margin: 20vh auto;
-    border-radius: 10px;
-}
-
-.perfil-infos-user,
-#form-user-perfil {
-    display: grid;
-    place-items: center;
-    flex-direction: column;
-    width: 50rem;
-}
-
-.perfil-img-user{
-    
-}
-
-#edit-perfil-user{
-    text-decoration: none;
-    padding: .5rem;
-    background-color: rebeccapurple;
-}
-
-#user-img-perfil {
-    width: 8rem;
-    height: 8rem;
-    border-radius: 50%;
-}
-
-.container-show-apps{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.main-perfil-projects{
-    display: flex;
-    width: min-content;
-    justify-content: center;
-    flex-direction: column;
-    margin: 20px 20px;
-    border: 1px solid black;
-    border-radius: 10px;
-}
-
-.header-perfil-project{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #ff9522;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.section-perfil-project-infos{
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-    margin: 10px 0px;
-}
-
-#section-img-perfil-project{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#img-project-approve{
-    width: 20rem;
-}
-
-#settings-perfil-project{
-    display: flex;
-    justify-content: center;
-    margin: 10px 0px;
-}
-
-#settings-perfil-project a{
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90px;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: rgba(36, 36, 36, 0.25);
-}
-
-/* Parte de Publicar Aplicativo */
-
-.container-publish{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 15vh auto;
-    background-color: rgba(53, 53, 53, 0.25);
-    border-radius: 10px;
-}
-
-#form-publish{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 30px;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 30px;
-}
-
-#form-publish input{
-    margin: 10px;
-}
-
-#form-publish label{
-    font-weight: bold;
-}
-
-#contador-space{
-    display: flex;
-    justify-content: end;
-    align-items: end;
-    width: 500px;
-}
-
-#name-project-publish,
-#link-project-publish{
-    width: 467px;
-    border-radius: 3px;
-    border: 1px solid black;
-    text-align: center;
-    height: 30px;
-}
-
-#description-project-publish{
-    text-align: start;
-}
-
-#btn-publish-app{
-    height: 30px;
-    border: none;
-    border-radius: 10px;
-    padding: 0 20px;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: .3s;
-}
-
-#btn-publish-app:hover{
-    background-color: rgb(53, 187, 53);
-}
-
-textarea{
-    resize:none;
-}
-
-/* Aprovacao do Projeto */
-
-.container-main-approve{
-    display: flex;
-    width: 75rem;
-    margin: 20px auto;
-    flex-wrap: wrap;
-    background-color: rgba(53, 53, 53, 0.25);
-    border-radius: 10px;
-}
-
-.main-approve{
-    display: flex;
-    width: min-content;
-    justify-content: center;
-    flex-direction: column;
-    margin: 20px 20px;
-    border: 1px solid black;
-    border-radius: 10px;
-}
-
-.header-approve-project{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #ff9522;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.section-approve-infos{
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-    margin: 10px 0px;
-}
-
-#section-img-approve{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#img-project-approve{
-    width: 20rem;
-}
-
-#confirmation-btn-approve{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-#reject-project, #approve-project, #edit-project{
-    border: none;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .3s ease-in-out;
-    background-color: white;
-    text-decoration: none;
-    color: black;
-}
-
-#reject-project:hover{
-    background-color: red;
-    color: white;
-}
-
-#approve-project:hover{
-    background-color: green;
-    color: white;
-}
+}   

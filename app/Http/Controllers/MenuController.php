@@ -20,6 +20,14 @@ class MenuController extends Controller
         return view('menu.menu', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
     }
 
+    public function teste(){
+        return view('menu.teste');
+    }
+
+    public function teste2(){
+        return view('menu.outroteste');
+    }
+
 
     public function publish()
     {

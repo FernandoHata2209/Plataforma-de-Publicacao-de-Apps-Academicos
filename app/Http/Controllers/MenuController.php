@@ -20,15 +20,6 @@ class MenuController extends Controller
         return view('menu.menu', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
     }
 
-    public function teste(){
-        return view('menu.teste');
-    }
-
-    public function teste2(){
-        return view('menu.outroteste');
-    }
-
-
     public function publish()
     {
         $aplicativos = Aplicativo::all(); // Recupera todos os aplicativos
@@ -130,7 +121,7 @@ class MenuController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->route('menu.menu');
         } else {
-            return redirect()->route('login.login')->withErrors(['senha' => 'Email ou senha incorretos']);
+            return redirect()->route('menu.menu')->withErrors(['senha' => 'Email ou senha incorretos']);
         }
     }
 
@@ -158,7 +149,7 @@ class MenuController extends Controller
         // Criação do usuário
         Usuario::create($validatedData);
 
-        return redirect()->route('login.login');
+        return redirect()->route('menu.menu');
     }
 
     public function logout()

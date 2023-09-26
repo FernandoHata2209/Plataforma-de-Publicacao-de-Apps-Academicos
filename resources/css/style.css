@@ -1,14 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,300&display=swap');
-=======
->>>>>>> a1c58eb7becffbef9e57e94ba4d7527616e4ceb8
 
 *{
     width: 100%;
     box-sizing: border-box;
     font-size: 1rem;
-<<<<<<< HEAD
     /* font-family: 'Lato'; */
 }
 
@@ -21,21 +17,6 @@
     margin: 0 auto;
 }
 
-=======
-}
-
-/* Cabecalho do Projeto */
-
-.container-header-menu{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 60vw;
-    margin: 0 auto;
-}
-
->>>>>>> a1c58eb7becffbef9e57e94ba4d7527616e4ceb8
 .container-menu{
     display: flex;
     justify-content: center;
@@ -135,20 +116,38 @@
 
 /* Conteudo da Publicacao do Projeto */
 
-.container-project-publish{
+.container-project-publish {
     display: flex;
     flex-wrap: wrap;
-    width: 40vw;
-    border-radius: 3px;
-    border: 1px solid rgb(187, 187, 187);
-    margin-top: 20px;
-    margin-bottom: 20px;
+    justify-content: space-between;
 }
 
-#section-info-project{
+.content-publish {
+    height: fit-content;
+    width: fit-content;
+    margin-right: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 3px;
     padding: 10px;
-    width: 25vw;
+    box-sizing: border-box;
+    flex-direction: row; 
 }
+
+#section-info-project {
+    display: flex;
+    flex-direction: column;
+    width: fit-content 
+}
+
+#section-img-project{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5vw;
+}
+
 
 #title-project{
     font-family: Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;

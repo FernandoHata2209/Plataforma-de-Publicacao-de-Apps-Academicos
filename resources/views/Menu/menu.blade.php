@@ -67,37 +67,108 @@
                         <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
                     </svg>
                 </a>
-                <div id="section-login-user">
-                    <button id="login-account" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-                    
+                @auth
+                    <div id="section-perfil-user">
+                        <a href=""></a>
+                    </div>
+                @endauth
+            </div>
+        </div>
+        @guest
+            <div id="section-login-user">
+                <button id="login-account" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                <button id="register-account"data-bs-toggle="modal"data-bs-target="#registerModal">Registrar-se<button>
+                
+            </div>
+        @endguest
+
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form action="{{ route('auth.user') }}" method="POST">
+                            @csrf
+                            <div id="error-message" class="text-danger"></div>
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="loginEmail" required name="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="loginPassword" required
+                                    name="senha">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Entrar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
 
-          <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="loginModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    @csrf
-                    <div class="mb-3">
-                      <label for="loginEmail" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="loginEmail" required name="email">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <h5 class="modal-title" id="loginModalLabel">Registrar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
-                    <div class="mb-3">
-                      <label for="loginPassword" class="form-label">Senha</label>
-                      <input type="password" class="form-control" id="loginPassword" required name="senha">
+                    <div class="modal-body">
+                        <form action="{{ route('login.store') }}" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="loginEmail" required name="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Sobrenome</label>
+                                <input type="text" class="form-control" id="loginPassword" required
+                                    name="sobrenome">
+                            </div>
+                            <div class="mb-3">
+                                <label for="cargo">Selecione o cargo:</label>
+                                <select class="form-control" id="cargo" name="cargo">
+                                    <option value="" selected hidden>Cargo</option>
+                                    <option value="equipe_NPI">Equipe NPI</option>
+                                    <option value="ciencia_Computacao">Ciência da Computação</option>
+                                    <option value="engenharia_Software">Engenharia de Software</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Email</label>
+                                <input type="nome" class="form-control" id="loginEmail" required name="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="loginPassword" required
+                                    name="senha">
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Confirme a senha</label>
+                                <input type="password" class="form-control" id="loginPassword" required
+                                    name="senha_confirmation">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </form>
                     </div>
-                    <button type="submit" class="btn btn-primary">Entrar</button>
-                  </form>
                 </div>
-              </div>
             </div>
-          </div>
+        </div>
 
         <div class="container-menu-project">
             <div class="section-type-project">
@@ -112,8 +183,7 @@
             <div id="infos-project-principal">
                 <h1 id="title-project-principal">Titulo do Projeto</h1>
                 <p id="description-project-principal">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quos repellat voluptatum eaque
-                    nemo? Ipsam, delen
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, consequuntur voluptates. Veritatis iste pariatur, eaque molestias architecto magnam unde sequi dolorum officiis, neque ullam tempora explicabo, non fugit enim provident?
                 </p>
                 <div id="more-infos-project">
                     <a id="more-info">
@@ -122,31 +192,43 @@
                 </div>
             </div>
         </div>
-
-        <div class="container-project-publish">
-            <div id="section-info-project">
-                <p id="type-project-publish">
-                    Tipo do Projeto
-                </p>
-                <div id="title-project-publish">
-                    <h4 id="title-project">Titulo do Projeto</h4>
+        
+            <div class="container-project-publish">
+                @foreach ($aplicativos as $aplicativo)
+                <div class="content-publish">
+                    <div id="section-info-project">
+                        <p id="type-project-publish">
+                            {{ $aplicativo->tipo }}
+                        </p>
+                        <p>
+                            {{ $aplicativo->criadorRelacao->nome }} {{ $aplicativo->criadorRelacao->sobrenome }}
+                        </p>
+                        <div id="title-project-publish">
+                            <h4 id="title-project">
+                                {{ $aplicativo->nome_Aplicativo }}
+                            </h4>
+    
+                        </div>
+                        <div id="description-project-publish">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, eaque, quo odio consequatur
+                                omnis, adipisci quidem dicta magnam libero totam ipsa quia. Obcaecati hic nesciunt molestias
+                                dolore quis libero eligendi.</p>
+                        </div>
+                        <div id="more-infos-project">
+                            <a id="more-info-publish">
+                                Mais informacoes
+                            </a>
+                        </div>
+                    </div>
+                    <div id="section-img-project">
+                        <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}" alt="">
+                    </div>
                 </div>
-                <div id="description-project-publish">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, eaque, quo odio consequatur
-                        omnis, adipisci quidem dicta magnam libero totam ipsa quia. Obcaecati hic nesciunt molestias
-                        dolore quis libero eligendi.</p>
-                </div>
-                <div id="more-infos-project">
-                    <a id="more-info-publish">
-                        Mais informacoes
-                    </a>
-                </div>
-            </div>
-            <div id="section-img-project">
-                <img src="" alt="">
-            </div>
+                @endforeach
         </div>
+        
     </div>
+   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

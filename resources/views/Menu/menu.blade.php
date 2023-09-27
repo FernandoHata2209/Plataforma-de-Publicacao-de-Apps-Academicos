@@ -14,10 +14,10 @@
     <div class="container-header-menu">
         <div class="container-menu">
             @auth
-                <form action="{{ route('auth.logout') }}" method="POST">
+                <form action="{{ route('auth.logout') }}" method="POST" id="form-logout">
                     <div id="header-settings-menu">
                         @csrf
-                        <button id="header-settings" class="door-button" type="submit">
+                        <button id="btn-logout" class="door-button" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 class="bi bi-door-closed door-icon" viewBox="0 0 16 16">
                                 <path
@@ -67,30 +67,30 @@
                         <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
                     </svg>
                 </a>
-                @auth
-                    <div id="section-perfil-user">
-                        <a href=""></a>
-                    </div>
-                @endauth
+                <div id="section-login-user">
+                    @guest
+                        <button id="login-account" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                        <button
+                            id="register-account"data-bs-toggle="modal"data-bs-target="#registerModal">Registrar-se</button>
+                    @endguest
+                    @auth
+                        <button>Perfil</button>
+                        <button id="publish-project" data-bs-toggle="modal" data-bs-target="#publishModal">Publicar</button>
+                    @endauth
+                </div>
             </div>
         </div>
-        @guest
-            <div id="section-login-user">
-                <button id="login-account" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-                <button id="register-account"data-bs-toggle="modal"data-bs-target="#registerModal">Registrar-se<button>
-                
-            </div>
-        @endguest
 
+        {{-- Login Modal --}}
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
                         <form action="{{ route('auth.user') }}" method="POST">
                             @csrf
                             <div id="error-message" class="text-danger"></div>
@@ -110,6 +110,7 @@
             </div>
         </div>
 
+        {{-- Register Modal --}}
         <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="loginModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
@@ -170,6 +171,64 @@
             </div>
         </div>
 
+        {{-- Publish Modal --}}
+        <div class="modal fade" id="publishModal" tabindex="-1" aria-labelledby="loginModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <h5 class="modal-title" id="loginModalLabel">Publicar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('publicar.store') }}" id="form-publish" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Nome Projeto</label>
+                                <input type="text" class="form-control" required name="nome_Aplicativo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Descricao Projeto</label>
+                                <textarea name="descricao" class="form-control" id="description-project-publish" cols="50" rows="4">
+                                </textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cargo">Selecione o cargo:</label>
+                                <select class="form-control" id="cargo" name="tipo">
+                                    <option value="" selected hidden>Tipo da Postagem</option>
+                                    <option value="Matematica">Matemática</option>
+                                    <option value="Jogos">Jogos</option>
+                                    <option value="Programacao">Programação</option>
+                                    <option value="Redes_computadores">Redes e Computadores</option>
+                                    <option value="Outros">Outros</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Imagem do Projeto</label>
+                                <input type="file" class="form-control" name="imagem" id="image-project-publish">
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Link do Projeto</label>
+                                <input type="text"  class="form-control" name="link_Projeto" id="link-project-publish" placeholder="Link">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Publicar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container-menu-project">
             <div class="section-type-project">
                 <a id="type-project" href="#">Tecnologia</a>
@@ -183,7 +242,9 @@
             <div id="infos-project-principal">
                 <h1 id="title-project-principal">Titulo do Projeto</h1>
                 <p id="description-project-principal">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, consequuntur voluptates. Veritatis iste pariatur, eaque molestias architecto magnam unde sequi dolorum officiis, neque ullam tempora explicabo, non fugit enim provident?
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, consequuntur voluptates.
+                    Veritatis iste pariatur, eaque molestias architecto magnam unde sequi dolorum officiis, neque ullam
+                    tempora explicabo, non fugit enim provident?
                 </p>
                 <div id="more-infos-project">
                     <a id="more-info">
@@ -192,43 +253,43 @@
                 </div>
             </div>
         </div>
-        
-            <div class="container-project-publish">
-                @foreach ($aplicativos as $aplicativo)
+
+        <div class="container-project-publish">
+            @foreach ($aplicativos as $aplicativo)
                 <div class="content-publish">
-                    <div id="section-info-project">
-                        <p id="type-project-publish">
-                            {{ $aplicativo->tipo }}
-                        </p>
-                        <p>
-                            {{ $aplicativo->criadorRelacao->nome }} {{ $aplicativo->criadorRelacao->sobrenome }}
-                        </p>
+                    <div class="project-info">
+                        <div id="header-publish">
+                            <p id="type-project-publish">
+                                {{ $aplicativo->tipo }}
+                            </p>
+                            <p id="creator-publish">
+                                {{ $aplicativo->criadorRelacao->nome }} {{ $aplicativo->criadorRelacao->sobrenome }}
+                            </p>
+                            <p>{{$aplicativo->created_at}}</p>
+                        </div>
                         <div id="title-project-publish">
                             <h4 id="title-project">
                                 {{ $aplicativo->nome_Aplicativo }}
                             </h4>
-    
                         </div>
                         <div id="description-project-publish">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, eaque, quo odio consequatur
-                                omnis, adipisci quidem dicta magnam libero totam ipsa quia. Obcaecati hic nesciunt molestias
-                                dolore quis libero eligendi.</p>
+                            <p>{{ $aplicativo->descricao }}</p>
                         </div>
                         <div id="more-infos-project">
                             <a id="more-info-publish">
-                                Mais informacoes
+                                Mais informações
                             </a>
                         </div>
                     </div>
-                    <div id="section-img-project">
+                    <div class="project-image">
                         <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}" alt="">
                     </div>
                 </div>
-                @endforeach
+            @endforeach
         </div>
-        
+
     </div>
-   
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

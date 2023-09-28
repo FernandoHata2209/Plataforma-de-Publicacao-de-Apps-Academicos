@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,300&display=swap");
 
-*{
+* {
     width: 100%;
     box-sizing: border-box;
     font-size: 1rem;
@@ -9,14 +9,14 @@
 
 /* Cabecalho do Projeto */
 
-.container-header-menu{
+.container-header-menu {
     display: flex;
     flex-direction: column;
     width: 75vw;
     margin: 0 auto;
 }
 
-.container-menu{
+.container-menu {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,19 +24,19 @@
     border-bottom: 1.5px solid gray;
 }
 
-#logo{
-    width: 60%;
+#logo {
+    width: 70%;
 }
 
 /* Menu */
 
-#section-search-project{
+#section-search-project {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.header-settings-menu{
+.header-settings-menu {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,49 +45,50 @@
     text-align: center;
 }
 
-#form-logout{
+#form-logout {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#btn-logout{
+#btn-logout {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 120px;
+    background-color: white;
     border: none;
 }
 
-#section-login-user{
+#section-login-user {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
 }
 
-#section-login-user button{
+#section-login-user button {
     width: 120px;
     height: 30px;
     border-radius: 10px;
     border: 1px solid gray;
     background: none;
     margin: 10px;
-    transition: .3s;
+    transition: 0.3s;
 }
 
-#section-login-user button:hover{
+#section-login-user button:hover {
     background-color: rgb(224, 224, 224);
 }
 
-.container-menu-project{
+.container-menu-project {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.section-type-project{
+.section-type-project {
     flex-direction: row;
     display: flex;
     justify-content: center;
@@ -96,20 +97,20 @@
     margin: 10px auto;
 }
 
-#type-project{
+#type-project {
     text-decoration: none;
     color: rgb(82, 82, 82);
 }
 
-#type-project:hover{
-    text-decoration: underline
+#type-project:hover {
+    text-decoration: underline;
 }
 
-#search{
+#search {
     margin: 10px;
 }
 
-.container-project-publish-principal{
+.container-project-publish-principal {
     display: flex;
     justify-content: start;
     border-radius: 6px;
@@ -117,18 +118,18 @@
     margin-top: 10px;
 }
 
-#infos-project-principal{
+#infos-project-principal {
     color: white;
     padding: 30px;
     width: 50vw;
 }
 
-#title-project-principal{
-    font-style: italic!important;
+#title-project-principal {
+    font-style: italic !important;
     font-size: 70px;
 }
 
-#more-info{
+#more-info {
     text-decoration: underline;
     font-weight: bolder;
     font-size: 20px;
@@ -146,44 +147,30 @@
 .content-publish {
     display: flex;
     width: calc(50% - 20px);
-    flex-grow: 200;
-    flex-wrap: wrap;
-    margin-right: 10px; 
+    flex-grow: 1;
+    flex-basis: 200;
+    margin-right: 10px;
     border: 1px solid rgb(187, 187, 187);
     margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 3px;
-    box-sizing: border-box; 
 }
 
-#header-publish{
+#header-publish {
     display: flex;
     flex-direction: column;
     border-top-right-radius: 3px;
 }
 
-#header-publish p{
-    margin: 2px;
-}
-
-#type-project-publish{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-weight: bold;
-}
-
-#creator-publish{
-    font-size: 20px;
-}
-
-.content-publish-info{
+.content-publish-info {
     display: flex;
     margin: 5px;
     flex-direction: column;
 }
 
 .project-image {
-    width: 35%; 
-    box-sizing: border-box; 
+    width: 35%;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     border-top-left-radius: 3px;
@@ -191,24 +178,80 @@
 
 .project-image img {
     max-width: 100%;
-    height: 100%; 
-    object-fit: cover; 
+    height: 100%;
+    object-fit: cover;
 }
 
 .project-info {
-    flex: 1; 
+    flex: 1;
     flex-direction: column;
     margin: 5px;
 }
 
-#title-project{
-    font-family: Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;
+@media (max-width: 768px) {
+    .content-publish {
+        width: 100%; /* Ocupa 100% da largura em telas menores */
+        margin-right: 0; /* Remove a margem direita em telas menores */
+    }
+
+    .project-image {
+        width: 100%; /* Ocupa 100% da largura em telas menores */
+        border-top-left-radius: 0; /* Remove o arredondamento no canto superior esquerdo em telas menores */
+    }
+
+    .project-info {
+        flex: 1; /* Mantém a flexibilidade em telas menores */
+    }
+
+    #header-publish {
+        border-top-right-radius: 0; /* Remove o arredondamento no canto superior direito em telas menores */
+    }
+}
+
+/* Estilos para telas maiores ou com largura superior a 768px */
+@media (min-width: 769px) {
+    .content-publish {
+        width: calc(50% - 20px);
+        margin-right: 10px;
+    }
+
+    .project-image {
+        width: 35%;
+        border-top-left-radius: 3px;
+    }
+
+    .project-info {
+        flex: 1;
+    }
+
+    #header-publish {
+        border-top-right-radius: 3px;
+    }
+}
+
+#header-publish p {
+    margin: 2px;
+}
+
+#type-project-publish {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+#creator-publish {
+    font-size: 20px;
+}
+
+#title-project {
+    font-family: Didot, "Didot LT STD", "Hoefler Text", Garamond,
+        "Times New Roman", serif;
     font-size: 30px;
 }
 
-#more-info-publish{
+#more-info-publish {
     text-decoration: underline;
     font-weight: bolder;
     font-size: 15px;
     cursor: pointer;
-}   
+}

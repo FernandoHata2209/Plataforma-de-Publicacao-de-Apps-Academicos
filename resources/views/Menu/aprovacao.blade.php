@@ -141,31 +141,6 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
                 Login
               </button>
-              
-              <!-- Modal de Login -->
-              <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="mb-3">
-                          <label for="loginEmail" class="form-label">Email</label>
-                          <input type="email" class="form-control" id="loginEmail" required>
-                        </div>
-                        <div class="mb-3">
-                          <label for="loginPassword" class="form-label">Senha</label>
-                          <input type="password" class="form-control" id="loginPassword" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Entrar</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
         @else
             <h3 id="none-publish">Nenhuma aplicativo para aprovar no momento</h3>
         @endif

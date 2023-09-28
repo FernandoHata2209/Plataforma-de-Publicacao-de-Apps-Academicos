@@ -14,8 +14,8 @@
     <div class="container-header-menu">
         <div class="container-menu">
             @auth
-                <form action="{{ route('auth.logout') }}" method="POST" id="form-logout">
-                    <div id="header-settings-menu">
+                <div id="header-settings-menu">
+                    <form action="{{ route('auth.logout') }}" method="POST" id="form-logout">
                         @csrf
                         <button id="btn-logout" class="door-button" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -25,8 +25,8 @@
                                 <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" />
                             </svg>
                         </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             @endauth
             @guest
                 <div class="section-infos">
@@ -76,6 +76,10 @@
                     @auth
                         <button>Perfil</button>
                         <button id="publish-project" data-bs-toggle="modal" data-bs-target="#publishModal">Publicar</button>
+                        @if (auth()->user()->cargo === 'equipe_NPI')
+                            <!-- Botão que só será exibido para a equipe do NPI -->
+                            <button  id="publish-project" data-bs-toggle="modal" data-bs-target="#aprovarModal">Aprovar</button>
+                        @endif
                     @endauth
                 </div>
             </div>
@@ -216,13 +220,45 @@
                             </div>
                             <div class="mb-3">
                                 <label for="loginEmail" class="form-label">Imagem do Projeto</label>
-                                <input type="file" class="form-control" name="imagem" id="image-project-publish">
+                                <input type="file" class="form-control" name="imagem"
+                                    id="image-project-publish">
                             </div>
                             <div class="mb-3">
                                 <label for="loginPassword" class="form-label">Link do Projeto</label>
-                                <input type="text"  class="form-control" name="link_Projeto" id="link-project-publish" placeholder="Link">
+                                <input type="text" class="form-control" name="link_Projeto"
+                                    id="link-project-publish" placeholder="Link">
                             </div>
                             <button type="submit" class="btn btn-primary">Publicar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Aprove Modal --}}
+
+        <div class="modal fade" id="aprovarModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('auth.user') }}" method="POST">
+                            @csrf
+                            <div id="error-message" class="text-danger"></div>
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="loginEmail" required name="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="loginPassword" required
+                                    name="senha">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Entrar</button>
                         </form>
                     </div>
                 </div>
@@ -265,7 +301,7 @@
                             <p id="creator-publish">
                                 {{ $aplicativo->criadorRelacao->nome }} {{ $aplicativo->criadorRelacao->sobrenome }}
                             </p>
-                            <p>{{$aplicativo->created_at}}</p>
+                            <p>{{ $aplicativo->created_at }}</p>
                         </div>
                         <div id="title-project-publish">
                             <h4 id="title-project">

@@ -78,7 +78,8 @@
                         <button id="publish-project" data-bs-toggle="modal" data-bs-target="#publishModal">Publicar</button>
                         @if (auth()->user()->cargo === 'equipe_NPI')
                             <!-- Botão que só será exibido para a equipe do NPI -->
-                            <button  id="publish-project" data-bs-toggle="modal" data-bs-target="#aprovarModal">Aprovar</button>
+                            <button id="publish-project" data-bs-toggle="modal"
+                                data-bs-target="#aprovarModal">Aprovar</button>
                         @endif
                     @endauth
                 </div>
@@ -237,29 +238,65 @@
 
         {{-- Aprove Modal --}}
 
-        <div class="modal fade" id="aprovarModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+        <div class="modal fade" id="aprovarModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Aprovação de Projetos</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('auth.user') }}" method="POST">
-                            @csrf
-                            <div id="error-message" class="text-danger"></div>
-                            <div class="mb-3">
-                                <label for="loginEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="loginEmail" required name="email">
-                            </div>
-                            <div class="mb-3">
-                                <label for="loginPassword" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="loginPassword" required
-                                    name="senha">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Entrar</button>
-                        </form>
+                        <div class="container-main-approve">
+                            @if ($aplicativos->count() > 0)
+                                @foreach ($aplicativos as $aplicativo)
+                                    <div class="content-publish">
+                                        <div class="project-info">
+                                            <div id="header-publish">
+                                                <p id="type-project-publish">
+                                                    {{ $aplicativo->tipo }}
+                                                </p>
+                                                <p id="creator-publish">
+                                                    {{ $aplicativo->criadorRelacao->nome }}
+                                                    {{ $aplicativo->criadorRelacao->sobrenome }}
+                                                </p>
+                                                <p>{{ $aplicativo->created_at }}</p>
+                                            </div>
+                                            <div id="title-project-publish">
+                                                <h4 id="title-project">
+                                                    {{ $aplicativo->nome_Aplicativo }}
+                                                </h4>
+                                            </div>
+                                            <div id="description-project-publish">
+                                                <p>{{ $aplicativo->descricao }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="project-image">
+                                            <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}"
+                                                alt="">
+                                        </div>
+                                        <div id="confirmation-btn-approve">
+                                            <form action="{{ route('menu.aprovar', ['id' => $aplicativo->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                <button type="submit" id="approve-project">Aprovar</button>
+                                            </form>
+                                            <form action="{{ route('menu.rejeitar', ['id' => $aplicativo->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                <button type="submit" id="reject-project">Cancelar</button>
+                                            </form>
+                                            <a href="{{ route('aprovacao.editar', ['id' => $aplicativo->id]) }}"
+                                                id="edit-project">
+                                                Editar</a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <h3 id="none-publish">Nenhuma aplicativo para aprovar no momento</h3>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

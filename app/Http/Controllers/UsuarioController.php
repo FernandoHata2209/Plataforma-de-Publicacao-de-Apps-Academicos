@@ -32,7 +32,7 @@ class UsuarioController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->route('menu.menu');
         } else {
-            return redirect()->route('login.login')->withErrors(['senha' => 'Email ou senha incorretos']);
+            return redirect()->route('menu.menu')->withErrors(['senha' => 'Email ou senha incorretos']);
         }
     }
 

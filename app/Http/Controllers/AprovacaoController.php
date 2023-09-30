@@ -25,7 +25,7 @@ class AprovacaoController extends Controller
         $aplicativos->update(['status' => 'Aprovado']);
 
         // Redirecione de volta à interface de aprovação com uma mensagem de sucesso
-        return redirect()->route('menu.aprovacao');
+        return redirect()->route('menu.menu');
     }
 
     public function rejeitar(Request $request, $id)
@@ -37,7 +37,7 @@ class AprovacaoController extends Controller
         $aplicativos->update(['status' => 'Rejeitado']);
 
         // Redirecione de volta à interface de aprovação com uma mensagem de sucesso
-        return redirect()->route('menu.aprovar');
+        return redirect()->route('menu.menu');
     }
 
     public function editar(Request $request, $id)
@@ -47,7 +47,7 @@ class AprovacaoController extends Controller
         if (!empty($aplicativos)) {
             return view('aprovacao.editar', ['aplicativos' => $aplicativos]);
         } else {
-            return redirect()->route('menu.aprovacao');
+            return redirect()->route('menu.menu');
         }
     }
 
@@ -58,7 +58,7 @@ class AprovacaoController extends Controller
             'descricao' => $request->descricao,
             'tipo' => $request->tipo,
             'link_Projeto' => $request->link_Projeto,
-            
+
         ];
 
         // Atualize os dados do aplicativo

@@ -139,7 +139,7 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="loginEmail" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="loginEmail" required name="email">
+                                <input type="text" class="form-control" id="loginEmail" required name="nome">
                             </div>
                             <div class="mb-3">
                                 <label for="loginPassword" class="form-label">Sobrenome</label>
@@ -251,7 +251,7 @@
                         <div class="container-main-approve">
                             @if ($aplicativos->count() > 0)
                                 @foreach ($aplicativos as $aplicativo)
-                                    <div class="content-publish">
+                                    <div class="content-publish-approve">
                                         <div class="project-info">
                                             <div id="header-publish">
                                                 <p id="type-project-publish">
@@ -262,6 +262,9 @@
                                                     {{ $aplicativo->criadorRelacao->sobrenome }}
                                                 </p>
                                                 <p>{{ $aplicativo->created_at }}</p>
+                                                <label for="">Link do Projeto: </label>
+                                                <a href="{{ $aplicativo->link_Projeto }}"
+                                                    target="_blank">{{ $aplicativo->link_Projeto }}</a>
                                             </div>
                                             <div id="title-project-publish">
                                                 <h4 id="title-project">
@@ -271,26 +274,27 @@
                                             <div id="description-project-publish">
                                                 <p>{{ $aplicativo->descricao }}</p>
                                             </div>
+                                            <div id="confirmation-btn-approve">
+                                                <form action="{{ route('menu.aprovar', ['id' => $aplicativo->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <button type="submit" id="approve-project">Aprovar</button>
+                                                </form>
+                                                <form action="{{ route('menu.rejeitar', ['id' => $aplicativo->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <button type="submit" id="reject-project">Cancelar</button>
+                                                </form>
+                                                <form action="">
+                                                    <button type="" id="edit-project">Editar</button>
+                                                </form>
+                                            </div>
                                         </div>
                                         <div class="project-image">
                                             <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}"
                                                 alt="">
                                         </div>
-                                        <div id="confirmation-btn-approve">
-                                            <form action="{{ route('menu.aprovar', ['id' => $aplicativo->id]) }}"
-                                                method="POST">
-                                                @csrf
-                                                <button type="submit" id="approve-project">Aprovar</button>
-                                            </form>
-                                            <form action="{{ route('menu.rejeitar', ['id' => $aplicativo->id]) }}"
-                                                method="POST">
-                                                @csrf
-                                                <button type="submit" id="reject-project">Cancelar</button>
-                                            </form>
-                                            <a href="{{ route('aprovacao.editar', ['id' => $aplicativo->id]) }}"
-                                                id="edit-project">
-                                                Editar</a>
-                                        </div>
+
                                     </div>
                                 @endforeach
                             @else
@@ -339,6 +343,9 @@
                                 {{ $aplicativo->criadorRelacao->nome }} {{ $aplicativo->criadorRelacao->sobrenome }}
                             </p>
                             <p>{{ $aplicativo->created_at }}</p>
+                            <label for="">Link do Projeto: </label>
+                            <a href="{{ $aplicativo->link_Projeto }}"
+                                target="_blank">{{ $aplicativo->link_Projeto }}</a>
                         </div>
                         <div id="title-project-publish">
                             <h4 id="title-project">

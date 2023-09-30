@@ -230,7 +230,7 @@
 }
 
 #header-publish p {
-    margin: 2px;
+    margin: 3px;
 }
 
 #type-project-publish {
@@ -239,7 +239,7 @@
     font-weight: bold;
 }
 
-#creator-publish {
+#creator-publish{
     font-size: 20px;
 }
 
@@ -258,7 +258,33 @@
 
 /* Aprovar Projeto */
 
+.content-publish-approve{
+    display: flex;
+    width: fit-content;
+    flex: 1;
+    margin-right: 10px;
+    border: 1px solid rgb(187, 187, 187);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+}
+
 #confirmation-btn-approve{
     display: flex;
     justify-content: center;
+    text-align: center;
 }
+
+#confirmation-btn-approve form{
+    margin: 10px;
+}
+
+#confirmation-btn-approve button{
+    border-radius: 10px;
+    border: 1px solid gray;
+    background: white;
+}
+
+
+
+

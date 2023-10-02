@@ -92,4 +92,44 @@ class MenuController extends Controller
             }
         }
     }
+
+    public function aprovar(Request $request, $id) {
+        $aplicativo = Aplicativo::findOrFail($id);
+        $aplicativo->update(['status' => 'Aprovado']);
+        return redirect()->route('menu.menu')->with('success', 'Aplicativo aprovado com sucesso!');
+    }
+    
+    public function rejeitar(Request $request, $id) {
+        $aplicativo = Aplicativo::findOrFail($id);
+        $aplicativo->update(['status' => 'Rejeitado']);
+        return redirect()->route('menu.menu')->with('success', 'Aplicativo rejeitado com sucesso!');
+    }
+
+    public function editar(Request $request, $id)
+    {
+
+        $aplicativos = Aplicativo::where('id', $id)->first();
+        if (!empty($aplicativos)) {
+            return view('aprovacao.editar', ['aplicativos' => $aplicativos]);
+        } else {
+            return redirect()->route('menu.menu');
+        }
+    }
+
+    public function atualizar(Request $request, $id)
+    {
+        $data = [
+            'nome_Aplicativo' => $request->nome_Aplicativo,
+            'descricao' => $request->descricao,
+            'tipo' => $request->tipo,
+            'link_Projeto' => $request->link_Projeto,
+
+        ];
+
+        // Atualize os dados do aplicativo
+        Aplicativo::where('id', $id)->update($data);
+
+        // Redirecione de volta à interface de aprovação ou outra página relevante
+        return redirect()->route('menu.aprovacao')->with('success', 'Aplicativo atualizado com sucesso!');
+    }
 }

@@ -249,8 +249,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-main-approve">
-                            @if ($aplicativos->where('status', 'Em verificação', true)->count() > 0)
-                                @foreach ($aplicativos->where('status', 'Em verificação', true) as $aplicativo)
+                            @forelse ($aplicativos as $aplicativo)
+                                @if ($aplicativo->status === 'Em verificação')
                                     <div class="content-publish-approve">
                                         <div class="project-info">
                                             <div id="header-publish">
@@ -296,10 +296,10 @@
                                         </div>
 
                                     </div>
-                                @endforeach
-                            @else
+                                @endif
+                            @empty
                                 <h3 id="none-publish">Nenhuma aplicativo para aprovar no momento</h3>
-                            @endif
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -311,7 +311,8 @@
                 <a id="type-project" href="#">Tecnologia</a>
                 <a id="type-project" href="#">Matematica</a>
                 <a id="type-project" href="#">Redes</a>
-                <a id="type-project" href="#">Outros</a>
+                <a id="type-project" href="#">Jogos</a>
+                <a href="#" id="type-project">Programação</a>
             </div>
         </div>
 
@@ -332,7 +333,8 @@
         </div>
 
         <div class="container-project-publish">
-            @foreach ($aplicativos as $aplicativo)
+            @forelse ($aplicativos as $aplicativo)
+                @if ($aplicativo->status === 'Aprovado')
                 <div class="content-publish">
                     <div class="project-info">
                         <div id="header-publish">
@@ -365,7 +367,10 @@
                         <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}" alt="">
                     </div>
                 </div>
-            @endforeach
+                @endif
+            @empty
+            <h3 id="none-publish">Nenhuma aplicativo para aprovar no momento</h3>
+            @endforelse
         </div>
 
     </div>

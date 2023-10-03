@@ -60,7 +60,7 @@ class UsuarioController extends Controller
         // Criação do usuário
         Usuario::create($validatedData);
 
-        return redirect()->route('login.login');
+        return redirect()->route('menu.menu');
     }
 
     public function logout()

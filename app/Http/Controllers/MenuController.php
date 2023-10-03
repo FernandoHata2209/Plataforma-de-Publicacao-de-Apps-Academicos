@@ -12,9 +12,7 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $aplicativos = Aplicativo::where('status', 'Aprovado')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
         $usuarios = Usuario::all();
 
         return view('menu.menu', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
@@ -93,13 +91,15 @@ class MenuController extends Controller
         }
     }
 
-    public function aprovar(Request $request, $id) {
+    public function aprovar(Request $request, $id)
+    {
         $aplicativo = Aplicativo::findOrFail($id);
         $aplicativo->update(['status' => 'Aprovado']);
         return redirect()->route('menu.menu')->with('success', 'Aplicativo aprovado com sucesso!');
     }
-    
-    public function rejeitar(Request $request, $id) {
+
+    public function rejeitar(Request $request, $id)
+    {
         $aplicativo = Aplicativo::findOrFail($id);
         $aplicativo->update(['status' => 'Rejeitado']);
         return redirect()->route('menu.menu')->with('success', 'Aplicativo rejeitado com sucesso!');

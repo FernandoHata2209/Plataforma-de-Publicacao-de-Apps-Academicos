@@ -249,12 +249,45 @@
     font-size: 30px;
 }
 
-#more-info-publish {
+#more-info-publish{
+    display: flex;
+    flex-direction: row;
     text-decoration: underline;
     font-weight: bolder;
     font-size: 15px;
     cursor: pointer;
 }
+
+.content-like-comment-project{
+    display: flex;
+    flex-direction: row;
+}
+
+#btn-like-project, #btn-comment-project{
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+#btn-link-project{
+    width: 150px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+
+#like-project{
+    transition: .3s ease-in-out;
+}
+
+#like-project:hover{
+    color: red;
+}
+
 
 /* Aprovar Projeto */
 
@@ -285,6 +318,17 @@
     background: white;
 }
 
+.none-publish{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-top: 20px;
+}
 
+#title-none-publish{
+    text-align: center;
+}
 
 

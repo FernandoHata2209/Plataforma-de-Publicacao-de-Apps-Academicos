@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Redes - Plataforma de Publicação de Apps Acadêmicos</title>
+    <title>Matematica - Plataforma de Publicação de Apps Acadêmicos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     @vite(['resources/css/style.css', 'resources/js/script.js'])
 </head>
 
 <body>
+
     <div class="container-header-menu">
         <div class="container-menu">
             @auth
@@ -310,14 +311,14 @@
             <div class="section-type-project">
                 <a id="type-project" href="{{route('menu.menu')}}">Menu</a>
                 <a id="type-project" href="{{route('menu.tecnologia')}}">Tecnologia</a>
-                <a id="type-project" href="{{route('menu.matematica')}}">Matematica</a>
+                <a id="type-project" href="{{route('menu.redes')}}">Redes</a>
                 <a id="type-project" href="{{route('menu.jogos')}}">Jogos</a>
                 <a href="{{route('menu.programacao')}}" id="type-project">Programação</a>
             </div>
         </div>
 
         @foreach ($aplicativos as $aplicativo)
-                @if ($aplicativo->tipo === 'Redes')
+                @if ($aplicativo->tipo === 'Matematica')
         <div class="container-project-publish-principal">
             <div id="infos-project-principal">
                 <h1 id="title-project-principal">Titulo do Projeto</h1>
@@ -374,6 +375,7 @@
             @endif
         @endforeach
         </div>
+
     </div>
 
 

@@ -18,6 +18,41 @@ class MenuController extends Controller
         return view('menu.menu', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
     }
 
+    public function jogos(){
+        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+        $usuarios = Usuario::all();
+
+        return view('menu.jogos', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
+    }
+
+    public function programacao(){
+        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+        $usuarios = Usuario::all();
+
+        return view('menu.programacao', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
+    }
+
+    public function redes(){
+        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+        $usuarios = Usuario::all();
+
+        return view('menu.redes', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
+    }
+
+    public function matematica(){
+        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+        $usuarios = Usuario::all();
+
+        return view('menu.matematica', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
+    }
+
+    public function tecnologia(){
+        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+        $usuarios = Usuario::all();
+
+        return view('menu.tecnologia', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
+    }
+
     public function storePublish(Request $request)
     {
         // Validação dos dados
@@ -25,7 +60,7 @@ class MenuController extends Controller
             'nome_Aplicativo' => 'required|string',
             'imagem' => 'required|image|mimes:jpeg,png,jpg,webp',
             'descricao' => 'required|string',
-            'tipo' => 'required|in:Matematica,Jogos,Programacao,Redes_computadores,Outros',
+            'tipo' => 'required|in:Matematica,Jogos,Programacao,Redes,Outros',
             'link_Projeto' => 'required|string',
         ]);
 
@@ -60,37 +95,7 @@ class MenuController extends Controller
         $user = Auth::user();
     }
 
-    public function show($id)
-    {
-        // Verifique se o usuário está autenticado
-        if (Auth::check()) {
-            // Recupere o usuário autenticado
-            $user = Auth::user();
-        } else {
-            // Caso o usuário não esteja autenticado, você pode lidar com isso de acordo com suas necessidades.
-            return redirect()->route('login.login')->with('error', 'Faça login para acessar perfis de usuários.');
-        }
-
-        // Verifique se o ID fornecido é o mesmo do usuário autenticado
-        if ($id == $user->id) {
-            // Se o ID for o mesmo do usuário autenticado, exiba seu próprio perfil
-            $aplicativos = $user->aplicativos ?? collect();
-            return view('user.userPerfil', compact('user', 'aplicativos'));
-        } else {
-            // Se o ID não for o mesmo, tente encontrar o usuário de destino
-            $usuarioDestino = Usuario::find($id);
-
-            // Verifique se o usuário de destino foi encontrado
-            if ($usuarioDestino) {
-                $aplicativos = $usuarioDestino->aplicativos ?? collect();
-                return view('user.userPerfilEnter', ['usuario' => $usuarioDestino, 'aplicativos' => $aplicativos]);
-            } else {
-                // Lide com o caso em que o usuário de destino não foi encontrado
-                return redirect()->route('home')->with('error', 'Perfil não encontrado');
-            }
-        }
-    }
-
+    // Metodo de Aprovacao
     public function aprovar(Request $request, $id)
     {
         $aplicativo = Aplicativo::findOrFail($id);

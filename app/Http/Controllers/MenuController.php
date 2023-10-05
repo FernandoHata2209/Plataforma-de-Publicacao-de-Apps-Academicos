@@ -18,35 +18,40 @@ class MenuController extends Controller
         return view('menu.menu', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
     }
 
-    public function jogos(){
+    public function jogos()
+    {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
         $usuarios = Usuario::all();
 
         return view('menu.jogos', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
     }
 
-    public function programacao(){
+    public function programacao()
+    {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
         $usuarios = Usuario::all();
 
         return view('menu.programacao', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
     }
 
-    public function redes(){
+    public function redes()
+    {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
         $usuarios = Usuario::all();
 
         return view('menu.redes', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
     }
 
-    public function matematica(){
+    public function matematica()
+    {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
         $usuarios = Usuario::all();
 
         return view('menu.matematica', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
     }
 
-    public function tecnologia(){
+    public function tecnologia()
+    {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
         $usuarios = Usuario::all();
 
@@ -56,9 +61,10 @@ class MenuController extends Controller
     public function storePublish(Request $request)
     {
         // Validação dos dados
+        // Validação dos dados
         $validatedData = $request->validate([
             'nome_Aplicativo' => 'required|string',
-            'imagem' => 'required|image|mimes:jpeg,png,jpg,webp',
+            'media' => 'required|file|mimes:jpeg,png,jpg,webp,mp4,avi,mov', // Permite imagens e vídeos
             'descricao' => 'required|string',
             'tipo' => 'required|in:Matematica,Jogos,Programacao,Redes,Outros',
             'link_Projeto' => 'required|string',
@@ -67,16 +73,16 @@ class MenuController extends Controller
         // Obtém o usuário autenticado
         $user = Auth::user();
 
-        // Salva a imagem
-        $image = $request->file('imagem');
-        $imageName = $image->getClientOriginalName();
-        $image->move(public_path('imagesProject'), $imageName);
+        // Lida com o upload da mídia (imagem ou vídeo)
+        $media = $request->file('media');
+        $mediaName = $media->getClientOriginalName();
+        $media->move(public_path('mediaProject'), $mediaName);
 
         // Cria um novo registro de aplicativo associando o criador (usuário autenticado)
         Aplicativo::create([
             'nome_Aplicativo' => $validatedData['nome_Aplicativo'],
             'criador' => $user->id,
-            'imagem' => $imageName, // Salva apenas o nome do arquivo da imagem
+            'media' => $mediaName, // Salva apenas o nome do arquivo da mídia
             'descricao' => $validatedData['descricao'],
             'tipo' => $validatedData['tipo'],
             'link_Projeto' => $validatedData['link_Projeto'],
@@ -136,5 +142,11 @@ class MenuController extends Controller
 
         // Redirecione de volta à interface de aprovação ou outra página relevante
         return redirect()->route('menu.aprovacao')->with('success', 'Aplicativo atualizado com sucesso!');
+    }
+
+    // function Search 
+
+    public function search(){
+        
     }
 }

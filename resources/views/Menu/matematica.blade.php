@@ -60,14 +60,14 @@
                 </svg>
             </div>
             <div id="section-search-project">
-                <a id="search" href="#">
+                <button id="btn-search" data-bs-toggle="modal" data-bs-target="#searchModal">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="mx-3">
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="mx-3">
                         <circle cx="10.5" cy="10.5" r="7.5"></circle>
                         <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
                     </svg>
-                </a>
+                </button>
                 <div id="section-login-user">
                     @guest
                         <button id="login-account" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
@@ -75,7 +75,9 @@
                             id="register-account"data-bs-toggle="modal"data-bs-target="#registerModal">Registrar-se</button>
                     @endguest
                     @auth
+                    <a href="{{route('user.perfil', ['id' => Auth::user()->id])}}" id="user-perfil">
                         <button>Perfil</button>
+                    </a>
                         <button id="publish-project" data-bs-toggle="modal" data-bs-target="#publishModal">Publicar</button>
                         @if (auth()->user()->cargo === 'equipe_NPI')
                             <!-- Botão que só será exibido para a equipe do NPI -->
@@ -83,6 +85,30 @@
                                 data-bs-target="#aprovarModal">Aprovar</button>
                         @endif
                     @endauth
+                </div>
+            </div>
+        </div>
+
+        {{-- Search Modal --}}
+
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="loginModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Buscar Aplicativo / Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('auth.user') }}" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <input type="email" class="form-control" id="loginEmail" required name="email">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -28,14 +28,12 @@ Route::get('/menu/matematica', [MenuController::class, 'matematica'])->name('men
 
 Route::post('/auth', [UsuarioController::class, 'auth'])->name('auth.user');
 Route::post('/logout', [UsuarioController::class, 'logout'])->name('auth.logout');
+Route::post('/store', [UsuarioController::class, 'store'])->name('login.store');
 
 Route::post('/aprovacao/aprovar/{id}', [MenuController::class, 'aprovar'])->name('menu.aprovar');
 Route::post('/aprovacao/rejeitar/{id}', [MenuController::class, 'rejeitar'])->name('menu.rejeitar');
 Route::get('/aprovacao/{id}/editar', [AprovacaoController::class, 'editar'])->name('aprovacao.editar');
 Route::put('/aprovacao/{id}', [AprovacaoController::class, 'atualizar'])->name('aprovacao.update');
-
-Route::get('/register', [UsuarioController::class, 'create'])->name('login.register');
-Route::post('/store', [UsuarioController::class, 'store'])->name('login.store');
 
 Route::get('/perfil/{id}', [userAccountController::class, 'index'])->name('user.perfil');
 

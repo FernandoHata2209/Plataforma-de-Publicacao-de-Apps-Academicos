@@ -59,14 +59,17 @@
                 </svg>
             </div>
             <div id="section-search-project">
-                <a id="search" href="#">
+                <button id="btn-search" data-bs-toggle="modal" data-bs-target="#searchModal">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="mx-3">
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="mx-3">
                         <circle cx="10.5" cy="10.5" r="7.5"></circle>
                         <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
                     </svg>
-                </a>
+                </button>
+
+                {{-- Search Modal --}}
+
                 <div id="section-login-user">
                     @guest
                         <button id="login-account" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
@@ -74,7 +77,9 @@
                             id="register-account"data-bs-toggle="modal"data-bs-target="#registerModal">Registrar-se</button>
                     @endguest
                     @auth
-                        <button>Perfil</button>
+                        <a href="{{ route('user.perfil', ['id' => Auth::user()->id]) }}" id="user-perfil">
+                            <button>Perfil</button>
+                        </a>
                         <button id="publish-project" data-bs-toggle="modal" data-bs-target="#publishModal">Publicar</button>
                         @if (auth()->user()->cargo === 'equipe_NPI')
                             <!-- Botão que só será exibido para a equipe do NPI -->
@@ -86,8 +91,33 @@
             </div>
         </div>
 
+        {{-- Search Modal --}}
+
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="loginModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Buscar Aplicativo / Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('auth.user') }}" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <input type="email" class="form-control" id="loginEmail" required name="email">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{-- Login Modal --}}
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -308,72 +338,75 @@
 
         <div class="container-menu-project">
             <div class="section-type-project">
-                <a id="type-project" href="{{route('menu.menu')}}">Menu</a>
-                <a id="type-project" href="{{route('menu.matematica')}}">Matematica</a>
-                <a id="type-project" href="{{route('menu.redes')}}">Redes</a>
-                <a id="type-project" href="{{route('menu.jogos')}}">Jogos</a>
-                <a href="{{route('menu.programacao')}}" id="type-project">Programação</a>
+                <a id="type-project" href="{{ route('menu.menu') }}">Menu</a>
+                <a id="type-project" href="{{ route('menu.matematica') }}">Matematica</a>
+                <a id="type-project" href="{{ route('menu.redes') }}">Redes</a>
+                <a id="type-project" href="{{ route('menu.jogos') }}">Jogos</a>
+                <a href="{{ route('menu.programacao') }}" id="type-project">Programação</a>
             </div>
         </div>
 
         @foreach ($aplicativos as $aplicativo)
-                @if ($aplicativo->tipo === 'Outros')
-        <div class="container-project-publish-principal">
-            <div id="infos-project-principal">
-                <h1 id="title-project-principal">Titulo do Projeto</h1>
-                <p id="description-project-principal">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, consequuntur voluptates.
-                    Veritatis iste pariatur, eaque molestias architecto magnam unde sequi dolorum officiis, neque ullam
-                    tempora explicabo, non fugit enim provident?
-                </p>
-                <div id="more-infos-project">
-                    <a id="more-info">
-                        Mais informacoes
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="container-project-publish">
-                <div class="content-publish">
-                    <div class="project-info">
-                        <div id="header-publish">
-                            <p id="type-project-publish">
-                                {{ $aplicativo->tipo }}
-                            </p>
-                            <p id="creator-publish">
-                                {{ $aplicativo->criadorRelacao->nome }} {{ $aplicativo->criadorRelacao->sobrenome }}
-                            </p>
-                            <p>{{ $aplicativo->created_at }}</p>
-                            <label for="">Link do Projeto: </label>
-                            <a href="{{ $aplicativo->link_Projeto }}"
-                                target="_blank">{{ $aplicativo->link_Projeto }}</a>
-                        </div>
-                        <div id="title-project-publish">
-                            <h4 id="title-project">
-                                {{ $aplicativo->nome_Aplicativo }}
-                            </h4>
-                        </div>
-                        <div id="description-project-publish">
-                            <p>{{ $aplicativo->descricao }}</p>
-                        </div>
+            @if ($aplicativo->tipo === 'Outros')
+                <div class="container-project-publish-principal">
+                    <div id="infos-project-principal">
+                        <h1 id="title-project-principal">Titulo do Projeto</h1>
+                        <p id="description-project-principal">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, consequuntur
+                            voluptates.
+                            Veritatis iste pariatur, eaque molestias architecto magnam unde sequi dolorum officiis,
+                            neque ullam
+                            tempora explicabo, non fugit enim provident?
+                        </p>
                         <div id="more-infos-project">
-                            <a id="more-info-publish">
-                                Mais informações
+                            <a id="more-info">
+                                Mais informacoes
                             </a>
                         </div>
                     </div>
-                    <div class="project-image">
-                        <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}" alt="">
+                </div>
+
+                <div class="container-project-publish">
+                    <div class="content-publish">
+                        <div class="project-info">
+                            <div id="header-publish">
+                                <p id="type-project-publish">
+                                    {{ $aplicativo->tipo }}
+                                </p>
+                                <p id="creator-publish">
+                                    {{ $aplicativo->criadorRelacao->nome }}
+                                    {{ $aplicativo->criadorRelacao->sobrenome }}
+                                </p>
+                                <p>{{ $aplicativo->created_at }}</p>
+                                <label for="">Link do Projeto: </label>
+                                <a href="{{ $aplicativo->link_Projeto }}"
+                                    target="_blank">{{ $aplicativo->link_Projeto }}</a>
+                            </div>
+                            <div id="title-project-publish">
+                                <h4 id="title-project">
+                                    {{ $aplicativo->nome_Aplicativo }}
+                                </h4>
+                            </div>
+                            <div id="description-project-publish">
+                                <p>{{ $aplicativo->descricao }}</p>
+                            </div>
+                            <div id="more-infos-project">
+                                <a id="more-info-publish">
+                                    Mais informações
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-image">
+                            <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}" alt="">
+                        </div>
                     </div>
-                </div>
                 @else
-                <div class="none-publish">
-                    <h3 id="title-none-publish">Nenhum aplicativo postado no momento.</h3>
-                </div>
+                    <div class="none-publish">
+                        <h3 id="title-none-publish">Nenhum aplicativo postado no momento.</h3>
+                    </div>
             @endif
         @endforeach
-        </div>
+    </div>
     </div>
 
 

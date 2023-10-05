@@ -88,6 +88,18 @@
     flex-direction: column;
 }
 
+#user-perfil{
+    width: 140px;
+}
+
+#btn-search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    border: none;
+}
+
 .section-type-project {
     flex-direction: row;
     display: flex;

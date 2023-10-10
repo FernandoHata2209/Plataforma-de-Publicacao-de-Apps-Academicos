@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aplicativo;
+use App\Models\Curtida;
 use App\Models\Usuario;
+use App\Models\usuario_Aplicativo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -96,9 +98,42 @@ class MenuController extends Controller
         return redirect()->route('menu.menu');
     }
 
-    public function likeProject()
+    public function curtir($id)
     {
-        $user = Auth::user();
+        // Encontrar o aplicativo pelo ID
+        $aplicativo = Aplicativo::find($id);
+
+        if (auth()->check()) {
+            // Encontrar o aplicativo pelo ID
+            $aplicativo = Aplicativo::find($id);
+
+            // Verificar se o aplicativo foi encontrado
+            if (!$aplicativo) {
+                return redirect()->back();
+            }
+
+            // Verificar se o usuário já curtiu o aplicativo
+            $curtidaExistente = Usuario_Aplicativo::where('id_usuario', auth()->id())
+                ->where('id_aplicativo', $aplicativo->id)
+                ->exists();
+
+            if ($curtidaExistente) {
+                return redirect()->back()->with('error', 'Você já curtiu este aplicativo.');
+            }
+
+            // Criar uma nova entrada na tabela usuario_aplicativo para registrar a curtida
+            $usuarioAplicativo = new usuario_aplicativo();
+            $usuarioAplicativo->id_usuario = auth()->id();
+            $usuarioAplicativo->id_aplicativo = $aplicativo->id;
+            $usuarioAplicativo->save();
+
+            // Incrementar o número de curtidas no aplicativo
+            $aplicativo->qtd_Curtidas += 1;
+            $aplicativo->save();
+
+
+            return redirect()->back()->with('success', 'Você curtiu o aplicativo com sucesso!');
+        }
     }
 
     // Metodo de Aprovacao
@@ -146,7 +181,7 @@ class MenuController extends Controller
 
     // function Search 
 
-    public function search(){
-        
+    public function search()
+    {
     }
 }

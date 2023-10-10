@@ -39,4 +39,6 @@ Route::get('/perfil/{id}', [userAccountController::class, 'index'])->name('user.
 
 Route::post('publicar/app', [MenuController::class, 'storePublish'])->name('publicar.store');
 
+Route::post('/aplicativos/{id}/curtir', [MenuController::class, 'curtir'])->name('aplicativos.curtir');
+
 

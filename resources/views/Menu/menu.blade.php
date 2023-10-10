@@ -230,9 +230,8 @@
                                 <input type="text" class="form-control" required name="nome_Aplicativo">
                             </div>
                             <div class="mb-3">
-                                <label for="loginPassword" class="form-label">Descricao Projeto</label>
-                                <textarea name="descricao" class="form-control" id="description-project-publish" cols="50" rows="4">
-                                </textarea>
+                                <label class="form-label" for="textAreaExample">Descrição</label>
+                                <textarea class="form-control" id="textAreaExample1" rows="4" name="descricao"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="cargo">Selecione o cargo:</label>
@@ -317,7 +316,7 @@
                                             </div>
                                         </div>
                                         <div class="project-image">
-                                            <img src="{{ asset('imagesProject/' . $aplicativo->imagem) }}"
+                                            <img src="{{ asset('imagesProject/' . $aplicativo->media) }}"
                                                 alt="">
                                         </div>
 
@@ -362,7 +361,7 @@
         </div>
 
         <div class="container-project-publish">
-            @if ($aplicativo->status === 'Aprovado')
+            @if (!$aplicativos->isEmpty() && $aplicativos[0]->status === 'Aprovado')
                 @foreach ($aplicativos as $aplicativo)
                     <div class="content-publish">
                         <div class="project-info">
@@ -391,15 +390,20 @@
                                 <a id="more-info-publish">
                                     Mais informações
                                 </a>
+                                
                                 <div class="content-like-comment-project">
-                                    <button id="btn-like-project">
-                                        <svg xmlns="http://www.w3.org/2000/svg" id="like-project" width="32"
-                                            height="32" fill="currentColor" class="bi bi-heart"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                        </svg>
-                                    </button>
+                                    <p id="count-like-project">{{ $aplicativo->qtd_Curtidas}}</p>
+                                    <form action="{{ route('aplicativos.curtir', ['id' => $aplicativo->id]) }}" method="post">
+                                        @csrf
+                                        <button id="btn-like-project">
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="like-project" width="32"
+                                                height="32" fill="currentColor" class="bi bi-heart"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                            </svg>
+                                        </button>
+                                    </form>
                                     <button id="btn-comment-project">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                             fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16">

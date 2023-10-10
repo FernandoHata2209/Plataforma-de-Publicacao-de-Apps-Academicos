@@ -270,9 +270,23 @@
     cursor: pointer;
 }
 
+#form-like-project{
+    width: 50px;
+}
+
+#count-like-project{
+    text-align: center;
+    font-size: 32px;
+    width: 32px;
+    height: 44px;
+}
+
 .content-like-comment-project{
     display: flex;
+    align-items: center;
+    text-align: center;
     flex-direction: row;
+    width: 140px;
 }
 
 #btn-like-project, #btn-comment-project{

@@ -50,6 +50,7 @@ class UsuarioController extends Controller
             'email' => 'required|email|unique:usuarios', // Verifica a unicidade do email na tabela 'usuarios'
             'senha' => 'required|min:6|confirmed',
             'cargo' => 'required|in:equipe_NPI,ciencia_Computacao,engenharia_Software',
+            'curso' => 'required|in:Ciencia_Computacao,engenharia_Software,Professor',
         ], [
             'email.unique' => 'Este email já está em uso.', // Mensagem personalizada para a regra 'unique'
         ]);

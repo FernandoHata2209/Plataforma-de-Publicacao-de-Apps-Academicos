@@ -13,11 +13,13 @@ class userAccountController extends Controller
     public function index($id)
     {
         $usuarios = Usuario::find($id);
+        $aplicativos = Aplicativo::all();
         if (!$usuarios) {
             // Usuário não encontrado, redirecionar para uma página de erro
             return redirect()->route('menu.menu')->with('error', 'Usuário não encontrado.');
         }
-        return view('user.perfil', ['usuarios' => $usuarios]);
+        
+        return view('user.perfil', ['usuarios' => $usuarios, 'aplicativos' => $aplicativos]);
     }
 
 

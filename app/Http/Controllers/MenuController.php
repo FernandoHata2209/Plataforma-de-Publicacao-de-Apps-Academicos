@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aplicativo;
+use App\Models\comentarios_Aplicativo;
 use App\Models\Curtida;
 use App\Models\Usuario;
 use App\Models\usuario_Aplicativo;
@@ -136,6 +137,42 @@ class MenuController extends Controller
         }
     }
 
+    // Comentar no Aplicativo
+
+    public function comentar(Request $request, $id)
+    {
+        // Encontrar o aplicativo pelo ID
+        $aplicativo = Aplicativo::find($id);
+
+        // Verificar se o aplicativo foi encontrado
+        if (!$aplicativo) {
+            return redirect()->back()->with('error', 'Aplicativo não encontrado.');
+        }
+
+        // Verificar se o usuário está autenticado
+        if (auth()->check()) {
+            // Validar o request
+            $request->validate([
+                'comentarios' => 'required|string|max:255', // Adapte as regras de validação conforme necessário
+            ]);
+
+            // Criar um novo comentário
+            $comentario = new comentarios_Aplicativo();
+            $comentario->id_usuario = auth()->id();
+            $comentario->id_aplicativo = $aplicativo->id;
+            $comentario->comentario = $request->input('comentarios'); // Usar o valor do textarea
+            $comentario->save();
+
+            // Incrementar o número de comentários no aplicativo
+            $aplicativo->qtd_Comentarios += 1;
+            $aplicativo->save();
+
+            return redirect()->back()->with('success', 'Comentário adicionado com sucesso!');
+        } else {
+            return redirect()->back()->with('error', 'Você precisa estar logado para comentar.');
+        }
+    }
+
     // Metodo de Aprovacao
     public function aprovar(Request $request, $id)
     {
@@ -177,11 +214,5 @@ class MenuController extends Controller
 
         // Redirecione de volta à interface de aprovação ou outra página relevante
         return redirect()->route('menu.aprovacao')->with('success', 'Aplicativo atualizado com sucesso!');
-    }
-
-    // function Search 
-
-    public function search()
-    {
     }
 }

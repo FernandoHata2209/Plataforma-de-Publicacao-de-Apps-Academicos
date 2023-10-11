@@ -3,8 +3,8 @@
 use App\Http\Controllers\AprovacaoController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\userAccountController;
-use App\Http\Controllers\PublicarAppController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\PesquisaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,5 +40,8 @@ Route::get('/perfil/{id}', [userAccountController::class, 'index'])->name('user.
 Route::post('publicar/app', [MenuController::class, 'storePublish'])->name('publicar.store');
 
 Route::post('/aplicativos/{id}/curtir', [MenuController::class, 'curtir'])->name('aplicativos.curtir');
+Route::post('/aplicativos/comentar/{id}', [MenuController::class, 'comentar'])->name('aplicativos.comentar');
+
+Route::get('/pesquisa', [PesquisaController::class, 'pesquisar'])->name('menu.pesquisa');
 
 

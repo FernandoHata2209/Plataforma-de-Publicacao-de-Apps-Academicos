@@ -271,14 +271,21 @@
 }
 
 #form-like-project{
-    width: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
 }
 
 #count-like-project{
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#text-like-project{
+    margin: 0;
     font-size: 32px;
-    width: 32px;
-    height: 44px;
 }
 
 .content-like-comment-project{
@@ -297,6 +304,7 @@
     border: none;
     border-radius: 10px;
     transition: .3s;
+    background-color: none;
 }
 
 #btn-link-project{
@@ -306,13 +314,17 @@
     border: 1px solid gray;
 }
 
-#like-project{
+#like-project, #comment-project{
     transition: .3s ease-in-out;
+    width: 30px;
+    background-color: white;
 }
 
 #like-project:hover{
     color: red;
 }
+
+
 
 
 /* Aprovar Projeto */

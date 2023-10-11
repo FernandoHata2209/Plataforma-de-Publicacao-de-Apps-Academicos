@@ -27,6 +27,7 @@ class Aplicativo extends Model
         'criador',
         'aprovacao_Projeto',
         'qtd_Curtidas',
+        'qtd_Comentarios',
         'media',
         'descricao',
         'tipo',

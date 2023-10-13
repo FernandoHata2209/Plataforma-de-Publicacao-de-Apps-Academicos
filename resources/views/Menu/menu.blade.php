@@ -125,13 +125,18 @@
                     <div class="modal-body">
                     </div>
                     <div class="modal-body">
-                        <form>
-                            @csrf
-                            <div class="mb-3">
-                                <textarea class="form-control" id="textAreaExample1" rows="4" name="comentarios"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Buscar</button>
-                        </form>
+                        @if ($aplicativos)
+                            <form action="{{ route('aplicativos.comentar', ['id' => $aplicativos->id]) }}"
+                                method="POST">
+                                @csrf
+                                <div class="mb-3">
+                                    <textarea class="form-control" id="textAreaExample1" rows="4" name="comentarios"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Comentar</button>
+                            </form>
+                        @else
+                            <p>Nenhum aplicativo disponível para comentar no momento.</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -203,8 +208,17 @@
                                 <select class="form-control" id="cargo" name="cargo">
                                     <option value="" selected hidden>Cargo</option>
                                     <option value="equipe_NPI">Equipe NPI</option>
+                                    <option value="aluno">Aluno</option>
+                                    <option value="professor">Professor</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cargo">Selecione o Curso:</label>
+                                <select class="form-control" id="cargo" name="curso">
+                                    <option value="" selected hidden>Curso</option>
                                     <option value="ciencia_Computacao">Ciência da Computação</option>
                                     <option value="engenharia_Software">Engenharia de Software</option>
+                                    <option value="Professor">Nenhum</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -300,8 +314,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-main-approve">
-                            @forelse ($aplicativos as $aplicativo)
-                                @if ($aplicativo->status === 'Em verificação')
+                            @if ($aplicativos && $aplicativos->status === 'Em Verificação')
+                                @foreach ($aplicativos as $aplicativo)
                                     <div class="content-publish-approve">
                                         <div class="project-info">
                                             <div id="header-publish">
@@ -347,10 +361,10 @@
                                         </div>
 
                                     </div>
-                                @endif
-                            @empty
+                                @endforeach
+                            @else
                                 <h3 id="none-publish">Nenhuma aplicativo para aprovar no momento</h3>
-                            @endforelse
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -387,7 +401,7 @@
         </div>
 
         <div class="container-project-publish">
-            @if (!$aplicativos->isEmpty() && $aplicativos[0]->status === 'Aprovado')
+            @if ($aplicativos && $aplicativos->status === 'Aprovado')
                 @foreach ($aplicativos as $aplicativo)
                     <div class="content-publish">
                         <div class="project-info">

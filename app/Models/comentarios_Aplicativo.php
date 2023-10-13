@@ -22,7 +22,6 @@ class comentarios_Aplicativo extends Model
     }
 
     protected $fillable = [
-        'id',
         'id_Aplicativo',
         'id_Usuario',
         'comentario'

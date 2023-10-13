@@ -14,12 +14,17 @@ use Illuminate\Support\Facades\Auth;
 class MenuController extends Controller
 {
     public function index()
-    {
-        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
-        $usuarios = Usuario::all();
+{
+    $aplicativosEmVerificacao = Aplicativo::where('status', 'Em Verificação')->orderBy('created_at', 'desc')->get();
+    $aplicativosAprovados = Aplicativo::where('status', 'Aprovado')->orderBy('created_at', 'desc')->get();
+    $usuarios = Usuario::all();
 
-        return view('menu.menu', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
-    }
+    return view('menu.menu', [
+        'aplicativosEmVerificacao' => $aplicativosEmVerificacao,
+        'aplicativosAprovados' => $aplicativosAprovados,
+        'usuarios' => $usuarios
+    ]);
+}
 
     public function jogos()
     {
@@ -157,11 +162,11 @@ class MenuController extends Controller
             ]);
 
             // Criar um novo comentário
-            $comentario = new comentarios_Aplicativo();
-            $comentario->id_usuario = auth()->id();
-            $comentario->id_aplicativo = $aplicativo->id;
-            $comentario->comentario = $request->input('comentarios'); // Usar o valor do textarea
-            $comentario->save();
+            comentarios_Aplicativo::create([
+                'id_Usuario' => auth()->id(),
+                'id_Aplicativo' => $aplicativo->id,
+                'comentario' => $request->input('comentarios'),
+            ]);
 
             // Incrementar o número de comentários no aplicativo
             $aplicativo->qtd_Comentarios += 1;
@@ -176,9 +181,17 @@ class MenuController extends Controller
     // Metodo de Aprovacao
     public function aprovar(Request $request, $id)
     {
-        $aplicativo = Aplicativo::findOrFail($id);
-        $aplicativo->update(['status' => 'Aprovado']);
-        return redirect()->route('menu.menu')->with('success', 'Aplicativo aprovado com sucesso!');
+        $aplicativo = Aplicativo::where('id', $id)
+            ->where('status', 'Em verificação')
+            ->first();
+
+        if ($aplicativo) {
+            $aplicativo->status = 'Aprovado';
+            $aplicativo->save();
+            return redirect()->route('menu.menu')->with('success', 'Aplicativo aprovado com sucesso!');
+        } else {
+            return redirect()->route('menu.menu')->with('error', 'Aplicativo não encontrado ou não está em verificação.');
+        }
     }
 
     public function rejeitar(Request $request, $id)

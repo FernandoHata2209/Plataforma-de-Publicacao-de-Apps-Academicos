@@ -111,36 +111,7 @@
             </div>
         </div>
 
-        {{-- Comment Modal --}}
 
-        <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="loginModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Buscar Aplicativo / Usuario</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                    </div>
-                    <div class="modal-body">
-                        @if ($aplicativos)
-                            <form action="{{ route('aplicativos.comentar', ['id' => $aplicativos->id]) }}"
-                                method="POST">
-                                @csrf
-                                <div class="mb-3">
-                                    <textarea class="form-control" id="textAreaExample1" rows="4" name="comentarios"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Comentar</button>
-                            </form>
-                        @else
-                            <p>Nenhum aplicativo disponível para comentar no momento.</p>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
 
         {{-- Login Modal --}}
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
@@ -314,56 +285,61 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-main-approve">
-                            @if ($aplicativos && $aplicativos->status === 'Em Verificação')
-                                @foreach ($aplicativos as $aplicativo)
-                                    <div class="content-publish-approve">
-                                        <div class="project-info">
-                                            <div id="header-publish">
-                                                <p id="type-project-publish">
-                                                    {{ $aplicativo->tipo }}
-                                                </p>
-                                                <p id="creator-publish">
-                                                    {{ $aplicativo->criadorRelacao->nome }}
-                                                    {{ $aplicativo->criadorRelacao->sobrenome }}
-                                                </p>
-                                                <p>{{ $aplicativo->created_at }}</p>
-                                                <label for="">Link do Projeto: </label>
-                                                <a href="{{ $aplicativo->link_Projeto }}"
-                                                    target="_blank">{{ $aplicativo->link_Projeto }}</a>
-                                            </div>
-                                            <div id="title-project-publish">
-                                                <h4 id="title-project">
-                                                    {{ $aplicativo->nome_Aplicativo }}
-                                                </h4>
-                                            </div>
-                                            <div id="description-project-publish">
-                                                <p>{{ $aplicativo->descricao }}</p>
-                                            </div>
-                                            <div id="confirmation-btn-approve">
-                                                <form action="{{ route('menu.aprovar', ['id' => $aplicativo->id]) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    <button type="submit" id="approve-project">Aprovar</button>
-                                                </form>
-                                                <form action="{{ route('menu.rejeitar', ['id' => $aplicativo->id]) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    <button type="submit" id="reject-project">Cancelar</button>
-                                                </form>
-                                                <form action="">
-                                                    <button type="" id="edit-project">Editar</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="project-image">
-                                            <img src="{{ asset('imagesProject/' . $aplicativo->media) }}"
-                                                alt="">
-                                        </div>
-
-                                    </div>
-                                @endforeach
+                            @if ($aplicativos->where('status', 'Em verificação')->isEmpty())
+                                <div class="none-publish">
+                                    <h3 id="title-none-publish">Nenhum aplicativo postado no momento.</h3>
+                                </div>
                             @else
-                                <h3 id="none-publish">Nenhuma aplicativo para aprovar no momento</h3>
+                                @foreach ($aplicativos as $aplicativo)
+                                    @if ($aplicativo->status == 'Em verificação')
+                                        <div class="content-publish-approve">
+                                            <div class="project-info">
+                                                <div id="header-publish">
+                                                    <p id="type-project-publish">
+                                                        {{ $aplicativo->tipo }}
+                                                    </p>
+                                                    <p id="creator-publish">
+                                                        {{ $aplicativo->criadorRelacao->nome }}
+                                                        {{ $aplicativo->criadorRelacao->sobrenome }}
+                                                    </p>
+                                                    <p>{{ $aplicativo->created_at }}</p>
+                                                    <label for="">Link do Projeto: </label>
+                                                    <a href="{{ $aplicativo->link_Projeto }}"
+                                                        target="_blank">{{ $aplicativo->link_Projeto }}</a>
+                                                </div>
+                                                <div id="title-project-publish">
+                                                    <h4 id="title-project">
+                                                        {{ $aplicativo->nome_Aplicativo }}
+                                                    </h4>
+                                                </div>
+                                                <div id="description-project-publish">
+                                                    <p>{{ $aplicativo->descricao }}</p>
+                                                </div>
+                                                <div id="confirmation-btn-approve">
+                                                    <form
+                                                        action="{{ route('menu.aprovar', ['id' => $aplicativo->id]) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <button type="submit" id="approve-project">Aprovar</button>
+                                                    </form>
+                                                    <form
+                                                        action="{{ route('menu.rejeitar', ['id' => $aplicativo->id]) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <button type="submit" id="reject-project">Cancelar</button>
+                                                    </form>
+                                                    <form action="">
+                                                        <button type="" id="edit-project">Editar</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="project-image">
+                                                <img src="{{ asset('mediaProject/' . $aplicativo->media) }}"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
                             @endif
                         </div>
                     </div>
@@ -401,18 +377,25 @@
         </div>
 
         <div class="container-project-publish">
-            @if ($aplicativos && $aplicativos->status === 'Aprovado')
+            @if ($aplicativos->where('status', 'Aprovado')->isEmpty())
+                <div class="none-publish">
+                    <h3 id="title-none-publish">Nenhum aplicativo postado no momento.</h3>
+                </div>
+            @else
                 @foreach ($aplicativos as $aplicativo)
+                    @if ($aplicativo->status == 'Aprovado')
                     <div class="content-publish">
                         <div class="project-info">
                             <div id="header-publish">
                                 <p id="type-project-publish">
                                     {{ $aplicativo->tipo }}
                                 </p>
-                                <p id="creator-publish">
-                                    {{ $aplicativo->criadorRelacao->nome }}
-                                    {{ $aplicativo->criadorRelacao->sobrenome }}
-                                </p>
+                                <a href="{{ route('user.perfil', ['id' => $aplicativo->criadorRelacao->first()->id]) }}">
+                                    <p id="creator-publish">
+                                        {{ $aplicativo->criadorRelacao->nome }}
+                                        {{ $aplicativo->criadorRelacao->sobrenome }}
+                                    </p>
+                                </a>
                                 <p>{{ $aplicativo->created_at }}</p>
                             </div>
                             <div id="title-project-publish">
@@ -466,22 +449,66 @@
                             @if (pathinfo($aplicativo->arquivo, PATHINFO_EXTENSION) == 'mp4')
                                 <!-- Se o arquivo é um vídeo -->
                                 <video width="320" height="240" controls>
-                                    <source src="{{ asset('imagesProject/' . $aplicativo->media) }}"
-                                        type="video/mp4">
+                                    <source src="{{ asset('mediaProject/' . $aplicativo->media) }}" type="video/mp4">
                                     Seu navegador não suporta o elemento de vídeo.
                                 </video>
                             @else
-                                <img src="{{ asset('imagesProject/' . $aplicativo->media) }}" alt="">
+                                <img src="{{ asset('mediaProject/' . $aplicativo->media) }}" alt="">
                             @endif
 
                         </div>
                     </div>
+                    @endif
                 @endforeach
-            @else
-                <div class="none-publish">
-                    <h3 id="title-none-publish">Nenhum aplicativo postado no momento.</h3>
-                </div>
             @endif
+
+            <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="loginModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="loginModalLabel">Buscar Aplicativo / Usuario</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            @if ($comentarios !== null && count($comentarios) > 0)
+                                @foreach ($comentarios as $comentario)
+                                    <div class="media mt-3">
+                                        <img src="{{ asset('caminho/para/foto/perfil.jpg') }}"
+                                            class="mr-3 rounded-circle" width="64">
+                                        <div class="media-body">
+                                            <h5 class="mt-0">{{ $comentario->usuario->nome }}
+                                                {{ $comentario->usuario->sobrenome }}</h5>
+                                            <p>{{ $comentario->comentario }}</p>
+                                            <small
+                                                class="text-muted">{{ $comentario->created_at->diffForHumans() }}</small>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                @endforeach
+                            @else
+                                <p>Nenhum comentário disponível.</p>
+                            @endif
+                        </div>
+                        <div class="modal-body">
+                            @if ($aplicativos)
+                                <form
+                                    action="{{ isset($aplicativo) ? route('aplicativos.comentar', ['id' => $aplicativo->id]) : '#' }}"
+                                    method="POST">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <textarea class="form-control" id="textAreaExample1" rows="4" name="comentarios"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Comentar</button>
+                                </form>
+                            @else
+                                <p>Nenhum aplicativo disponível para comentar no momento.</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Aplicativo;
 use App\Models\comentarios_Aplicativo;
-use App\Models\Curtida;
 use App\Models\Usuario;
 use App\Models\usuario_Aplicativo;
 use Illuminate\Http\Request;
@@ -14,56 +13,108 @@ use Illuminate\Support\Facades\Auth;
 class MenuController extends Controller
 {
     public function index()
-{
-    $aplicativosEmVerificacao = Aplicativo::where('status', 'Em Verificação')->orderBy('created_at', 'desc')->get();
-    $aplicativosAprovados = Aplicativo::where('status', 'Aprovado')->orderBy('created_at', 'desc')->get();
-    $usuarios = Usuario::all();
+    {
+        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
 
-    return view('menu.menu', [
-        'aplicativosEmVerificacao' => $aplicativosEmVerificacao,
-        'aplicativosAprovados' => $aplicativosAprovados,
-        'usuarios' => $usuarios
-    ]);
-}
+        $comentarios = comentarios_Aplicativo::all();
+
+        $usuarios = Usuario::all();
+
+        return view('menu.menu', [
+            'aplicativos' => $aplicativos,
+            'comentarios' => $comentarios,
+            'usuarios' => $usuarios,
+        ]);
+    }
 
     public function jogos()
     {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+
+        $comentarios = comentarios_Aplicativo::all();
+
         $usuarios = Usuario::all();
 
-        return view('menu.jogos', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
+        return view('menu.menu', [
+            'aplicativos' => $aplicativos,
+            'comentarios' => $comentarios,
+            'usuarios' => $usuarios,
+        ]);
     }
 
     public function programacao()
     {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+
+        $comentarios = comentarios_Aplicativo::all();
+
         $usuarios = Usuario::all();
 
-        return view('menu.programacao', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
+        return view('menu.menu', [
+            'aplicativos' => $aplicativos,
+            'comentarios' => $comentarios,
+            'usuarios' => $usuarios,
+        ]);
     }
 
     public function redes()
     {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+
+        $comentarios = comentarios_Aplicativo::all();
+
         $usuarios = Usuario::all();
 
-        return view('menu.redes', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
+        return view('menu.menu', [
+            'aplicativos' => $aplicativos,
+            'comentarios' => $comentarios,
+            'usuarios' => $usuarios,
+        ]);
     }
 
     public function matematica()
     {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+
+        $comentarios = comentarios_Aplicativo::all();
+
         $usuarios = Usuario::all();
 
-        return view('menu.matematica', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
+        return view('menu.menu', [
+            'aplicativos' => $aplicativos,
+            'comentarios' => $comentarios,
+            'usuarios' => $usuarios,
+        ]);
     }
 
     public function tecnologia()
     {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+
+        $comentarios = comentarios_Aplicativo::all();
+
         $usuarios = Usuario::all();
 
-        return view('menu.tecnologia', ['aplicativos' => $aplicativos, 'usuarios' => $usuarios]);
+        return view('menu.menu', [
+            'aplicativos' => $aplicativos,
+            'comentarios' => $comentarios,
+            'usuarios' => $usuarios,
+        ]);
+    }
+
+    public function mostrarComentario($id)
+    {
+        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+
+        $comentarios = comentarios_Aplicativo::where('id_Aplicativo', $id)->get();
+
+        $usuarios = Usuario::all();
+
+        return view('menu.menu', [
+            'aplicativos' => $aplicativos,
+            'comentarios' => $comentarios,
+            'usuarios' => $usuarios,
+        ]);
     }
 
     public function storePublish(Request $request)

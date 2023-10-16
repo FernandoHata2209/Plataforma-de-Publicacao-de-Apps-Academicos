@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MenuController::class, 'index'])->name('menu.menu');
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.menu');
+Route::get('/menu/{id?}', [Menucontroller::class, 'mostrarComentario'])->name('menu.menu');
 Route::get('/menu/jogos', [MenuController::class, 'jogos'])->name('menu.jogos');
 Route::get('/menu/tecnologia', [MenuController::class, 'tecnologia'])->name('menu.tecnologia');
 Route::get('/menu/redes', [MenuController::class, 'redes'])->name('menu.redes');

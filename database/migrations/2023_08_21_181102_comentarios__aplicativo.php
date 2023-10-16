@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_Aplicativo');
             $table->integer('id_Usuario');
-            $table->string('comentario');
+            $table->string('comentario')->nullable();
             $table->timestamps();
         });
     }

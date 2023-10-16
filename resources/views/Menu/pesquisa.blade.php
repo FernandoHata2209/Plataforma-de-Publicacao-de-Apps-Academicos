@@ -423,12 +423,12 @@
                             @if (pathinfo($aplicativo->arquivo, PATHINFO_EXTENSION) == 'mp4')
                                 <!-- Se o arquivo é um vídeo -->
                                 <video width="320" height="240" controls>
-                                    <source src="{{ asset('imagesProject/' . $aplicativo->media) }}"
+                                    <source src="{{ asset('mediaProject/' . $aplicativo->media) }}"
                                         type="video/mp4">
                                     Seu navegador não suporta o elemento de vídeo.
                                 </video>
                             @else
-                                <img src="{{ asset('imagesProject/' . $aplicativo->media) }}" alt="">
+                                <img src="{{ asset('mediaProject//' . $aplicativo->media) }}" alt="">
                             @endif
 
                         </div>

@@ -100,7 +100,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Comentar no App</h5>
+                        <h5 class="modal-title" id="loginModalLabel">Buscar Apps:</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -108,8 +108,27 @@
                         <form action="{{ route('menu.pesquisa') }}" method="GET">
                             @csrf
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="loginEmail" required
-                                    name="termo_pesquisa">
+                                <input type="text" class="form-control"
+                                    name="q">
+                            </div>
+                            <div class="mb-3">
+                                <label for="filtro_tipo">Filtrar por Temas:</label>
+                                <select class="form-control" name="tipo">
+                                    <option value="">Todos</option>
+                                    <option value="Outros">Tecnologia</option>
+                                    <option value="Matematica">Matemática</option>
+                                    <option value="Jogos">Jogos</option>
+                                    <option value="Programacao">Programação</option>
+                                    <option value="Redes">Redes</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="filtro_status">Filtrar por Curso:</label>
+                                <select class="form-control" name="status">
+                                    <option value="">Todos</option>
+                                    <option value="Ciência da Computação">Ciência da Computação</option>
+                                    <option value="Engenharia de Software">Engenharia de Software</option>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Buscar</button>
                         </form>
@@ -279,147 +298,41 @@
             </div>
         </div>
 
-        {{-- Aprove Modal --}}
-
-        <div class="modal fade" id="aprovarModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Aprovação de Projetos</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-main-approve">
-                            @if ($aplicativos->where('status', 'Em verificação')->isEmpty())
-                                <div class="none-publish">
-                                    <h3 id="title-none-publish">Nenhum aplicativo postado no momento.</h3>
-                                </div>
-                            @else
-                                @foreach ($aplicativos as $aplicativo)
-                                    @if ($aplicativo->status == 'Em verificação')
-                                        <div class="content-publish-approve">
-                                            <div class="project-info">
-                                                <div id="header-publish">
-                                                    <p id="type-project-publish">
-                                                        {{ $aplicativo->tipo }}
-                                                    </p>
-                                                    <p id="creator-publish">
-                                                        {{ $aplicativo->criadorRelacao->nome }}
-                                                        {{ $aplicativo->criadorRelacao->sobrenome }}
-                                                    </p>
-                                                    <p class="text-muted">{{ $aplicativo->criadorRelacao->curso }}</p>
-                                                    <p>{{ $aplicativo->created_at }}</p>
-                                                    <label for="">Link do Projeto: </label>
-                                                    <a href="{{ $aplicativo->link_Projeto }}"
-                                                        target="_blank">{{ $aplicativo->link_Projeto }}</a>
-                                                </div>
-                                                <div id="title-project-publish">
-                                                    <h4 id="title-project">
-                                                        {{ $aplicativo->nome_Aplicativo }}
-                                                    </h4>
-                                                </div>
-                                                <div id="description-project-publish">
-                                                    <p>{{ $aplicativo->descricao }}</p>
-                                                </div>
-                                                <div id="confirmation-btn-approve">
-                                                    <form
-                                                        action="{{ route('menu.aprovar', ['id' => $aplicativo->id]) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        <button type="submit" id="approve-project">Aprovar</button>
-                                                    </form>
-                                                    <form
-                                                        action="{{ route('menu.rejeitar', ['id' => $aplicativo->id]) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        <button type="submit" id="reject-project">Cancelar</button>
-                                                    </form>
-                                                    <form action="">
-                                                        <button type="" id="edit-project">Editar</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div class="project-image">
-                                                <img src="{{ asset('mediaProject/' . $aplicativo->media) }}"
-                                                    alt="">
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="container-menu-project">
             <div class="section-type-project">
-                <a id="type-project" href="{{ route('menu.menu') }}">Menu</a>
-                <a id="type-project" href="{{ route('menu.tecnologia') }}">Tecnologia</a>
-                <a id="type-project" href="{{ route('menu.redes') }}">Redes</a>
-                <a id="type-project" href="{{ route('menu.jogos') }}">Jogos</a>
-                <a href="{{ route('menu.programacao') }}" id="type-project">Programação</a>
+                <a id="type-project" href="{{ route('menu.tecnologia') }}">Menu</a>
             </div>
         </div>
 
-
-        <div class="container-project-publish-principal">
-            <div id="infos-project-principal">
-                <h1 id="title-project-principal">Titulo do Projeto</h1>
-                <p id="description-project-principal">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, consequuntur
-                    voluptates.
-                    Veritatis iste pariatur, eaque molestias architecto magnam unde sequi dolorum officiis,
-                    neque ullam
-                    tempora explicabo, non fugit enim provident?
-                </p>
-                <div id="more-infos-project">
-                    <a id="more-info">
-                        Mais informacoes
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="container-project-publish">
-            @if ($aplicativos->where('status', 'Aprovado')->isEmpty())
-                <div class="none-publish">
-                    <h3 id="title-none-publish">Nenhum aplicativo postado no momento.</h3>
-                </div>
-            @else
-                @foreach ($aplicativos as $aplicativo)
-                    @if ($aplicativo->status == 'Aprovado')
-                        <div class="content-publish">
+        <div class="container-project-publish">                 
+                      <div class="content-publish">
                             <div class="project-info">
                                 <div id="header-publish">
                                     <p id="type-project-publish">
-                                        {{ $aplicativo->tipo }}
+                                        {{ $aplicativos->tipo }}
                                     </p>
-                                    <a href="{{ route('user.perfil', ['id' => $aplicativo->criadorRelacao->first()->id]) }}"
+                                    <a href="{{ route('user.perfil', ['id' => $aplicativos->criadorRelacao->first()->id]) }}"
                                         id="username-perfil">
                                         <p id="creator-publish">
-                                            {{ $aplicativo->criadorRelacao->nome }}
-                                            {{ $aplicativo->criadorRelacao->sobrenome }}
+                                            {{ $aplicativos->criadorRelacao->nome }}
+                                            {{ $aplicativos->criadorRelacao->sobrenome }}
                                         </p>
                                     </a>
-                                    <p class="text-muted">{{ $aplicativo->criadorRelacao->curso }}</p>
+                                    <p class="text-muted">{{ $aplicativos->criadorRelacao->curso }}</p>
                                     <p><small
-                                            class="text-muted">{{ $aplicativo->created_at->diffForHumans() }}</small>
+                                            class="text-muted">{{ $aplicativos->created_at->diffForHumans() }}</small>
                                     </p>
                                 </div>
                                 <div id="title-project-publish">
                                     <h4 id="title-project">
-                                        {{ $aplicativo->nome_Aplicativo }}
+                                        {{ $aplicativos->nome_Aplicativo }}
                                     </h4>
                                 </div>
                                 <div id="description-project-publish">
-                                    <p>{{ $aplicativo->descricao }}</p>
+                                    <p>{{ $aplicativos->descricao }}</p>
                                 </div>
                                 <div id="more-infos-project">
-                                    <a href="{{ $aplicativo->link_Projeto }}" target="_blank">
+                                    <a href="{{ $aplicativos->link_Projeto }}" target="_blank">
                                         <button id="btn-link-project">Link do Projeto</button>
                                     </a>
                                     <a id="more-info-publish">
@@ -427,12 +340,12 @@
                                     </a>
 
                                     <div class="content-like-comment-project">
-                                        <form action="{{ route('aplicativos.curtir', ['id' => $aplicativo->id]) }}"
+                                        <form action="{{ route('aplicativos.curtir', ['id' => $aplicativos->id]) }}"
                                             method="post" id="form-like-project">
-                                            @if ($aplicativo->qtd_Curtidas === null)
+                                            @if ($aplicativos->qtd_Curtidas === null)
                                             @else
                                                 <div id="count-like-project">
-                                                    <p id="text-like-project">{{ $aplicativo->qtd_Curtidas }}</p>
+                                                    <p id="text-like-project">{{ $aplicativos->qtd_Curtidas }}</p>
                                                 </div>
                                             @endif
                                             @csrf
@@ -458,22 +371,19 @@
                                 </div>
                             </div>
                             <div class="project-image">
-                                @if (pathinfo($aplicativo->arquivo, PATHINFO_EXTENSION) == 'mp4')
+                                @if (pathinfo($aplicativos->arquivo, PATHINFO_EXTENSION) == 'mp4')
                                     <!-- Se o arquivo é um vídeo -->
                                     <video width="320" height="240" controls>
-                                        <source src="{{ asset('mediaProject/' . $aplicativo->media) }}"
+                                        <source src="{{ asset('mediaProject/' . $aplicativos->media) }}"
                                             type="video/mp4">
                                         Seu navegador não suporta o elemento de vídeo.
                                     </video>
                                 @else
-                                    <img src="{{ asset('mediaProject/' . $aplicativo->media) }}" alt="">
+                                    <img src="{{ asset('mediaProject/' . $aplicativos->media) }}" alt="">
                                 @endif
 
                             </div>
                         </div>
-                    @endif
-                @endforeach
-            @endif
 
             <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="loginModalLabel"
                 aria-hidden="true">

@@ -98,6 +98,7 @@
     align-items: center;
     width: 80px;
     border: none;
+    background-color: white;
 }
 
 .section-type-project {
@@ -253,6 +254,15 @@
 
 #creator-publish{
     font-size: 20px;
+}
+
+#username-perfil{
+    text-decoration: none;
+    color: black;
+}
+
+#username-perfil:hover{
+    text-decoration: underline;
 }
 
 #title-project {

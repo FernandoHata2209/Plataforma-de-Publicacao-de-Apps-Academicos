@@ -78,7 +78,7 @@
                             <button>Perfil</button>
                         </a>
                         <button id="publish-project" data-bs-toggle="modal" data-bs-target="#publishModal">Publicar</button>
-                        @if (auth()->user()->cargo === 'equipe_NPI')
+                        @if (auth()->user()->cargo === 'Equipe do NPI')
                             <!-- Botão que só será exibido para a equipe do NPI -->
                             <button id="publish-project" data-bs-toggle="modal"
                                 data-bs-target="#aprovarModal">Aprovar</button>
@@ -88,21 +88,47 @@
             </div>
         </div>
 
+        @if (session('error'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
+
         {{-- Search Modal --}}
 
         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Comentar no App</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="loginModalLabel">Buscar Apps:</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="{{ route('menu.pesquisa') }}" method="GET">
                             @csrf
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="loginEmail" required
-                                    name="termo_pesquisa">
+                                <input type="text" class="form-control"
+                                    name="q">
+                            </div>
+                            <div class="mb-3">
+                                <label for="filtro_tipo">Filtrar por Temas:</label>
+                                <select class="form-control" name="tipo">
+                                    <option value="">Todos</option>
+                                    <option value="Outros">Tecnologia</option>
+                                    <option value="Matematica">Matemática</option>
+                                    <option value="Jogos">Jogos</option>
+                                    <option value="Programacao">Programação</option>
+                                    <option value="Redes">Redes</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="filtro_status">Filtrar por Curso:</label>
+                                <select class="form-control" name="status">
+                                    <option value="">Todos</option>
+                                    <option value="Ciência da Computação">Ciência da Computação</option>
+                                    <option value="Engenharia de Software">Engenharia de Software</option>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Buscar</button>
                         </form>
@@ -178,18 +204,18 @@
                                 <label for="cargo">Selecione o cargo:</label>
                                 <select class="form-control" id="cargo" name="cargo">
                                     <option value="" selected hidden>Cargo</option>
-                                    <option value="equipe_NPI">Equipe NPI</option>
-                                    <option value="aluno">Aluno</option>
-                                    <option value="professor">Professor</option>
+                                    <option value="Equipe do NPI">Equipe NPI</option>
+                                    <option value="Aluno">Aluno</option>
+                                    <option value="Professor">Professor</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="cargo">Selecione o Curso:</label>
                                 <select class="form-control" id="cargo" name="curso">
                                     <option value="" selected hidden>Curso</option>
-                                    <option value="ciencia_Computacao">Ciência da Computação</option>
-                                    <option value="engenharia_Software">Engenharia de Software</option>
-                                    <option value="Professor">Nenhum</option>
+                                    <option value="Ciencia da Computação">Ciência da Computação</option>
+                                    <option value="Engenharia de Software">Engenharia de Software</option>
+                                    <option value="Nenhum">Nenhum</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -302,6 +328,7 @@
                                                         {{ $aplicativo->criadorRelacao->nome }}
                                                         {{ $aplicativo->criadorRelacao->sobrenome }}
                                                     </p>
+                                                    <p class="text-muted">{{ $aplicativo->criadorRelacao->curso }}</p>
                                                     <p>{{ $aplicativo->created_at }}</p>
                                                     <label for="">Link do Projeto: </label>
                                                     <a href="{{ $aplicativo->link_Projeto }}"
@@ -384,80 +411,85 @@
             @else
                 @foreach ($aplicativos as $aplicativo)
                     @if ($aplicativo->status == 'Aprovado')
-                    <div class="content-publish">
-                        <div class="project-info">
-                            <div id="header-publish">
-                                <p id="type-project-publish">
-                                    {{ $aplicativo->tipo }}
-                                </p>
-                                <a href="{{ route('user.perfil', ['id' => $aplicativo->criadorRelacao->first()->id]) }}">
-                                    <p id="creator-publish">
-                                        {{ $aplicativo->criadorRelacao->nome }}
-                                        {{ $aplicativo->criadorRelacao->sobrenome }}
+                        <div class="content-publish">
+                            <div class="project-info">
+                                <div id="header-publish">
+                                    <p id="type-project-publish">
+                                        {{ $aplicativo->tipo }}
                                     </p>
-                                </a>
-                                <p>{{ $aplicativo->created_at }}</p>
-                            </div>
-                            <div id="title-project-publish">
-                                <h4 id="title-project">
-                                    {{ $aplicativo->nome_Aplicativo }}
-                                </h4>
-                            </div>
-                            <div id="description-project-publish">
-                                <p>{{ $aplicativo->descricao }}</p>
-                            </div>
-                            <div id="more-infos-project">
-                                <a href="{{ $aplicativo->link_Projeto }}" target="_blank">
-                                    <button id="btn-link-project">Link do Projeto</button>
-                                </a>
-                                <a id="more-info-publish">
-                                    Mais informações
-                                </a>
+                                    <a href="{{ route('user.perfil', ['id' => $aplicativo->criadorRelacao->first()->id]) }}"
+                                        id="username-perfil">
+                                        <p id="creator-publish">
+                                            {{ $aplicativo->criadorRelacao->nome }}
+                                            {{ $aplicativo->criadorRelacao->sobrenome }}
+                                        </p>
+                                    </a>
+                                    <p class="text-muted">{{ $aplicativo->criadorRelacao->curso }}</p>
+                                    <p><small
+                                            class="text-muted">{{ $aplicativo->created_at->diffForHumans() }}</small>
+                                    </p>
+                                </div>
+                                <div id="title-project-publish">
+                                    <h4 id="title-project">
+                                        {{ $aplicativo->nome_Aplicativo }}
+                                    </h4>
+                                </div>
+                                <div id="description-project-publish">
+                                    <p>{{ $aplicativo->descricao }}</p>
+                                </div>
+                                <div id="more-infos-project">
+                                    <a href="{{ $aplicativo->link_Projeto }}" target="_blank">
+                                        <button id="btn-link-project">Link do Projeto</button>
+                                    </a>
+                                    <a id="more-info-publish">
+                                        Mais informações
+                                    </a>
 
-                                <div class="content-like-comment-project">
-                                    <form action="{{ route('aplicativos.curtir', ['id' => $aplicativo->id]) }}"
-                                        method="post" id="form-like-project">
-                                        @if ($aplicativo->qtd_Curtidas === null)
-                                        @else
-                                            <div id="count-like-project">
-                                                <p id="text-like-project">{{ $aplicativo->qtd_Curtidas }}</p>
-                                            </div>
-                                        @endif
-                                        @csrf
-                                        <button id="btn-like-project">
-                                            <svg xmlns="http://www.w3.org/2000/svg" id="like-project" width="32"
-                                                height="32" fill="currentColor" class="bi bi-heart"
-                                                viewBox="0 0 16 16">
+                                    <div class="content-like-comment-project">
+                                        <form action="{{ route('aplicativos.curtir', ['id' => $aplicativo->id]) }}"
+                                            method="post" id="form-like-project">
+                                            @if ($aplicativo->qtd_Curtidas === null)
+                                            @else
+                                                <div id="count-like-project">
+                                                    <p id="text-like-project">{{ $aplicativo->qtd_Curtidas }}</p>
+                                                </div>
+                                            @endif
+                                            @csrf
+                                            <button id="btn-like-project">
+                                                <svg xmlns="http://www.w3.org/2000/svg" id="like-project"
+                                                    width="32" height="32" fill="currentColor"
+                                                    class="bi bi-heart" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        <button
+                                            id="btn-comment-project"data-bs-toggle="modal"data-bs-target="#commentModal">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16"
+                                                id="comment-project">
                                                 <path
-                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                    d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
                                             </svg>
                                         </button>
-                                    </form>
-                                    <button
-                                        id="btn-comment-project"data-bs-toggle="modal"data-bs-target="#commentModal">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                            fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16"
-                                            id="comment-project">
-                                            <path
-                                                d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
-                                        </svg>
-                                    </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="project-image">
-                            @if (pathinfo($aplicativo->arquivo, PATHINFO_EXTENSION) == 'mp4')
-                                <!-- Se o arquivo é um vídeo -->
-                                <video width="320" height="240" controls>
-                                    <source src="{{ asset('mediaProject/' . $aplicativo->media) }}" type="video/mp4">
-                                    Seu navegador não suporta o elemento de vídeo.
-                                </video>
-                            @else
-                                <img src="{{ asset('mediaProject/' . $aplicativo->media) }}" alt="">
-                            @endif
+                            <div class="project-image">
+                                @if (pathinfo($aplicativo->arquivo, PATHINFO_EXTENSION) == 'mp4')
+                                    <!-- Se o arquivo é um vídeo -->
+                                    <video width="320" height="240" controls>
+                                        <source src="{{ asset('mediaProject/' . $aplicativo->media) }}"
+                                            type="video/mp4">
+                                        Seu navegador não suporta o elemento de vídeo.
+                                    </video>
+                                @else
+                                    <img src="{{ asset('mediaProject/' . $aplicativo->media) }}" alt="">
+                                @endif
 
+                            </div>
                         </div>
-                    </div>
                     @endif
                 @endforeach
             @endif

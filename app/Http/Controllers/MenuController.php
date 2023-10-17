@@ -35,7 +35,7 @@ class MenuController extends Controller
 
         $usuarios = Usuario::all();
 
-        return view('menu.menu', [
+        return view('menu.jogos', [
             'aplicativos' => $aplicativos,
             'comentarios' => $comentarios,
             'usuarios' => $usuarios,
@@ -50,7 +50,7 @@ class MenuController extends Controller
 
         $usuarios = Usuario::all();
 
-        return view('menu.menu', [
+        return view('menu.programacao', [
             'aplicativos' => $aplicativos,
             'comentarios' => $comentarios,
             'usuarios' => $usuarios,
@@ -65,7 +65,7 @@ class MenuController extends Controller
 
         $usuarios = Usuario::all();
 
-        return view('menu.menu', [
+        return view('menu.redes', [
             'aplicativos' => $aplicativos,
             'comentarios' => $comentarios,
             'usuarios' => $usuarios,
@@ -80,7 +80,7 @@ class MenuController extends Controller
 
         $usuarios = Usuario::all();
 
-        return view('menu.menu', [
+        return view('menu.matematica', [
             'aplicativos' => $aplicativos,
             'comentarios' => $comentarios,
             'usuarios' => $usuarios,
@@ -95,7 +95,7 @@ class MenuController extends Controller
 
         $usuarios = Usuario::all();
 
-        return view('menu.menu', [
+        return view('menu.tecnologia', [
             'aplicativos' => $aplicativos,
             'comentarios' => $comentarios,
             'usuarios' => $usuarios,

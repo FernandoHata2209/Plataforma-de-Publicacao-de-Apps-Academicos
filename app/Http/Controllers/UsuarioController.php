@@ -32,7 +32,7 @@ class UsuarioController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->route('menu.menu');
         } else {
-            return redirect()->route('menu.menu')->withErrors(['senha' => 'Email ou senha incorretos']);
+            return redirect()->route('menu.menu')->with('error', 'Email ou senha incorretos. Por favor, tente novamente.');
         }
     }
 
@@ -49,8 +49,8 @@ class UsuarioController extends Controller
             'sobrenome' => 'required|string',
             'email' => 'required|email|unique:usuarios', // Verifica a unicidade do email na tabela 'usuarios'
             'senha' => 'required|min:6|confirmed',
-            'cargo' => 'required|in:equipe_NPI,aluno,Professor',
-            'curso' => 'required|in:ciencia_Computacao,engenharia_Software,Professor',
+            'cargo' => 'required|in:Equipe do NPI,Aluno,Professor',
+            'curso' => 'required|in:Ciencia da Computação,Engenharia de Software,Nenhum',
         ], [
             'email.unique' => 'Este email já está em uso.', // Mensagem personalizada para a regra 'unique'
         ]);

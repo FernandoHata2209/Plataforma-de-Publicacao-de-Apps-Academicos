@@ -368,7 +368,7 @@
         @else
             <div class="container-project-publish">
                 @foreach ($usuarios as $usuario)
-                    <div class="card text-center mt-3">
+                    <div class="card text-center mt-3 mb-3">
                         <div class="card-header">
                             Usuario Encontrado
                         </div>
@@ -377,7 +377,11 @@
                                 {{ $usuario->sobrenome }}</h5>
                             <p class="card-text">{{ $usuario->curso }}</p>
                             <p class="card-text">{{ $usuario->cargo }}</p>
+                            @if($usuario->qtd_Postagens == 0)
+                            <p class="card-text">Nenhuma Postagem Realizada</p>
+                            @else
                             <p class="card-text">Quantidade de Postagens: {{ $usuario->qtd_Postagens }}</p>
+                            @endif
                             <a href="{{ route('user.perfil', ['id' => $usuario->first()->id]) }}"
                                 class="btn btn-primary">Ir ao Perfil</a>
                         </div>

@@ -81,6 +81,14 @@
     background-color: rgb(224, 224, 224);
 }
 
+.forgot-password{
+    text-decoration: underline;
+    border: none;
+    width: 160px;
+    background-color: white;
+    color: rgb(0, 119, 255);
+}
+
 .container-menu-project {
     display: flex;
     justify-content: center;
@@ -274,10 +282,15 @@
 #more-info-publish{
     display: flex;
     flex-direction: row;
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: bolder;
     font-size: 15px;
     cursor: pointer;
+    color: black;
+}
+
+#more-info-publish:hover{
+    text-decoration: underline;
 }
 
 #form-like-project{
@@ -315,6 +328,7 @@
     border-radius: 10px;
     transition: .3s;
     background-color: none;
+    background-color: white;
 }
 
 #btn-link-project{

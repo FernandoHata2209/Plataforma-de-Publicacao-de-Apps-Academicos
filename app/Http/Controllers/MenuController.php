@@ -123,7 +123,7 @@ class MenuController extends Controller
         // Validação dos dados
         $validatedData = $request->validate([
             'nome_Aplicativo' => 'required|string',
-            'media' => 'required|file|mimes:jpeg,png,jpg,webp,mp4,avi,mov', // Permite imagens e vídeos
+            'media' => 'required|file|mimes:jpeg,png,jpg,webp,mp4,avi,mov,pdf,rar,zip', // Permite imagens e vídeos
             'descricao' => 'required|string',
             'tipo' => 'required|in:Matematica,Jogos,Programacao,Redes,Outros',
             'link_Projeto' => 'required|string',

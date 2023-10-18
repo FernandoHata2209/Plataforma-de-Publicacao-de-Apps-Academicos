@@ -6,6 +6,7 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 
@@ -68,5 +69,20 @@ class UsuarioController extends Controller
     {
         Auth::logout();
         return redirect()->route('menu.menu');
+    }
+
+    public function update(Request $request)
+    {
+        $user = Usuario::where('email', $request->email)->first();
+
+        if (!$user) {
+            return back()->withErrors(['email' => 'E-mail não encontrado']);
+        }
+
+        // Atualizar a senha no banco de dados
+        $user->senha = Hash::make($request->senha);
+        $user->save();
+
+        return redirect()->route('menu.menu')->with('status', 'Senha redefinida com sucesso. Você pode fazer login agora.');
     }
 }

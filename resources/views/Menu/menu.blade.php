@@ -70,8 +70,8 @@
                 <div id="section-login-user">
                     @guest
                         <button id="login-account" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-                        <button
-                            id="register-account"data-bs-toggle="modal"data-bs-target="#registerModal">Registrar-se</button>
+                        <button id="register-account"data-bs-toggle="modal"
+                            data-bs-target="#registerModal">Registrar-se</button>
                     @endguest
                     @auth
                         <a href="{{ route('user.perfil', ['id' => Auth::user()->id]) }}" id="user-perfil">
@@ -108,8 +108,7 @@
                         <form action="{{ route('menu.pesquisa') }}" method="GET">
                             @csrf
                             <div class="mb-3">
-                                <input type="text" class="form-control"
-                                    name="q">
+                                <input type="text" class="form-control" name="q">
                             </div>
                             <div class="mb-3">
                                 <label for="filtro_tipo">Filtrar por Temas:</label>
@@ -162,8 +161,59 @@
                                 <input type="password" class="form-control" id="loginPassword" required
                                     name="senha">
                             </div>
+                            <div class="mb-3">
+                                <button class="forgot-password" data-bs-toggle="modal"
+                                    data-bs-target="#changePasswordModal">Esqueceu a senha?</button>
+                            </div>
                             <button type="submit" class="btn btn-primary">Entrar</button>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Change Password --}}
+
+        <div class="modal top fade" id="changePasswordModal" tabindex="-1"
+            aria-labelledby="changePasswordModalLabel" aria-hidden="true" data-mdb-backdrop="true"
+            data-mdb-keyboard="true">
+            <div class="modal-dialog" style="width: 500px;">
+                <div class="modal-content text-center">
+                    <div class="modal-header h5 text-black justify-content-center">
+                        Alterar Senha
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body px-5">
+                        <p class="py-2 ">
+                            Digite seu email e sua nova senha!
+                        </p>
+                        <div class="form-outline">
+                            <form action="{{ route('password.reset') }}" method="POST">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Email</label>
+                                    <input class="form-control" type="email" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Nova senha</label>
+                                    <input class="form-control" type="password" name="senha" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Repita a nova Senha</label>
+                                    <input class="form-control" type="password" name="senha_confirmation" required>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary">Redefinir Senha</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button class="forgot-password" data-bs-toggle="modal"
+                                data-bs-target="#loginModal">Login</button>
+                            <button class="forgot-password"data-bs-toggle="modal"
+                                data-bs-target="#registerModal">Registrar-se</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -175,15 +225,6 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                         <h5 class="modal-title" id="loginModalLabel">Registrar</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
@@ -238,6 +279,16 @@
                 </div>
             </div>
         </div>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         {{-- Publish Modal --}}
         <div class="modal fade" id="publishModal" tabindex="-1" aria-labelledby="loginModalLabel"
@@ -361,8 +412,25 @@
                                                 </div>
                                             </div>
                                             <div class="project-image">
-                                                <img src="{{ asset('mediaProject/' . $aplicativo->media) }}"
-                                                    alt="">
+                                                @if (pathinfo($aplicativo->arquivo, PATHINFO_EXTENSION) == 'mp4')
+                                                    <!-- Se o arquivo é um vídeo -->
+                                                    <video width="320" height="240" controls>
+                                                        <source
+                                                            src="{{ asset('mediaProject/' . $aplicativo->media) }}"
+                                                            type="video/mp4">
+                                                        Seu navegador não suporta o elemento de vídeo.
+                                                    </video>
+                                                @else
+                                                    @if (pathinfo($aplicativo->arquivo, PATHINFO_EXTENSION) == 'pdf')
+                                                        <!-- Se o arquivo é um PDF -->
+                                                        <embed src="{{ asset('mediaProject/' . $aplicativo->media) }}"
+                                                            type="application/pdf" width="100%" height="600px" />
+                                                    @else
+                                                        <!-- Se o arquivo não é um vídeo nem um PDF, assumindo que seja uma imagem -->
+                                                        <img src="{{ asset('mediaProject/' . $aplicativo->media) }}"
+                                                            alt="">
+                                                    @endif
+                                                @endif
                                             </div>
                                         </div>
                                     @endif
@@ -383,7 +451,6 @@
                 <a href="{{ route('menu.programacao') }}" id="type-project">Programação</a>
             </div>
         </div>
-
 
         <div class="container-project-publish-principal">
             <div id="infos-project-principal">
@@ -441,7 +508,8 @@
                                     <a href="{{ $aplicativo->link_Projeto }}" target="_blank">
                                         <button id="btn-link-project">Link do Projeto</button>
                                     </a>
-                                    <a id="more-info-publish">
+                                    <a id="more-info-publish"
+                                        href="{{ route('menu.detalhes', ['id' => $aplicativo->id]) }}">
                                         Mais informações
                                     </a>
 
@@ -464,8 +532,8 @@
                                                 </svg>
                                             </button>
                                         </form>
-                                        <button
-                                            id="btn-comment-project"data-bs-toggle="modal"data-bs-target="#commentModal">
+                                        <button id="btn-comment-project"data-bs-toggle="modal"
+                                            data-bs-target="#commentModal">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                                 fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16"
                                                 id="comment-project">
@@ -485,7 +553,14 @@
                                         Seu navegador não suporta o elemento de vídeo.
                                     </video>
                                 @else
-                                    <img src="{{ asset('mediaProject/' . $aplicativo->media) }}" alt="">
+                                    @if (pathinfo($aplicativo->arquivo, PATHINFO_EXTENSION) == 'pdf')
+                                        <!-- Se o arquivo é um PDF -->
+                                        <embed src="{{ asset('mediaProject/' . $aplicativo->media) }}"
+                                            type="application/pdf" width="100%" height="600px" />
+                                    @else
+                                        <!-- Se o arquivo não é um vídeo nem um PDF, assumindo que seja uma imagem -->
+                                        <img src="{{ asset('mediaProject/' . $aplicativo->media) }}" alt="">
+                                    @endif
                                 @endif
 
                             </div>

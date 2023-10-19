@@ -362,7 +362,7 @@
         </div>
 
         <div class="container-project-publish">
-            @if ($aplicativo->status === 'Aprovado')
+            @if ($aplicativos->status === 'Aprovado')
                 @foreach ($aplicativos as $aplicativo)
                     <div class="content-publish">
                         <div class="project-info">

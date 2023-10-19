@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('criador');
             $table->boolean('aprovacao_Projeto')->nullable();
             $table->integer('qtd_Curtidas')->nullable();
+            $table->integer('qtd_Comentarios')->nullable();
             $table->string('media');
             $table->text('descricao');
-            $table->string('status');
+            $table->string('status')->default('Em verificação');
             $table->string('tipo');
             $table->string('link_Projeto');
             $table->timestamps();

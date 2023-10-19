@@ -16,12 +16,18 @@ class Aplicativo extends Model
         return $this->belongsTo(Usuario::class, 'criador', 'id');
     }
 
+    public function curtidas()
+    {
+        return $this->hasMany(Curtida::class);
+    }
+
     protected $fillable = [
         'nome_Aplicativo',
         'id',
         'criador',
         'aprovacao_Projeto',
         'qtd_Curtidas',
+        'qtd_Comentarios',
         'media',
         'descricao',
         'tipo',

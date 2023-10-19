@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comentarios_aplicativo', function (Blueprint $table) {
+        Schema::create('curtidas', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_Aplicativo');
-            $table->integer('id_Usuario');
-            $table->string('comentario')->nullable();
+            $table->unsignedBigInteger('aplicativo_id');
+            $table->unsignedBigInteger('usuario_id');
             $table->timestamps();
+    
+            $table->foreign('aplicativo_id')->references('id')->on('aplicativos')->onDelete('cascade');
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
         });
     }
 

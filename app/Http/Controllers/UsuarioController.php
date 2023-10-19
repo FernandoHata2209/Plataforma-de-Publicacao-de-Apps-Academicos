@@ -6,6 +6,7 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 
@@ -32,7 +33,7 @@ class UsuarioController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->route('menu.menu');
         } else {
-            return redirect()->route('menu.menu')->withErrors(['senha' => 'Email ou senha incorretos']);
+            return redirect()->route('menu.menu')->with('error', 'Email ou senha incorretos. Por favor, tente novamente.');
         }
     }
 
@@ -49,7 +50,8 @@ class UsuarioController extends Controller
             'sobrenome' => 'required|string',
             'email' => 'required|email|unique:usuarios', // Verifica a unicidade do email na tabela 'usuarios'
             'senha' => 'required|min:6|confirmed',
-            'cargo' => 'required|in:equipe_NPI,ciencia_Computacao,engenharia_Software',
+            'cargo' => 'required|in:Equipe do NPI,Aluno,Professor',
+            'curso' => 'required|in:Ciencia da Computação,Engenharia de Software,Nenhum',
         ], [
             'email.unique' => 'Este email já está em uso.', // Mensagem personalizada para a regra 'unique'
         ]);
@@ -67,5 +69,20 @@ class UsuarioController extends Controller
     {
         Auth::logout();
         return redirect()->route('menu.menu');
+    }
+
+    public function update(Request $request)
+    {
+        $user = Usuario::where('email', $request->email)->first();
+
+        if (!$user) {
+            return back()->withErrors(['email' => 'E-mail não encontrado']);
+        }
+
+        // Atualizar a senha no banco de dados
+        $user->senha = Hash::make($request->senha);
+        $user->save();
+
+        return redirect()->route('menu.menu')->with('status', 'Senha redefinida com sucesso. Você pode fazer login agora.');
     }
 }

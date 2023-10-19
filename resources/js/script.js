@@ -21,11 +21,3 @@ function updateCaracteres() {
     }
 }
 
-function openRegisterModal() {
-    $("#registerModal").modal("show");
-}
-
-// Função para abrir o modal de login
-function openLoginModal() {
-    $("#loginModal").modal("show");
-}

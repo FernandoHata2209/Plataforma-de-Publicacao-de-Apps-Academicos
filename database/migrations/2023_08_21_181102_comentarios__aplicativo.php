@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('comentarios_aplicativo', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_Aplicativo');
-            $table->integer('id_Usuario');
+            $table->integer('aplicativo_id');
+            $table->integer('usuario_id');
             $table->string('comentario')->nullable();
             $table->timestamps();
         });

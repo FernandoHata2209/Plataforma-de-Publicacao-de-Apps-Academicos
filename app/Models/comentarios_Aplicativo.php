@@ -11,19 +11,20 @@ class comentarios_Aplicativo extends Model
 
     protected $table = 'comentarios_aplicativo';
 
-    public function usuario()
-    {
-        return $this->belongsTo(Usuario::class, 'id');
-    }
-
     public function aplicativo()
     {
-        return $this->belongsTo(Aplicativo::class, 'id');
+        return $this->belongsTo(Aplicativo::class);
+    }
+
+    // Relação muitos para um com Usuario
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class);
     }
 
     protected $fillable = [
-        'id_Aplicativo',
-        'id_Usuario',
+        'aplicativo_id',
+        'usuario_id',
         'comentario'
     ];
 }

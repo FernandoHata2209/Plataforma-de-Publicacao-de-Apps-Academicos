@@ -21,6 +21,11 @@ class Aplicativo extends Model
         return $this->hasMany(Curtida::class);
     }
 
+    public function comentarios()
+    {
+        return $this->hasMany(comentarios_Aplicativo::class);
+    }
+
     protected $fillable = [
         'nome_Aplicativo',
         'id',

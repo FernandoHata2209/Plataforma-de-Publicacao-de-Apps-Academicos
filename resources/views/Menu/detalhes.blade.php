@@ -299,12 +299,7 @@
 
         <div class="container-menu-project">
             <div class="section-type-project">
-                <a id="type-project" href="{{ route('menu.tecnologia') }}">Menu</a>
-                <a id="type-project" href="{{ route('menu.tecnologia') }}">Tecnologia</a>
-                <a id="type-project" href="{{ route('menu.matematica') }}">Matematica</a>
-                <a id="type-project" href="{{ route('menu.redes') }}">Redes</a>
-                <a id="type-project" href="{{ route('menu.jogos') }}">Jogos</a>
-                <a href="{{ route('menu.programacao') }}" id="type-project">Programação</a>
+
             </div>
         </div>
 
@@ -316,103 +311,102 @@
                     Seu navegador não suporta o elemento de vídeo.
                 </video>
             @else
-                <img class="card-img-top" whidth="30" src="{{ asset('mediaProject/' . $aplicativos->media) }}" alt="">
+                <img class="card-img-top" whidth="30" src="{{ asset('mediaProject/' . $aplicativos->media) }}"
+                    alt="">
             @endif
             <div class="card-body">
                 <h2 class="card-title">{{ $aplicativos->nome_Aplicativo }}</h2>
-                    <h5>
-                        <a href="{{ route('user.perfil', $aplicativos->criadorRelacao->id) }}"
-                            id="username-perfil">
-                            <p id="creator-publish">
-                                {{ $aplicativos->criadorRelacao->nome }}
-                                {{ $aplicativos->criadorRelacao->sobrenome }}
-                            </p>
-                        </a>
-                    </h5>
-                    <p class="text-muted">{{ $aplicativos->criadorRelacao->curso }}</p>
-                    <p class="card-text">{{ $aplicativos->descricao }}</p>
-                    <a href="{{ $aplicativos->link_Projeto }}" target="_blank">
-                        <button id="btn-link-project">Link do Projeto</button>
+                <h5>
+                    <a href="{{ route('user.perfil', $aplicativos->criadorRelacao->id) }}" id="username-perfil">
+                        <p id="creator-publish">
+                            {{ $aplicativos->criadorRelacao->nome }}
+                            {{ $aplicativos->criadorRelacao->sobrenome }}
+                        </p>
                     </a>
-                    <div class="content-like-comment-project">
-                        <form action="{{ route('aplicativos.curtir', ['id' => $aplicativos->id]) }}"
-                            method="post" id="form-like-project">
-                            @if ($aplicativos->qtd_Curtidas === 0)
-                            @else
-                                <div id="count-like-project">
-                                    <p id="text-like-project">{{ $aplicativos->qtd_Curtidas }}</p>
-                                </div>
-                            @endif
-                            @csrf
-                            <button id="btn-like-project">
-                                <svg xmlns="http://www.w3.org/2000/svg" id="like-project" width="32"
-                                    height="32" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                                    <path
-                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                </svg>
-                            </button>
-                        </form>
-                        <button id="btn-comment-project"data-bs-toggle="modal" data-bs-target="#commentModal">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16" id="comment-project">
+                </h5>
+                <p class="text-muted">{{ $aplicativos->criadorRelacao->curso }}</p>
+                <p class="card-text">{{ $aplicativos->descricao }}</p>
+                <a href="{{ $aplicativos->link_Projeto }}" target="_blank">
+                    <button id="btn-link-project">Link do Projeto</button>
+                </a>
+                <div class="content-like-comment-project">
+                    <form action="{{ route('aplicativos.curtir', ['id' => $aplicativos->id]) }}" method="post"
+                        id="form-like-project">
+                        @if ($aplicativos->qtd_Curtidas === 0)
+                        @else
+                            <div id="count-like-project">
+                                <p id="text-like-project">{{ $aplicativos->qtd_Curtidas }}</p>
+                            </div>
+                        @endif
+                        @csrf
+                        <button id="btn-like-project">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="like-project" width="32" height="32"
+                                fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                                 <path
-                                    d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
+                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
                             </svg>
                         </button>
-                    </div>
-                    <p class="card-text"><small
-                            class="text-muted">{{ $aplicativos->created_at->diffForHumans() }}</small></p>
+                    </form>
+                    <button id="btn-comment-project"data-bs-toggle="modal" data-bs-target="#commentModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                            class="bi bi-chat" viewBox="0 0 16 16" id="comment-project">
+                            <path
+                                d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
+                        </svg>
+                    </button>
+                </div>
+                <p class="card-text"><small
+                        class="text-muted">{{ $aplicativos->created_at->diffForHumans() }}</small></p>
             </div>
         </div>
 
-            <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="loginModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="loginModalLabel">Buscar Aplicativo / Usuario</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            @if ($comentarios !== null && count($comentarios) > 0)
-                                @foreach ($comentarios as $comentario)
-                                    <div class="media mt-3">
-                                        <img src="{{ asset('caminho/para/foto/perfil.jpg') }}"
-                                            class="mr-3 rounded-circle" width="64">
-                                        <div class="media-body">
-                                            <h5 class="mt-0">{{ $comentario->usuario->nome }}
-                                                {{ $comentario->usuario->sobrenome }}</h5>
-                                            <p>{{ $comentario->comentario }}</p>
-                                            <small
-                                                class="text-muted">{{ $comentario->created_at->diffForHumans() }}</small>
-                                        </div>
+        <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="loginModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Buscar Aplicativo / Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @if ($aplicativos->comentarios->count() > 0)
+                            @foreach ($aplicativos->comentarios as $comentario)
+                                <div class="media mt-3">
+                                    <img src="{{ asset('caminho/para/foto/perfil.jpg') }}"
+                                        class="mr-3 rounded-circle" width="64">
+                                    <div class="media-body">
+                                        <h5 class="mt-0">{{ $comentario->usuario->nome }}
+                                            {{ $comentario->usuario->sobrenome }}</h5>
+                                        <p>{{ $comentario->comentario }}</p>
+                                        <small
+                                            class="text-muted">{{ $comentario->created_at->diffForHumans() }}</small>
                                     </div>
-                                    <hr>
-                                @endforeach
-                            @else
-                                <p>Nenhum comentário disponível.</p>
-                            @endif
-                        </div>
-                        <div class="modal-body">
-                            @if ($aplicativos)
-                                <form
-                                    action="{{ isset($aplicativo) ? route('aplicativos.comentar', ['id' => $aplicativo->id]) : '#' }}"
-                                    method="POST">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <textarea class="form-control" id="textAreaExample1" rows="4" name="comentarios"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Comentar</button>
-                                </form>
-                            @else
-                                <p>Nenhum aplicativo disponível para comentar no momento.</p>
-                            @endif
-                        </div>
+                                </div>
+                                <hr>
+                            @endforeach
+                        @else
+                            <p>Nenhum comentário disponível.</p>
+                        @endif
+                    </div>
+                    <div class="modal-body">
+                        @if ($aplicativos)
+                            <form action="{{ route('menu.detalhes.comentar', ['id' => $aplicativos->id]) }}"
+                                method="POST">
+                                @csrf
+                                <div class="mb-3">
+                                    <textarea class="form-control" id="textAreaExample1" rows="4" name="comentarios"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Comentar</button>
+                            </form>
+                        @else
+                            <p>Nenhum aplicativo disponível para comentar no momento.</p>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

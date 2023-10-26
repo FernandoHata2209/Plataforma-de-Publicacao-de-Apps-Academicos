@@ -22,13 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MenuController::class, 'index'])->name('menu.menu');
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.menu');
 Route::get('/menu/{id?}', [Menucontroller::class, 'mostrarComentario'])->name('menu.menu');
-Route::get('/menu/jogos', [MenuController::class, 'jogos'])->name('menu.jogos');
-Route::get('/menu/tecnologia', [MenuController::class, 'tecnologia'])->name('menu.tecnologia');
-Route::get('/menu/redes', [MenuController::class, 'redes'])->name('menu.redes');
-Route::get('/menu/programação', [MenuController::class, 'programacao'])->name('menu.programacao');
-Route::get('/menu/matematica', [MenuController::class, 'matematica'])->name('menu.matematica');
-
 Route::get('/projeto/{id}', [ProjetoController::class, 'mostrarDetalhes'])->name('menu.detalhes');
+
+Route::post('/projeto/aplicativos/comentar/{id}', [ProjetoController::class, 'comentar'])->name('menu.detalhes.comentar');
 
 Route::post('/auth', [UsuarioController::class, 'auth'])->name('auth.user');
 Route::post('/logout', [UsuarioController::class, 'logout'])->name('auth.logout');

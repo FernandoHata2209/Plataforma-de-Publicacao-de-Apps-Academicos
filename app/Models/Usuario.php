@@ -53,6 +53,11 @@ class Usuario extends Model implements Authenticatable
         return $this->hasMany(Aplicativo::class, 'criador');
     }
 
+    public function comentarios()
+    {
+        return $this->hasMany(comentarios_Aplicativo::class);
+    }
+
 
     protected $fillable = [
         'nome',

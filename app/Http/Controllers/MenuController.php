@@ -214,8 +214,8 @@ class MenuController extends Controller
 
             // Criar um novo comentário
             comentarios_Aplicativo::create([
-                'id_Usuario' => auth()->id(),
-                'id_Aplicativo' => $aplicativo->id,
+                'usuario_id' => auth()->id(),
+                'aplicativo_id' => $aplicativo->id,
                 'comentario' => $request->input('comentarios'),
             ]);
 

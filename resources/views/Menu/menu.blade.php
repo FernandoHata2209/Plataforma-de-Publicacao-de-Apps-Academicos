@@ -435,11 +435,7 @@
 
         <div class="container-menu-project">
             <div class="section-type-project">
-                <a id="type-project" href="{{ route('menu.tecnologia') }}">Tecnologia</a>
-                <a id="type-project" href="{{ route('menu.matematica') }}">Matematica</a>
-                <a id="type-project" href="{{ route('menu.redes') }}">Redes</a>
-                <a id="type-project" href="{{ route('menu.jogos') }}">Jogos</a>
-                <a href="{{ route('menu.programacao') }}" id="type-project">Programação</a>
+                <a href="">Irei mudar dpos</a>
             </div>
         </div>
 
@@ -586,14 +582,14 @@
                                     <hr>
                                 @endforeach
                             @else
-                                <p>Nenhum comentário disponível.</p>
+                                <p class="modal-title">Nenhum comentário realizado.</p>
                             @endif
                         </div>
                         <div class="modal-body">
                             @if ($aplicativos)
                                 <form
                                     action="{{ isset($aplicativo) ? route('aplicativos.comentar', ['id' => $aplicativo->id]) : '#' }}"
-                                    method="POST">
+                                    method="post">
                                     @csrf
                                     <div class="mb-3">
                                         <textarea class="form-control" id="textAreaExample1" rows="4" name="comentarios"></textarea>

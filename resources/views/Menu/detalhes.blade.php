@@ -168,6 +168,53 @@
             </div>
         </div>
 
+        {{-- Change Password --}}
+
+        <div class="modal top fade" id="changePasswordModal" tabindex="-1"
+            aria-labelledby="changePasswordModalLabel" aria-hidden="true" data-mdb-backdrop="true"
+            data-mdb-keyboard="true">
+            <div class="modal-dialog" style="width: 500px;">
+                <div class="modal-content text-center">
+                    <div class="modal-header h5 text-black justify-content-center">
+                        Alterar Senha
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body px-5">
+                        <p class="py-2 ">
+                            Digite seu email e sua nova senha!
+                        </p>
+                        <div class="form-outline">
+                            <form action="{{ route('password.reset') }}" method="POST">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Email</label>
+                                    <input class="form-control" type="email" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Nova senha</label>
+                                    <input class="form-control" type="password" name="senha" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Repita a nova Senha</label>
+                                    <input class="form-control" type="password" name="senha_confirmation" required>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary">Redefinir Senha</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button class="forgot-password" data-bs-toggle="modal"
+                                data-bs-target="#loginModal">Login</button>
+                            <button class="forgot-password"data-bs-toggle="modal"
+                                data-bs-target="#registerModal">Registrar-se</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{-- Register Modal --}}
         <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="loginModalLabel"
             aria-hidden="true">
@@ -299,7 +346,7 @@
 
         <div class="container-menu-project">
             <div class="section-type-project">
-
+                <a href="{{route('menu.menu')}}" id="type-project">Menu</a>
             </div>
         </div>
 
@@ -365,13 +412,13 @@
             <div class="modal-dialog modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Buscar Aplicativo / Usuario</h5>
+                        <h5 class="modal-title" id="loginModalLabel">COmentar</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         @if ($aplicativos->comentarios->count() > 0)
-                            @foreach ($aplicativos->comentarios as $comentario)
+                            @foreach($aplicativos->comentarios as $comentario)
                                 <div class="media mt-3">
                                     <img src="{{ asset('caminho/para/foto/perfil.jpg') }}"
                                         class="mr-3 rounded-circle" width="64">

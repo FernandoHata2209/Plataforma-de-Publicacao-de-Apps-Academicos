@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 
 * {
     width: 100%;
@@ -142,12 +144,18 @@
 #infos-project-principal {
     color: white;
     padding: 30px;
-    width: 50vw;
+    width: 80%;
+}
+
+#title-principal {
+    font-family: 'Lobster', sans-serif;
+    font-size: 30px;
+    
 }
 
 #title-project-principal {
     font-style: italic !important;
-    font-size: 70px;
+    font-size: 45px;
 }
 
 #more-info {
@@ -155,6 +163,7 @@
     font-weight: bolder;
     font-size: 20px;
     cursor: pointer;
+    color: white;
 }
 
 /* Conteudo da Publicacao do Projeto */
@@ -319,7 +328,7 @@
     width: 140px;
 }
 
-#btn-like-project, #btn-comment-project{
+#btn-like-project, #btn-comment-project, #btn-edit-project{
     width: 50px;
     display: flex;
     justify-content: center;
@@ -368,6 +377,12 @@
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+#aprove-edit-project{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #confirmation-btn-approve form{

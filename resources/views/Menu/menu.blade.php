@@ -94,6 +94,12 @@
             </div>
         @endif
 
+        @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
         {{-- Search Modal --}}
 
         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -290,6 +296,7 @@
             </div>
         @endif
 
+
         {{-- Publish Modal --}}
         <div class="modal fade" id="publishModal" tabindex="-1" aria-labelledby="loginModalLabel"
             aria-hidden="true">
@@ -397,9 +404,10 @@
                                                         @csrf
                                                         <button type="submit" id="reject-project">Cancelar</button>
                                                     </form>
-                                                    <form action="">
-                                                        <button type="" id="edit-project">Editar</button>
-                                                    </form>
+                                                    <div id="aprove-edit-project">
+                                                        <button id="edit-project" data-bs-toggle="modal"
+                                                            data-bs-target="#editAproveModal{{ $aplicativo->id }}">Editar</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="project-image">
@@ -433,29 +441,102 @@
             </div>
         </div>
 
-        <div class="container-menu-project">
-            <div class="section-type-project">
-                <a href="">Irei mudar dpos</a>
-            </div>
-        </div>
-
-        <div class="container-project-publish-principal">
-            <div id="infos-project-principal">
-                <h1 id="title-project-principal">Titulo do Projeto</h1>
-                <p id="description-project-principal">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, consequuntur
-                    voluptates.
-                    Veritatis iste pariatur, eaque molestias architecto magnam unde sequi dolorum officiis,
-                    neque ullam
-                    tempora explicabo, non fugit enim provident?
-                </p>
-                <div id="more-infos-project">
-                    <a id="more-info">
-                        Mais informacoes
-                    </a>
+        {{-- Edit Aprove --}}
+        @foreach($aplicativos as $aplicativo)
+        <div class="modal fade" id="editAproveModal{{ $aplicativo->id }}" tabindex="-1"
+            aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Publicar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('aprovacao.atualizar', ['id' => $aplicativo->id]) }}"
+                            id="form-publish" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Nome
+                                    Projeto</label>
+                                <input type="text" class="form-control" name="nome_Aplicativo"
+                                    placeholder="{{ $aplicativo->nome_Aplicativo }}"
+                                    value="{{ $aplicativo->nome_Aplicativo }}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="textAreaExample">Descrição</label>
+                                <textarea class="form-control" id="textAreaExample1" rows="4" name="descricao">
+                                {{ $aplicativo->descricao }}
+                            </textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cargo">Selecione
+                                    o cargo:</label>
+                                <select class="form-control" id="cargo" name="tipo" required>
+                                    <option value="" selected hidden>
+                                        {{ $aplicativo->tipo }}
+                                    </option>
+                                    <option value="Matematica">
+                                        Matemática</option>
+                                    <option value="Jogos">
+                                        Jogos</option>
+                                    <option value="Programacao">
+                                        Programação</option>
+                                    <option value="Redes">
+                                        Redes</option>
+                                    <option value="Outros">
+                                        Outros</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Imagem /
+                                    Video do Projeto</label>
+                                <input type="file" class="form-control" name="media"
+                                    id="image-project-publish">
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Link do
+                                    Projeto</label>
+                                <input type="text" class="form-control" name="link_Projeto"
+                                    id="link-project-publish" placeholder="{{ $aplicativo->link_Projeto }}"
+                                    value="{{ $aplicativo->link_Projeto }}">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Publicar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        @endforeach
+
+        <div class="container-menu-project">
+            <div class="section-type-project">
+                <a href="{{route('menu.menu')}}" id="type-project">Menu</a>
+                <a href="{{route('menu.menu')}}" id="type-project">Tecnologia</a>
+                <a href="{{route('menu.menu')}}" id="type-project">Jogos</a>
+                <a href="{{route('menu.menu')}}" id="type-project">Redes</a>
+                <a href="{{route('menu.menu')}}" id="type-project">Outros</a>
+            </div>
+        </div>
+
+
+        @if (!$aplicativos->isEmpty() && $aplicativos->where('qtd_Curtidas', '>=', 2)->count() > 0)
+            @php
+                $aplicativoDestaque = $aplicativos->sortByDesc('qtd_Curtidas')->first();
+            @endphp
+            <div class="container-project-publish-principal">
+                <div id="infos-project-principal">
+                    <h1 id="title-principal">Projeto em Destaque</h1>
+                    <h6 id="title-project-principal">{{ $aplicativoDestaque->nome_Aplicativo }}</h6>
+                    <p id="description-project-principal">{{ $aplicativoDestaque->descricao }}</p>
+                    <div id="more-infos-project">
+                        <a href="{{ route('menu.detalhes', ['id' => $aplicativoDestaque->id]) }}" id="more-info">
+                            Mais informações
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
 
         <div class="container-project-publish">
             @if ($aplicativos->where('status', 'Aprovado')->isEmpty())
@@ -519,8 +600,9 @@
                                                 </svg>
                                             </button>
                                         </form>
-                                        <button id="btn-comment-project"data-bs-toggle="modal"
-                                            data-bs-target="#commentModal">
+                                        <button id="btn-comment-project-{{ $aplicativo->id }}"data-bs-toggle="modal"
+                                            data-bs-target="#commentModal-{{ $aplicativo->id }}"
+                                            style="border: none; background: white;">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                                                 fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16"
                                                 id="comment-project">
@@ -555,54 +637,54 @@
                     @endif
                 @endforeach
             @endif
-
-            <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="loginModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="loginModalLabel">Buscar Aplicativo / Usuario</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            @if ($comentarios !== null && count($comentarios) > 0)
-                                @foreach ($comentarios as $comentario)
-                                    <div class="media mt-3">
-                                        <img src="{{ asset('caminho/para/foto/perfil.jpg') }}"
-                                            class="mr-3 rounded-circle" width="64">
-                                        <div class="media-body">
-                                            <h5 class="mt-0">{{ $comentario->usuario->nome }}
-                                                {{ $comentario->usuario->sobrenome }}</h5>
-                                            <p>{{ $comentario->comentario }}</p>
-                                            <small
-                                                class="text-muted">{{ $comentario->created_at->diffForHumans() }}</small>
+            @foreach ($aplicativos as $aplicativo)
+                <div class="modal fade" id="commentModal-{{ $aplicativo->id }}" tabindex="-1"
+                    aria-labelledby="loginModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="loginModalLabel">Comentarios</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                @if ($aplicativo->comentarios->count() > 0)
+                                    @foreach ($aplicativo->comentarios as $comentario)
+                                        <div class="media mt-3">
+                                            <img src="{{ asset('caminho/para/foto/perfil.jpg') }}"
+                                                class="mr-3 rounded-circle" width="64">
+                                            <div class="media-body">
+                                                <h5 class="mt-0">{{ $comentario->usuario->nome }}
+                                                    {{ $comentario->usuario->sobrenome }}</h5>
+                                                <p>{{ $comentario->comentario }}</p>
+                                                <small
+                                                    class="text-muted">{{ $comentario->created_at->diffForHumans() }}</small>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <hr>
-                                @endforeach
-                            @else
-                                <p class="modal-title">Nenhum comentário realizado.</p>
-                            @endif
-                        </div>
-                        <div class="modal-body">
-                            @if ($aplicativos)
-                                <form
-                                    action="{{ isset($aplicativo) ? route('aplicativos.comentar', ['id' => $aplicativo->id]) : '#' }}"
-                                    method="post">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <textarea class="form-control" id="textAreaExample1" rows="4" name="comentarios"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Comentar</button>
-                                </form>
-                            @else
-                                <p>Nenhum aplicativo disponível para comentar no momento.</p>
-                            @endif
+                                        <hr>
+                                    @endforeach
+                                @else
+                                    <p>Nenhum comentário disponível.</p>
+                                @endif
+                            </div>
+                            <div class="modal-body">
+                                @if ($aplicativo)
+                                    <form action="{{ route('menu.detalhes.comentar', ['id' => $aplicativo->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <textarea class="form-control" id="textAreaExample1" rows="4" name="comentarios"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Comentar</button>
+                                    </form>
+                                @else
+                                    <p>Nenhum aplicativo disponível para comentar no momento.</p>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

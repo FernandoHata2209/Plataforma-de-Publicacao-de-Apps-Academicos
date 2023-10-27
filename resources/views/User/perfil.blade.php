@@ -13,6 +13,11 @@
 <body>
     <section style="background-color: #eee;">
         <div class="container py-5">
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card mb-4">
@@ -22,7 +27,7 @@
                             <h5 class="my-3">{{ $usuarios->nome }}</h5>
                             <p class="text-muted mb-1">{{ $usuarios->curso }}</p>
                             <p class="text-muted mb-1">{{ $usuarios->cargo }}</p>
-                            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                            <p class="text-muted mb-4">Londrina / Parana</p>
                         </div>
                     </div>
                     <div class="card mb-4 mb-lg-0">
@@ -146,7 +151,109 @@
                                                                         </svg>
                                                                     </button>
                                                                 </form>
-                                                                <button id="btn-comment-project">
+                                                                @if (auth()->check() && $aplicativo->criadorRelacao->id === auth()->user()->id)
+                                                                    <div id="perfil-edit-project"><button
+                                                                            id="btn-edit-project"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#editPublishModal{{ $aplicativo->id }}">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="32" height="32"
+                                                                                fill="Black" class="bi bi-gear"
+                                                                                viewBox="0 0 16 16">
+                                                                                <path
+                                                                                    d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                                                                <path
+                                                                                    d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                                                                            </svg>
+                                                                        </button>
+                                                                    </div>
+                                                                @endif
+                                                                <div class="modal fade"
+                                                                    id="editPublishModal{{ $aplicativo->id }}"
+                                                                    tabindex="-1" aria-labelledby="loginModalLabel"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="loginModalLabel">Publicar</h5>
+                                                                                <button type="button"
+                                                                                    class="btn-close"
+                                                                                    data-bs-dismiss="modal"
+                                                                                    aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form
+                                                                                    action="{{ route('aplicativos.atualizar', ['id' => $aplicativo->id]) }}"
+                                                                                    id="form-publish" method="POST"
+                                                                                    enctype="multipart/form-data">
+                                                                                    @csrf
+                                                                                    <div class="mb-3">
+                                                                                        <label for="loginEmail"
+                                                                                            class="form-label">Nome
+                                                                                            Projeto</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            name="nome_Aplicativo" placeholder="{{$aplicativo->nome_Aplicativo}}" value="{{ $aplicativo->nome_Aplicativo }}" >
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label class="form-label"
+                                                                                            for="textAreaExample">Descrição</label>
+                                                                                        <textarea class="form-control" id="textAreaExample1" rows="4" name="descricao">
+                                {{ $aplicativo->descricao }}
+                            </textarea>
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="cargo">Selecione
+                                                                                            o cargo:</label>
+                                                                                        <select class="form-control"
+                                                                                            id="cargo"
+                                                                                            name="tipo" required>
+                                                                                            <option value=""
+                                                                                                selected hidden>
+                                                                                                {{ $aplicativo->tipo }}
+                                                                                            </option>
+                                                                                            <option value="Matematica">
+                                                                                                Matemática</option>
+                                                                                            <option value="Jogos">
+                                                                                                Jogos</option>
+                                                                                            <option
+                                                                                                value="Programacao">
+                                                                                                Programação</option>
+                                                                                            <option value="Redes">
+                                                                                                Redes</option>
+                                                                                            <option value="Outros">
+                                                                                                Outros</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="loginEmail"
+                                                                                            class="form-label">Imagem /
+                                                                                            Video do Projeto</label>
+                                                                                        <input type="file"
+                                                                                            class="form-control"
+                                                                                            name="media"
+                                                                                            id="image-project-publish">
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="loginPassword"
+                                                                                            class="form-label">Link do
+                                                                                            Projeto</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            name="link_Projeto"
+                                                                                            id="link-project-publish"
+                                                                                            placeholder="{{$aplicativo->link_Projeto}}" value="{{$aplicativo->link_Projeto}}" >
+                                                                                    </div>
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-primary">Publicar</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <button id="btn-comment-project"data-bs-toggle="modal"
+                                                                    data-bs-target="#commentModal">
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                         width="32" height="32"
                                                                         fill="currentColor" class="bi bi-chat"
@@ -155,6 +262,7 @@
                                                                             d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
                                                                     </svg>
                                                                 </button>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -191,7 +299,10 @@
         </div>
         </div>
     </section>
+
     </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

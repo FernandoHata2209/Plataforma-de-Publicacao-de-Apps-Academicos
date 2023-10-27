@@ -28,9 +28,9 @@ class userAccountController extends Controller
 
         $aplicativos = Aplicativo::where('id', $id)->first();
         if (!empty($aplicativos)) {
-            return view('user.editarProject', ['aplicativos' => $aplicativos]);
+            return view('user.perfil', ['aplicativos' => $aplicativos]);
         } else {
-            return redirect()->route('user.userperfil');
+            return redirect()->route('user.perfil');
         }
     }
 
@@ -48,7 +48,7 @@ class userAccountController extends Controller
         Aplicativo::where('id', $id)->update($data);
 
         // Redirecione de volta à interface de aprovação ou outra página relevante
-        return redirect()->route('user.userperfil', ['id' => $id])->with('success', 'Aplicativo atualizado com sucesso!');
+        return redirect()->route('user.perfil', ['id' => $id])->with('success', 'Aplicativo atualizado com sucesso!');
     }
 
     public function show($id)

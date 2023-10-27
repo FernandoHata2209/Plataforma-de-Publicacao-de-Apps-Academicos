@@ -26,6 +26,9 @@ Route::get('/projeto/{id}', [ProjetoController::class, 'mostrarDetalhes'])->name
 
 Route::post('/projeto/aplicativos/comentar/{id}', [ProjetoController::class, 'comentar'])->name('menu.detalhes.comentar');
 
+Route::get('/aplicativos/{id}/editar', [userAccountController::class, 'editar'])->name('user.perfil');
+Route::post('/aplicativos/{id}/atualizar', [userAccountController::class, 'atualizar'])->name('aplicativos.atualizar');
+
 Route::post('/auth', [UsuarioController::class, 'auth'])->name('auth.user');
 Route::post('/logout', [UsuarioController::class, 'logout'])->name('auth.logout');
 Route::post('/store', [UsuarioController::class, 'store'])->name('login.store');
@@ -34,7 +37,7 @@ Route::post('/redefinir-senha', [UsuarioController::class, 'update'])->name('pas
 Route::post('/aprovacao/aprovar/{id}', [MenuController::class, 'aprovar'])->name('menu.aprovar');
 Route::post('/aprovacao/rejeitar/{id}', [MenuController::class, 'rejeitar'])->name('menu.rejeitar');
 Route::get('/aprovacao/{id}/editar', [MenuController::class, 'editar'])->name('aprovacao.editar');
-Route::put('/aprovacao/{id}', [MenuController::class, 'atualizar'])->name('aprovacao.update');
+Route::post('/aprovacao/{id}', [MenuController::class, 'atualizar'])->name('aprovacao.atualizar');
 
 Route::get('/perfil/{id}', [userAccountController::class, 'index'])->name('user.perfil');
 

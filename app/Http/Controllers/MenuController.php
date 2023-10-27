@@ -15,106 +15,19 @@ class MenuController extends Controller
     public function index()
     {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
-
-        $comentarios = comentarios_Aplicativo::all();
-
         $usuarios = Usuario::all();
-
-        return view('menu.menu', [
-            'aplicativos' => $aplicativos,
-            'comentarios' => $comentarios,
-            'usuarios' => $usuarios,
-        ]);
-    }
-
-    public function jogos()
-    {
-        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
-
-        $comentarios = comentarios_Aplicativo::all();
-
-        $usuarios = Usuario::all();
-
-        return view('menu.jogos', [
-            'aplicativos' => $aplicativos,
-            'comentarios' => $comentarios,
-            'usuarios' => $usuarios,
-        ]);
-    }
-
-    public function programacao()
-    {
-        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
-
-        $comentarios = comentarios_Aplicativo::all();
-
-        $usuarios = Usuario::all();
-
-        return view('menu.programacao', [
-            'aplicativos' => $aplicativos,
-            'comentarios' => $comentarios,
-            'usuarios' => $usuarios,
-        ]);
-    }
-
-    public function redes()
-    {
-        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
-
-        $comentarios = comentarios_Aplicativo::all();
-
-        $usuarios = Usuario::all();
-
-        return view('menu.redes', [
-            'aplicativos' => $aplicativos,
-            'comentarios' => $comentarios,
-            'usuarios' => $usuarios,
-        ]);
-    }
-
-    public function matematica()
-    {
-        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
-
-        $comentarios = comentarios_Aplicativo::all();
-
-        $usuarios = Usuario::all();
-
-        return view('menu.matematica', [
-            'aplicativos' => $aplicativos,
-            'comentarios' => $comentarios,
-            'usuarios' => $usuarios,
-        ]);
-    }
-
-    public function tecnologia()
-    {
-        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
-
-        $comentarios = comentarios_Aplicativo::all();
-
-        $usuarios = Usuario::all();
-
-        return view('menu.tecnologia', [
-            'aplicativos' => $aplicativos,
-            'comentarios' => $comentarios,
-            'usuarios' => $usuarios,
-        ]);
+        return view('menu.menu', compact('aplicativos', 'usuarios'));
     }
 
     public function mostrarComentario($id)
     {
-        $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
+        $aplicativo = Aplicativo::with('comentarios')->find($id);
 
-        $comentarios = comentarios_Aplicativo::where('id_Aplicativo', $id)->get();
+        if (!$aplicativo) {
+            return redirect()->route('menu.menu')->with('error', 'Aplicativo não encontrado.');
+        }
 
-        $usuarios = Usuario::all();
-
-        return view('menu.menu', [
-            'aplicativos' => $aplicativos,
-            'comentarios' => $comentarios,
-            'usuarios' => $usuarios,
-        ]);
+        return view('menu.menu', compact('aplicativo'));
     }
 
     public function storePublish(Request $request)
@@ -277,6 +190,6 @@ class MenuController extends Controller
         Aplicativo::where('id', $id)->update($data);
 
         // Redirecione de volta à interface de aprovação ou outra página relevante
-        return redirect()->route('menu.aprovacao')->with('success', 'Aplicativo atualizado com sucesso!');
+        return redirect()->route('menu.menu')->with('success', 'Aplicativo atualizado com sucesso!');
     }
 }

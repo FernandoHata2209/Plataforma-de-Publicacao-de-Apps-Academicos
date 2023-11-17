@@ -37,7 +37,20 @@ class MenuController extends Controller
         $validatedData = $request->validate([
             'nome_Aplicativo' => 'required|string',
             'media' => 'required|file|mimes:jpeg,png,jpg,webp,mp4,avi,mov,pdf,rar,zip', // Permite imagens e vídeos
-            'descricao' => 'required|string',
+            'descricao' => ['required','string',
+                function ($attribute, $value, $fail) {
+                    $wordCount = str_word_count($value);
+            
+                    if (!empty($value)) {
+                        mb_internal_encoding('UTF-8');
+                        $wordCount = str_word_count($value);
+            
+                        if ($wordCount > 255) {
+                            $fail("O campo $attribute não pode ter mais de 255 palavras.");
+                        }
+                    }
+                },
+            ],
             'tipo' => 'required|in:Matematica,Jogos,Programacao,Redes,Outros',
             'link_Projeto' => 'required|string',
         ]);
@@ -162,7 +175,7 @@ class MenuController extends Controller
     {
         $aplicativo = Aplicativo::findOrFail($id);
         $aplicativo->update(['status' => 'Rejeitado']);
-        return redirect()->route('menu.menu')->with('success', 'Aplicativo rejeitado com sucesso!');
+        return redirect()->route('menu.menu')->with('success', 'Aplicativo cancelado com sucesso!');
     }
 
     public function editar(Request $request, $id)
@@ -183,7 +196,6 @@ class MenuController extends Controller
             'descricao' => $request->descricao,
             'tipo' => $request->tipo,
             'link_Projeto' => $request->link_Projeto,
-
         ];
 
         // Atualize os dados do aplicativo

@@ -16,11 +16,6 @@ class Aplicativo extends Model
         return $this->belongsTo(Usuario::class, 'criador', 'id');
     }
 
-    public function curtidas()
-    {
-        return $this->hasMany(Curtida::class);
-    }
-
     public function comentarios()
     {
         return $this->hasMany(comentarios_Aplicativo::class);

@@ -34,6 +34,7 @@
                 </div>
             @endguest
             <div id="logo">
+                <a href="{{route('menu.menu')}}">
                 <svg version="1.1" id="svg2" xml:space="preserve" width="440" height="98.666664"
                     viewBox="0 0 440 98.666664" sodipodi:docname="logo-unifil.eps"
                     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -57,6 +58,7 @@
                         </g>
                     </g>
                 </svg>
+            </a>
             </div>
             <div id="section-search-project">
                 <button id="btn-search" data-bs-toggle="modal" data-bs-target="#searchModal">
@@ -651,8 +653,8 @@
                                 @if ($aplicativo->comentarios->count() > 0)
                                     @foreach ($aplicativo->comentarios as $comentario)
                                         <div class="media mt-3">
-                                            <img src="{{ asset('caminho/para/foto/perfil.jpg') }}"
-                                                class="mr-3 rounded-circle" width="64">
+                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                                class="mr-3 rounded-circle" width="12">
                                             <div class="media-body">
                                                 <h5 class="mt-0">{{ $comentario->usuario->nome }}
                                                     {{ $comentario->usuario->sobrenome }}</h5>

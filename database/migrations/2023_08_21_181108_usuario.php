@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('email');
             $table->string('cargo');
             $table->string('senha');
-            $table->integer('qtd_Postagens')->nullable();;
-            $table->string('curso')->nullable();;
-            $table->integer('matricula')->nullable();;
-            $table->binary('imagem')->nullable();;
+            $table->integer('qtd_Postagens')->nullable();
+            $table->string('curso')->nullable();
+            $table->integer('matricula')->nullable();
+            $table->binary('imagem')->nullable();
+            $table->boolean('perfil_completo');
             $table->timestamps();
         });
 

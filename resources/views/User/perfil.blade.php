@@ -22,14 +22,48 @@
                 <div class="col-lg-4">
                     <div class="card mb-4">
                         <div class="card-body text-center">
+                            <a href="{{ route('menu.menu') }}" class="btn btn-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                    <path d="M6.5 12.5a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM11 8a.5.5 0 0 0-.5-.5H1a.5.5 0 0 0 0 1h9.5a.5.5 0 0 0 .5-.5zM1 2a.5.5 0 0 0 .5.5H13a.5.5 0 0 0 0-1H1.5A.5.5 0 0 0 1 2z"/>
+                                </svg>
+                                Voltar ao Menu
+                            </a>
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                                 alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
                             <h5 class="my-3">{{ $usuarios->nome }}</h5>
                             <p class="text-muted mb-1">{{ $usuarios->curso }}</p>
                             <p class="text-muted mb-1">{{ $usuarios->cargo }}</p>
                             <p class="text-muted mb-4">Londrina / Parana</p>
+                            @auth
+                                @if (auth()->user()->id === $usuarios->id)
+                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#editPerfilModal">
+                                        Editar Perfil
+                                    </button>
+                                @endif
+                            @endauth
+
                         </div>
                     </div>
+
+                    <div class="modal fade" id="editPerfilModal" tabindex="-1"
+                        aria-labelledby="loginModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="loginModalLabel">Editar Perfil</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="">
+                                        <input type="text" placeholder="{{$usuarios->nome}}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card mb-4 mb-lg-0">
                         <div class="card-body p-0">
                             <ul class="list-group list-group-flush rounded-3">
@@ -194,7 +228,9 @@
                                                                                             Projeto</label>
                                                                                         <input type="text"
                                                                                             class="form-control"
-                                                                                            name="nome_Aplicativo" placeholder="{{$aplicativo->nome_Aplicativo}}" value="{{ $aplicativo->nome_Aplicativo }}" >
+                                                                                            name="nome_Aplicativo"
+                                                                                            placeholder="{{ $aplicativo->nome_Aplicativo }}"
+                                                                                            value="{{ $aplicativo->nome_Aplicativo }}">
                                                                                     </div>
                                                                                     <div class="mb-3">
                                                                                         <label class="form-label"
@@ -243,7 +279,8 @@
                                                                                             class="form-control"
                                                                                             name="link_Projeto"
                                                                                             id="link-project-publish"
-                                                                                            placeholder="{{$aplicativo->link_Projeto}}" value="{{$aplicativo->link_Projeto}}" >
+                                                                                            placeholder="{{ $aplicativo->link_Projeto }}"
+                                                                                            value="{{ $aplicativo->link_Projeto }}">
                                                                                     </div>
                                                                                     <button type="submit"
                                                                                         class="btn btn-primary">Publicar</button>

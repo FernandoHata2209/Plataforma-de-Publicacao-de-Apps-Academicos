@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Menu - Plataforma de Publicação de Apps Acadêmicos</title>
+    <title>Plataforma de Publicacoes de Apps Academicos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     @vite(['resources/css/style.css', 'resources/js/script.js'])
 </head>
 
 <body>
+
     <div class="container-header-menu">
         <div class="container-menu">
             @auth
@@ -72,8 +73,8 @@
                 <div id="section-login-user">
                     @guest
                         <button id="login-account" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-                        <button id="register-account"data-bs-toggle="modal"
-                            data-bs-target="#registerModal">Registrar-se</button>
+                        <button
+                            id="register-account"data-bs-toggle="modal"data-bs-target="#registerModal">Registrar-se</button>
                     @endguest
                     @auth
                         <a href="{{ route('user.perfil', ['id' => Auth::user()->id]) }}" id="user-perfil">
@@ -90,12 +91,6 @@
             </div>
         </div>
 
-        @if (session('error'))
-            <div class="alert alert-danger" role="alert">
-                {{ session('error') }}
-            </div>
-        @endif
-
         {{-- Search Modal --}}
 
         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -103,8 +98,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="loginModalLabel">Buscar Apps:</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="{{ route('menu.pesquisa') }}" method="GET">
@@ -138,8 +132,6 @@
             </div>
         </div>
 
-
-
         {{-- Login Modal --}}
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
             aria-hidden="true">
@@ -165,53 +157,6 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Entrar</button>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- Change Password --}}
-
-        <div class="modal top fade" id="changePasswordModal" tabindex="-1"
-            aria-labelledby="changePasswordModalLabel" aria-hidden="true" data-mdb-backdrop="true"
-            data-mdb-keyboard="true">
-            <div class="modal-dialog" style="width: 500px;">
-                <div class="modal-content text-center">
-                    <div class="modal-header h5 text-black justify-content-center">
-                        Alterar Senha
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body px-5">
-                        <p class="py-2 ">
-                            Digite seu email e sua nova senha!
-                        </p>
-                        <div class="form-outline">
-                            <form action="{{ route('password.reset') }}" method="POST">
-                                @csrf
-                                <div class="mb-3">
-                                    <label for="loginEmail" class="form-label">Email</label>
-                                    <input class="form-control" type="email" name="email" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="loginEmail" class="form-label">Nova senha</label>
-                                    <input class="form-control" type="password" name="senha" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="loginEmail" class="form-label">Repita a nova Senha</label>
-                                    <input class="form-control" type="password" name="senha_confirmation" required>
-                                </div>
-                                <div class="mb-3">
-                                    <button type="submit" class="btn btn-primary">Redefinir Senha</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="d-flex justify-content-between mt-4">
-                            <button class="forgot-password" data-bs-toggle="modal"
-                                data-bs-target="#loginModal">Login</button>
-                            <button class="forgot-password"data-bs-toggle="modal"
-                                data-bs-target="#registerModal">Registrar-se</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -252,18 +197,9 @@
                                 <label for="cargo">Selecione o cargo:</label>
                                 <select class="form-control" id="cargo" name="cargo">
                                     <option value="" selected hidden>Cargo</option>
-                                    <option value="Equipe do NPI">Equipe NPI</option>
-                                    <option value="Aluno">Aluno</option>
-                                    <option value="Professor">Professor</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="cargo">Selecione o Curso:</label>
-                                <select class="form-control" id="cargo" name="curso">
-                                    <option value="" selected hidden>Curso</option>
-                                    <option value="Ciencia da Computação">Ciência da Computação</option>
-                                    <option value="Engenharia de Software">Engenharia de Software</option>
-                                    <option value="Nenhum">Nenhum</option>
+                                    <option value="equipe_NPI">Equipe NPI</option>
+                                    <option value="ciencia_Computacao">Ciência da Computação</option>
+                                    <option value="engenharia_Software">Engenharia de Software</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -346,116 +282,128 @@
             </div>
         </div>
 
-        <div class="container-menu-project">
-            <div class="section-type-project">
-                <a href="{{route('menu.menu')}}" id="type-project">Menu</a>
-            </div>
-        </div>
+        {{-- Aprove Modal --}}
 
-        <div class="card mb-3 mt-3">
-            @if (pathinfo($aplicativos->arquivo, PATHINFO_EXTENSION) == 'mp4')
-                <!-- Se o arquivo é um vídeo -->
-                <video width="320" height="240" controls>
-                    <source src="{{ asset('mediaProject/' . $aplicativos->media) }}" type="video/mp4">
-                    Seu navegador não suporta o elemento de vídeo.
-                </video>
-            @else
-                <img class="card-img-top" whidth="30" src="{{ asset('mediaProject/' . $aplicativos->media) }}"
-                    alt="">
-            @endif
-            <div class="card-body">
-                <h2 class="card-title">{{ $aplicativos->nome_Aplicativo }}</h2>
-                <h5>
-                    <a href="{{ route('user.perfil', $aplicativos->criadorRelacao->id) }}" id="username-perfil">
-                        <p id="creator-publish">
-                            {{ $aplicativos->criadorRelacao->nome }}
-                            {{ $aplicativos->criadorRelacao->sobrenome }}
-                        </p>
-                    </a>
-                </h5>
-                <p class="text-muted">{{ $aplicativos->criadorRelacao->curso }}</p>
-                <p class="card-text">{{ $aplicativos->descricao }}</p>
-                <a href="{{ $aplicativos->link_Projeto }}" target="_blank">
-                    <button id="btn-link-project">Link do Projeto</button>
-                </a>
-                <div class="content-like-comment-project">
-                    <form action="{{ route('aplicativos.curtir', ['id' => $aplicativos->id]) }}" method="post"
-                        id="form-like-project">
-                        @if ($aplicativos->qtd_Curtidas === 0)
-                        @else
-                            <div id="count-like-project">
-                                <p id="text-like-project">{{ $aplicativos->qtd_Curtidas }}</p>
-                            </div>
-                        @endif
-                        @csrf
-                        <button id="btn-like-project">
-                            <svg xmlns="http://www.w3.org/2000/svg" id="like-project" width="32" height="32"
-                                fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                                <path
-                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                            </svg>
-                        </button>
-                    </form>
-                    <button id="btn-comment-project"data-bs-toggle="modal" data-bs-target="#commentModal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                            class="bi bi-chat" viewBox="0 0 16 16" id="comment-project">
-                            <path
-                                d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
-                        </svg>
-                    </button>
-                </div>
-                <p class="card-text"><small
-                        class="text-muted">{{ $aplicativos->created_at->diffForHumans() }}</small></p>
-            </div>
-        </div>
-
-        <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="loginModalLabel"
+        <div class="modal fade" id="aprovarModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">COmentar</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Aprovação de Projetos</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        @if ($aplicativos->comentarios->count() > 0)
-                            @foreach($aplicativos->comentarios as $comentario)
-                                <div class="media mt-3">
-                                    <img src="{{ asset('caminho/para/foto/perfil.jpg') }}"
-                                        class="mr-3 rounded-circle" width="64">
-                                    <div class="media-body">
-                                        <h5 class="mt-0">{{ $comentario->usuario->nome }}
-                                            {{ $comentario->usuario->sobrenome }}</h5>
-                                        <p>{{ $comentario->comentario }}</p>
-                                        <small
-                                            class="text-muted">{{ $comentario->created_at->diffForHumans() }}</small>
+                        <div class="container-main-approve">
+                            @forelse ($aplicativos as $aplicativo)
+                                @if ($aplicativo->status === 'Em verificação')
+                                    <div class="content-publish-approve">
+                                        <div class="project-info">
+                                            <div id="header-publish">
+                                                <p id="type-project-publish">
+                                                    {{ $aplicativo->tipo }}
+                                                </p>
+                                                <p id="creator-publish">
+                                                    {{ $aplicativo->criadorRelacao->nome }}
+                                                    {{ $aplicativo->criadorRelacao->sobrenome }}
+                                                </p>
+                                                <p>{{ $aplicativo->created_at }}</p>
+                                                <label for="">Link do Projeto: </label>
+                                                <a href="{{ $aplicativo->link_Projeto }}"
+                                                    target="_blank">{{ $aplicativo->link_Projeto }}</a>
+                                            </div>
+                                            <div id="title-project-publish">
+                                                <h4 id="title-project">
+                                                    {{ $aplicativo->nome_Aplicativo }}
+                                                </h4>
+                                            </div>
+                                            <div id="description-project-publish">
+                                                <p>{{ $aplicativo->descricao }}</p>
+                                            </div>
+                                            <div id="confirmation-btn-approve">
+                                                <form action="{{ route('menu.aprovar', ['id' => $aplicativo->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <button type="submit" id="approve-project">Aprovar</button>
+                                                </form>
+                                                <form action="{{ route('menu.rejeitar', ['id' => $aplicativo->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <button type="submit" id="reject-project">Cancelar</button>
+                                                </form>
+                                                <form action="">
+                                                    <button type="" id="edit-project">Editar</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="project-image">
+                                            <img src="{{ asset('imagesProject/' . $aplicativo->media) }}"
+                                                alt="">
+                                        </div>
+
                                     </div>
-                                </div>
-                                <hr>
-                            @endforeach
-                        @else
-                            <p>Nenhum comentário disponível.</p>
-                        @endif
-                    </div>
-                    <div class="modal-body">
-                        @if ($aplicativos)
-                            <form action="{{ route('menu.detalhes.comentar', ['id' => $aplicativos->id]) }}"
-                                method="POST">
-                                @csrf
-                                <div class="mb-3">
-                                    <textarea class="form-control" id="textAreaExample1" rows="4" name="comentarios"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Comentar</button>
-                            </form>
-                        @else
-                            <p>Nenhum aplicativo disponível para comentar no momento.</p>
-                        @endif
+                                @endif
+                            @empty
+                                <h3 id="none-publish">Nenhuma aplicativo para aprovar no momento</h3>
+                            @endforelse
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="container-menu-project">
+            <div class="section-type-project">
+
+            </div>
+        </div>
+
+        @if ($usuarios->isEmpty() && $aplicativos->isEmpty())
+            <div class="none-publish">
+                <h3 id="title-none-publish">Nenhum resultado encontrado</h3>
+            </div>
+        @else
+            <div class="container-project-publish">
+                @foreach ($usuarios as $usuario)
+                    <div class="card text-center mt-3 mb-3">
+                        <div class="card-header">
+                            Usuario Encontrado
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $usuario->nome }}
+                                {{ $usuario->sobrenome }}</h5>
+                            <p class="card-text">{{ $usuario->curso }}</p>
+                            <p class="card-text">{{ $usuario->cargo }}</p>
+                            @if($usuario->qtd_Postagens == 0)
+                            <p class="card-text">Nenhuma Postagem Realizada</p>
+                            @else
+                            <p class="card-text">Quantidade de Postagens: {{ $usuario->qtd_Postagens }}</p>
+                            @endif
+                            <a href="{{ route('user.perfil', $usuario->id) }}"
+                                class="btn btn-primary">Ir ao Perfil</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Registro: {{ $usuario->created_at->diffForHumans() }}
+                        </div>
+                    </div>
+                @endforeach
+
+                @foreach ($aplicativos as $aplicativo)
+                    <div class="card mb-3 mt-3">
+                        <img src="{{ asset('mediaProject//' . $aplicativo->media) }}" class="card-img-top"
+                            alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $aplicativo->nome_Aplicativo }}</h5>
+                            <p class="card-text">{{ $aplicativo->descricao }}</p>
+                            <p class="card-text"><small
+                                    class="text-muted">{{ $aplicativo->created_at->diffForHumans() }}</small></p>
+                            <a href="{{route('menu.detalhes', ['id' => $aplicativo->id])}}"
+                                class="btn btn-primary">Mais Informações</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

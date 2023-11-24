@@ -35,15 +35,16 @@
                 </div>
             @endguest
             <div id="logo">
-                <a href="{{route('menu.menu')}}">
+                <a href="{{ route('menu.menu') }}">
                     <svg version="1.1" id="svg2" xml:space="preserve" width="440" height="98.666664"
                         viewBox="0 0 440 98.666664" sodipodi:docname="logo-unifil.eps"
                         xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
                         xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
                         xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
                         <defs id="defs6" />
-                        <sodipodi:namedview id="namedview4" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0"
-                            inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" />
+                        <sodipodi:namedview id="namedview4" pagecolor="#ffffff" bordercolor="#666666"
+                            borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0"
+                            inkscape:pagecheckerboard="0" />
                         <g id="g8" inkscape:groupmode="layer" inkscape:label="ink_ext_XXXXXX"
                             transform="matrix(1.3333333,0,0,-1.3333333,0,98.666667)">
                             <g id="g10" transform="scale(0.1)">
@@ -73,8 +74,8 @@
                 <div id="section-login-user">
                     @guest
                         <button id="login-account" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-                        <button
-                            id="register-account"data-bs-toggle="modal"data-bs-target="#registerModal">Registrar-se</button>
+                        <button id="register-account"data-bs-toggle="modal"
+                            data-bs-target="#registerModal">Registrar-se</button>
                     @endguest
                     @auth
                         <a href="{{ route('user.perfil', ['id' => Auth::user()->id]) }}" id="user-perfil">
@@ -98,7 +99,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="loginModalLabel">Buscar Apps:</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="{{ route('menu.pesquisa') }}" method="GET">
@@ -354,7 +356,12 @@
 
         <div class="container-menu-project">
             <div class="section-type-project">
-
+                <a href="{{ route('menu.menu') }}" id="type-project">Menu</a>
+                <a href="{{ route('menu.filtrartipo', 'Programacao') }}" id="type-project">Programação</a>
+                <a href="{{ route('menu.filtrartipo', 'Jogos') }}" id="type-project">Jogos</a>
+                <a href="{{ route('menu.filtrartipo', 'Redes') }}" id="type-project">Redes</a>
+                <a href="{{ route('menu.filtrartipo', 'Matematica') }}" id="type-project">Matemática</a>
+                <a href="{{ route('menu.filtrartipo', 'Outros') }}" id="type-project">Outros</a>
             </div>
         </div>
 
@@ -374,13 +381,13 @@
                                 {{ $usuario->sobrenome }}</h5>
                             <p class="card-text">{{ $usuario->curso }}</p>
                             <p class="card-text">{{ $usuario->cargo }}</p>
-                            @if($usuario->qtd_Postagens == 0)
-                            <p class="card-text">Nenhuma Postagem Realizada</p>
+                            @if ($usuario->qtd_Postagens == 0)
+                                <p class="card-text">Nenhuma Postagem Realizada</p>
                             @else
-                            <p class="card-text">Quantidade de Postagens: {{ $usuario->qtd_Postagens }}</p>
+                                <p class="card-text">Quantidade de Postagens: {{ $usuario->qtd_Postagens }}</p>
                             @endif
-                            <a href="{{ route('user.perfil', $usuario->id) }}"
-                                class="btn btn-primary">Ir ao Perfil</a>
+                            <a href="{{ route('user.perfil', $usuario->id) }}" class="btn btn-primary">Ir ao
+                                Perfil</a>
                         </div>
                         <div class="card-footer text-muted">
                             Registro: {{ $usuario->created_at->diffForHumans() }}
@@ -389,21 +396,27 @@
                 @endforeach
 
                 @foreach ($aplicativos as $aplicativo)
-                    <div class="card mb-3 mt-3">
-                        <img src="{{ asset('mediaProject//' . $aplicativo->media) }}" class="card-img-top"
-                            alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $aplicativo->nome_Aplicativo }}</h5>
-                            <p class="card-text">{{ $aplicativo->descricao }}</p>
-                            <p class="card-text"><small
-                                    class="text-muted">{{ $aplicativo->created_at->diffForHumans() }}</small></p>
-                            <a href="{{route('menu.detalhes', ['id' => $aplicativo->id])}}"
-                                class="btn btn-primary">Mais Informações</a>
-                        </div>
-                    </div>
-                @endforeach
+                    @if ($aplicativo->status === 'Aprovado')
+                        <div class="card mb-3 mt-3">
+                            <img src="{{ asset('mediaProject//' . $aplicativo->media) }}" class="card-img-top"
+                                alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $aplicativo->nome_Aplicativo }}</h5>
+                                <p class="card-text">{{ $aplicativo->descricao }}</p>
+                                <p class="card-text"><small
+                                        class="text-muted">{{ $aplicativo->created_at->diffForHumans() }}</small></p>
+                                <a href="{{ route('menu.detalhes', ['id' => $aplicativo->id]) }}"
+                                    class="btn btn-primary">Mais Informações</a>
+                            </div>
+                        @else
+                            <div class="none-publish">
+                                <h3 id="title-none-publish">Nenhum resultado encontrado</h3>
+                            </div>
+                    @endif
             </div>
-        @endif
+        @endforeach
+    </div>
+    @endif
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -348,7 +348,12 @@
 
         <div class="container-menu-project">
             <div class="section-type-project">
-                <a href="{{route('menu.menu')}}" id="type-project">Menu</a>
+                <a href="{{ route('menu.menu') }}" id="type-project">Menu</a>
+                <a href="{{ route('menu.filtrartipo', 'Programacao') }}" id="type-project">Programação</a>
+                <a href="{{ route('menu.filtrartipo', 'Jogos') }}" id="type-project">Jogos</a>
+                <a href="{{ route('menu.filtrartipo', 'Redes') }}" id="type-project">Redes</a>
+                <a href="{{ route('menu.filtrartipo', 'Matematica') }}" id="type-project">Matemática</a>
+                <a href="{{ route('menu.filtrartipo', 'Outros') }}" id="type-project">Outros</a>
             </div>
         </div>
 

@@ -16,7 +16,18 @@ class MenuController extends Controller
     {
         $aplicativos = Aplicativo::orderBy('created_at', 'desc')->get();
         $usuarios = Usuario::all();
+
         return view('menu.menu', compact('aplicativos', 'usuarios'));
+    }
+
+    public function filtrarPorTema($tema)
+    {
+        // Filtrar aplicativos por tema
+        $aplicativos = Aplicativo::where('status', 'aprovado')
+            ->where('tipo', $tema)
+            ->get();
+
+        return view('menu.menu', compact('aplicativos'));
     }
 
     public function mostrarComentario($id)
@@ -39,7 +50,6 @@ class MenuController extends Controller
             'media' => 'required|file|mimes:jpeg,png,jpg,webp,mp4,avi,mov,pdf,rar,zip', // Permite imagens e vídeos
             'descricao' => ['required','string',
                 function ($attribute, $value, $fail) {
-                    $wordCount = str_word_count($value);
             
                     if (!empty($value)) {
                         mb_internal_encoding('UTF-8');
@@ -83,8 +93,6 @@ class MenuController extends Controller
 
     public function curtir($id)
     {
-        // Encontrar o aplicativo pelo ID
-        $aplicativo = Aplicativo::find($id);
 
         if (auth()->check()) {
             // Encontrar o aplicativo pelo ID
@@ -101,7 +109,7 @@ class MenuController extends Controller
                 ->exists();
 
             if ($curtidaExistente) {
-                return redirect()->back()->with('error', 'Você já curtiu este aplicativo.');
+                return redirect()->back()->with('error', 'Você já curtiu essa publicação.');
             }
 
             // Criar uma nova entrada na tabela usuario_aplicativo para registrar a curtida
@@ -116,6 +124,8 @@ class MenuController extends Controller
 
 
             return redirect()->back()->with('success', 'Você curtiu o aplicativo com sucesso!');
+        } else {
+            return redirect()->back()->with('error', 'Você precisa estar logado para curtir.');
         }
     }
 
@@ -142,7 +152,19 @@ class MenuController extends Controller
             comentarios_Aplicativo::create([
                 'usuario_id' => auth()->id(),
                 'aplicativo_id' => $aplicativo->id,
-                'comentario' => $request->input('comentarios'),
+                'comentario' => ['required','string',
+                function ($attribute, $value, $fail) {
+            
+                    if (!empty($value)) {
+                        mb_internal_encoding('UTF-8');
+                        $wordCount = str_word_count($value);
+            
+                        if ($wordCount > 255) {
+                            $fail("O campo $attribute não pode ter mais de 255 palavras.");
+                        }
+                    }
+                },
+            ],
             ]);
 
             // Incrementar o número de comentários no aplicativo

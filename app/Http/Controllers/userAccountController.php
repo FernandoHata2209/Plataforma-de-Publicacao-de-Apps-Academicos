@@ -22,7 +22,7 @@ class userAccountController extends Controller
         return view('user.perfil', ['usuarios' => $usuarios, 'aplicativos' => $aplicativos]);
     }
 
-
+    // Editar Aplicatico
     public function editar(Request $request, $id)
     {
 
@@ -48,8 +48,10 @@ class userAccountController extends Controller
         Aplicativo::where('id', $id)->update($data);
 
         // Redirecione de volta à interface de aprovação ou outra página relevante
-        return redirect()->route('user.perfil', ['id' => $id])->with('success', 'Aplicativo atualizado com sucesso!');
+        return redirect()->route('user.perfil', ['id' => $id])->with('success', 'Aplicativo encaminhado para analise da equipe do NPI!');
     }
+
+    // Editar Perfil
 
     public function show($id)
     {

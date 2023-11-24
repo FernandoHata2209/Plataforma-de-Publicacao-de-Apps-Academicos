@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MenuController::class, 'index'])->name('menu.menu');
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.menu');
+Route::get('/menu/{tema}', [MenuController::class, 'filtrarPorTema'])->name('menu.filtrartipo');
 Route::get('/menu/{id?}', [Menucontroller::class, 'mostrarComentario'])->name('menu.menu');
 Route::get('/projeto/{id}', [ProjetoController::class, 'mostrarDetalhes'])->name('menu.detalhes');
 
@@ -39,6 +40,8 @@ Route::post('/aprovacao/rejeitar/{id}', [MenuController::class, 'rejeitar'])->na
 Route::get('/aprovacao/{id}/editar', [MenuController::class, 'editar'])->name('aprovacao.editar');
 Route::post('/aprovacao/{id}', [MenuController::class, 'atualizar'])->name('aprovacao.atualizar');
 
+Route::get('/perfil/{id}/editar', [UserAccountController::class, 'editar'])->name('perfil.editar');
+Route::post('/perfil/{id}', [UserAccountController::class, 'atualizar'])->name('perfil.atualizar');
 Route::get('/perfil/{id}', [userAccountController::class, 'index'])->name('user.perfil');
 
 Route::post('publicar/app', [MenuController::class, 'storePublish'])->name('publicar.store');

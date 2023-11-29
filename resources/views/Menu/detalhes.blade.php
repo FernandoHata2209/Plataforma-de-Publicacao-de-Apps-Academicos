@@ -427,8 +427,7 @@
                         @if ($aplicativos->comentarios->count() > 0)
                             @foreach($aplicativos->comentarios as $comentario)
                                 <div class="media mt-3">
-                                    <img src="{{ asset('caminho/para/foto/perfil.jpg') }}"
-                                        class="mr-3 rounded-circle" width="64">
+                                <img src="{{ $aplicativos->criadorRelacao->imagem ? asset('mediaProject/' . $aplicativos->criadorRelacao->imagem) : 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' }}" alt="avatar" class="rounded-circle img-fluid" style="width: 100px;">
                                     <div class="media-body">
                                         <h5 class="mt-0">{{ $comentario->usuario->nome }}
                                             {{ $comentario->usuario->sobrenome }}</h5>

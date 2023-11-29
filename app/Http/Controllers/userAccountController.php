@@ -55,56 +55,43 @@ class userAccountController extends Controller
 
     // Editar Perfil
 
-    public function atualizarPerfil(Request $request, $id){
-        $request->validate([
-            'email' => 'required|email|unique:usuarios,email,' . $id,
-            'senha' => 'sometimes|min:6|confirmed',
-            'imagem' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048', // Adapte conforme necessário
+    public function atualizarPerfil(Request $request, $id)
+    {
+        // Obtém o usuário autenticado
+        $usuario = Usuario::findOrFail($id);
+
+        // dd($request->all());
+
+        // Atualize os dados do usuário
+        $usuario->update([
+            'email' => $request->input('email'),
+            'senha' => $request->filled('senha') ? Hash::make($request->input('senha')) : $usuario->senha,
         ]);
 
-        $usuario = Usuario::findOrFail($id);
-    
-        try {  
-    
-            // Atualiza o e-mail se fornecido
-            if ($request->filled('email')) {
-                $usuario->email = $request->email;
-            }
-    
-            // Atualiza a senha se fornecida
-            if ($request->filled('senha')) {
-                $usuario->senha = Hash::make($request->senha);
-            }
-    
-            // Atualiza a foto de perfil se fornecida
-            if ($request->hasFile('imagem')) {
-                $foto_perfil = $request->file('imagem');
-                $nome_foto = $foto_perfil->getClientOriginalName();
-                $foto_perfil->move(public_path('mediaProject'), $nome_foto);
-                $usuario->imagem = $nome_foto;
-            }
-    
-            // Salva as alterações no banco de dados
-            $usuario->save();
-    
-            return redirect()->route('user.perfil')->with('success', 'Perfil atualizado com sucesso.');
-        } catch (\Exception $e) {
-            return redirect()->route('user.perfil')->with('error', 'Erro ao atualizar o perfil.');
+        if ($request->hasFile('imagem')) {
+            $media = $request->file('imagem');
+            $mediaName = $media->getClientOriginalName();
+            $media->move(public_path('mediaProject'), $mediaName);
+
+            // Atualiza o campo de imagem no banco de dados
+            $usuario->update(['imagem' => $mediaName]);
         }
+
+        return redirect()->route('user.perfil', ['id' => $usuario->id])->with('success', 'Perfil atualizado com sucesso.');
     }
 
-    public function editarPerfil(Request $request, $id)
+    public function editarPerfil()
     {
+        // Obtém o usuário autenticado
+        $usuario = Auth::user();
 
-        $usuarios = Usuario::where('id', $id)->first();
-        if (!empty($usuarios)) {
-            return view('user.perfil', ['usuarios' => $usuarios]);
-        } else {
-            return redirect()->route('user.perfil');
+        // Verifica se o usuário foi encontrado
+        if (!$usuario) {
+            return redirect()->route('user.perfil')->with('error', 'Usuário não encontrado.');
         }
 
+        return view('user.editarperfil', ['usuario' => $usuario]);
     }
-
 
     public function show($id)
     {

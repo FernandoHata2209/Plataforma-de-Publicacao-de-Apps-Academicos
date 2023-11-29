@@ -43,8 +43,8 @@ Route::post('/aprovacao/{id}', [MenuController::class, 'atualizar'])->name('apro
 Route::get('/perfil/projeto/{id}/editar', [UserAccountController::class, 'editarProjeto'])->name('perfil.projeto.editar');
 Route::post('/perfil/projeto/{id}', [UserAccountController::class, 'atualizarProjeto'])->name('perfil.projeto.atualizar');
 Route::get('/perfil/{id}', [userAccountController::class, 'index'])->name('user.perfil');
-Route::get('/perfil/{id}/editar', [UserAccountController::class, 'editarPerfil'])->name('perfil.editar');
-Route::post('/perfil/editar/{id}', [userAccountController::class, 'atualizarPerfil'])->name('perfil.atualizar');
+Route::get('/perfil/editar', [UserAccountController::class, 'editarPerfil'])->name('perfil.editar');
+Route::match(['post', 'put'], '/perfil/editar/{id}', [userAccountController::class, 'atualizarPerfil'])->name('perfil.atualizar');
 
 Route::post('publicar/app', [MenuController::class, 'storePublish'])->name('publicar.store');
 

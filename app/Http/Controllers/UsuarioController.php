@@ -25,7 +25,7 @@ class UsuarioController extends Controller
         ];
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('menu.menu');
+            return redirect()->route('menu.menu')->with('sucess', 'Login Realizado!');
         } else {
             return redirect()->route('menu.menu')->with('error', 'Email ou senha incorretos. Por favor, tente novamente.');
         }
@@ -34,6 +34,9 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         // Validação dos dados
+
+        
+        
         $validatedData = $request->validate([
             'nome' => 'required|string',
             'sobrenome' => 'required|string',

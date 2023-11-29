@@ -656,9 +656,7 @@
                                     @foreach ($aplicativo->comentarios as $comentario)
                                         <div class="media mt-3">
                                             <div class="media-body flex-row">
-                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                                                    alt="avatar" class="rounded-circle img-fluid"
-                                                    style="width: 100px;">
+                                            <img src="{{ $aplicativo->criadorRelacao->imagem ? asset('mediaProject/' . $aplicativo->criadorRelacao->imagem) : 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' }}" alt="avatar" class="rounded-circle img-fluid" style="width: 100px;">
                                                 <h5 class="mt-0">{{ $comentario->usuario->nome }}
                                                     {{ $comentario->usuario->sobrenome }}</h5>
                                                 <p>{{ $comentario->comentario }}</p>

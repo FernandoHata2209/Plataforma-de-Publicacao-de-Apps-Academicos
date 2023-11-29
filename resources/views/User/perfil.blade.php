@@ -28,7 +28,7 @@
                                 </svg>
                                 Voltar ao Menu
                             </a>
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                            <img src="{{ $usuarios->imagem ? asset('mediaProject/' . $usuarios->imagem) : 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' }}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
                             <h5 class="my-3">{{ $usuarios->nome }}</h5>
                             <p class="text-muted mb-1">{{ $usuarios->curso }}</p>
                             <p class="text-muted mb-1">{{ $usuarios->cargo }}</p>
@@ -56,9 +56,10 @@
                                 <div class="modal-body">
                                     <form action="{{ route('perfil.atualizar', ['id' => $usuarios->id]) }}" method="POST" enctype="multipart/form-data">
                                         @csrf
+                                        @method('put')
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Novo E-mail</label>
-                                            <input type="email" class="form-control" id="email" name="email" value="{{ $usuarios->email }}">
+                                            <input type="email" class="form-control" name="email" value="{{ Auth::user()->email }}">
                                         </div>
 
                                         <div class="mb-3">
@@ -84,34 +85,6 @@
                     </div>
                     @endif
                     @endauth
-
-
-                    <div class="card mb-4 mb-lg-0">
-                        <div class="card-body p-0">
-                            <ul class="list-group list-group-flush rounded-3">
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fas fa-globe fa-lg text-warning"></i>
-                                    <p class="mb-0">https://mdbootstrap.com</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                                    <p class="mb-0">mdbootstrap</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                                    <p class="mb-0">@mdbootstrap</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                                    <p class="mb-0">mdbootstrap</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                                    <p class="mb-0">mdbootstrap</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-lg-8">
                     <div class="card mb-4">
@@ -139,7 +112,7 @@
                                     <p class="mb-0">Telefone</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">(097) 234-5678</p>
+                                    <p class="text-muted mb-0">(097) 9234-5678</p>
                                 </div>
                             </div>
                             <hr>
@@ -148,7 +121,7 @@
                                     <p class="mb-0">Address</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                                    <p class="text-muted mb-0">Londrina, Paraná, Brasil</p>
                                 </div>
                             </div>
                         </div>

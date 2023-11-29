@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('qtd_Postagens')->nullable();
             $table->string('curso')->nullable();
             $table->integer('matricula')->nullable();
-            $table->binary('imagem')->nullable();
+            $table->string('imagem')->nullable();
             $table->timestamps();
         });
 

@@ -6,6 +6,7 @@ use App\Models\Aplicativo;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class userAccountController extends Controller
@@ -13,17 +14,18 @@ class userAccountController extends Controller
     public function index($id)
     {
         $usuarios = Usuario::find($id);
-        $aplicativos = $usuarios->aplicativos;
+
         if (!$usuarios) {
             // Usuário não encontrado, redirecionar para uma página de erro
             return redirect()->route('menu.menu')->with('error', 'Usuário não encontrado.');
         }
-        
+        $aplicativos = $usuarios->aplicativos;
+
         return view('user.perfil', ['usuarios' => $usuarios, 'aplicativos' => $aplicativos]);
     }
 
     // Editar Aplicatico
-    public function editar(Request $request, $id)
+    public function editarProjeto(Request $request, $id)
     {
 
         $aplicativos = Aplicativo::where('id', $id)->first();
@@ -34,7 +36,7 @@ class userAccountController extends Controller
         }
     }
 
-    public function atualizar(Request $request, $id)
+    public function atualizarProjeto(Request $request, $id)
     {
         $data = [
             'nome_Aplicativo' => $request->nome_Aplicativo,
@@ -52,6 +54,57 @@ class userAccountController extends Controller
     }
 
     // Editar Perfil
+
+    public function atualizarPerfil(Request $request, $id){
+        $request->validate([
+            'email' => 'required|email|unique:usuarios,email,' . $id,
+            'senha' => 'sometimes|min:6|confirmed',
+            'imagem' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048', // Adapte conforme necessário
+        ]);
+
+        $usuario = Usuario::findOrFail($id);
+    
+        try {  
+    
+            // Atualiza o e-mail se fornecido
+            if ($request->filled('email')) {
+                $usuario->email = $request->email;
+            }
+    
+            // Atualiza a senha se fornecida
+            if ($request->filled('senha')) {
+                $usuario->senha = Hash::make($request->senha);
+            }
+    
+            // Atualiza a foto de perfil se fornecida
+            if ($request->hasFile('imagem')) {
+                $foto_perfil = $request->file('imagem');
+                $nome_foto = $foto_perfil->getClientOriginalName();
+                $foto_perfil->move(public_path('mediaProject'), $nome_foto);
+                $usuario->imagem = $nome_foto;
+            }
+    
+            // Salva as alterações no banco de dados
+            $usuario->save();
+    
+            return redirect()->route('user.perfil')->with('success', 'Perfil atualizado com sucesso.');
+        } catch (\Exception $e) {
+            return redirect()->route('user.perfil')->with('error', 'Erro ao atualizar o perfil.');
+        }
+    }
+
+    public function editarPerfil(Request $request, $id)
+    {
+
+        $usuarios = Usuario::where('id', $id)->first();
+        if (!empty($usuarios)) {
+            return view('user.perfil', ['usuarios' => $usuarios]);
+        } else {
+            return redirect()->route('user.perfil');
+        }
+
+    }
+
 
     public function show($id)
     {

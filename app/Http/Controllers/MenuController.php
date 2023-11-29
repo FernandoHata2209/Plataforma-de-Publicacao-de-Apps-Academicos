@@ -44,7 +44,6 @@ class MenuController extends Controller
     public function storePublish(Request $request)
     {
         // Validação dos dados
-        // Validação dos dados
         $validatedData = $request->validate([
             'nome_Aplicativo' => 'required|string',
             'media' => 'required|file|mimes:jpeg,png,jpg,webp,mp4,avi,mov,pdf,rar,zip', // Permite imagens e vídeos

@@ -70,6 +70,5 @@ class Usuario extends Model implements Authenticatable
         'curso',
         'matricula',
         'imagem',
-        'perfil_completo'
     ];
 }

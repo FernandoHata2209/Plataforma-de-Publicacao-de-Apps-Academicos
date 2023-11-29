@@ -12,14 +12,8 @@ use Illuminate\Validation\ValidationException;
 
 class UsuarioController extends Controller
 {
-    public function index()
-    {
-        return view('Login/login');
-    }
-
     public function auth(Request $request)
     {
-
         $request->validate([
             'email' => 'required',
             'senha' => 'required'
@@ -35,11 +29,6 @@ class UsuarioController extends Controller
         } else {
             return redirect()->route('menu.menu')->with('error', 'Email ou senha incorretos. Por favor, tente novamente.');
         }
-    }
-
-    public function create()
-    {
-        return view('Login/register');
     }
 
     public function store(Request $request)

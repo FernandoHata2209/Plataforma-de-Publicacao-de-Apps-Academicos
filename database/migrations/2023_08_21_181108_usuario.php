@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('curso')->nullable();
             $table->integer('matricula')->nullable();
             $table->binary('imagem')->nullable();
-            $table->boolean('perfil_completo');
             $table->timestamps();
         });
 

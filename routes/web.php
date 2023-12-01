@@ -53,4 +53,6 @@ Route::post('/aplicativos/comentar/{id}', [MenuController::class, 'comentar'])->
 
 Route::get('/pesquisa', [PesquisaController::class, 'pesquisar'])->name('menu.pesquisa');
 
+Route::get('/download/arquivo/{id}', [MenuController::class, 'downloadArquivo'])->name('download.arquivo');
+
 

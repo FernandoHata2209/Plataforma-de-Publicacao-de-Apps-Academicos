@@ -44,16 +44,20 @@ class MenuController extends Controller
     public function storePublish(Request $request)
     {
         // Validação dos dados
+        $maxFileSize = 20480;
+
         $validatedData = $request->validate([
             'nome_Aplicativo' => 'required|string',
-            'media' => 'required|file|mimes:jpeg,png,jpg,webp,mp4,avi,mov,pdf,rar,zip', // Permite imagens e vídeos
-            'descricao' => ['required','string',
+            'media' => 'required|file|mimes:jpeg,png,jpg,webp',
+            'arquivo' => 'file|mimes:pdf,doc,docx,zip|max:' . $maxFileSize, // Permite imagens e vídeos
+            'descricao' => [
+                'required', 'string',
                 function ($attribute, $value, $fail) {
-            
+
                     if (!empty($value)) {
                         mb_internal_encoding('UTF-8');
                         $wordCount = str_word_count($value);
-            
+
                         if ($wordCount > 255) {
                             $fail("O campo $attribute não pode ter mais de 255 palavras.");
                         }
@@ -70,24 +74,58 @@ class MenuController extends Controller
         // Lida com o upload da mídia (imagem ou vídeo)
         $media = $request->file('media');
         $mediaName = $media->getClientOriginalName();
-        $media->move(public_path('mediaProject'), $mediaName);
+        $media->move(public_path('imagesProject'), $mediaName);
+
+        if ($request->hasFile('arquivo')) {
+            // Tente armazenar o arquivo
+            $mediaPath = $request->file('arquivo')->store('mediaProject', 'public');
+
+            Aplicativo::create([
+                'nome_Aplicativo' => $validatedData['nome_Aplicativo'],
+                'criador' => $user->id,
+                'media' => $mediaName,
+                'arquivo' => $mediaPath, // Salva apenas o nome do arquivo da mídia
+                'descricao' => $validatedData['descricao'],
+                'tipo' => $validatedData['tipo'],
+                'link_Projeto' => $validatedData['link_Projeto'],
+                'status' => 'Em verificação', // Define o status inicial do aplicativo
+            ]);
+            
+            // Restante do código...
+        } else {
+            Aplicativo::create([
+                'nome_Aplicativo' => $validatedData['nome_Aplicativo'],
+                'criador' => $user->id,
+                'media' => $mediaName,
+                'descricao' => $validatedData['descricao'],
+                'tipo' => $validatedData['tipo'],
+                'link_Projeto' => $validatedData['link_Projeto'],
+                'status' => 'Em verificação', // Define o status inicial do aplicativo
+            ]);
+        }
 
         // Cria um novo registro de aplicativo associando o criador (usuário autenticado)
-        Aplicativo::create([
-            'nome_Aplicativo' => $validatedData['nome_Aplicativo'],
-            'criador' => $user->id,
-            'media' => $mediaName, // Salva apenas o nome do arquivo da mídia
-            'descricao' => $validatedData['descricao'],
-            'tipo' => $validatedData['tipo'],
-            'link_Projeto' => $validatedData['link_Projeto'],
-            'status' => 'Em verificação', // Define o status inicial do aplicativo
-        ]);
+        
 
         // Incremente a quantidade de postagens do usuário
         $user->qtd_Postagens += 1;
         $user->save();
 
         return redirect()->route('menu.menu');
+    }
+
+    public function downloadArquivo($id)
+    {
+        $aplicativo = Aplicativo::findOrFail($id);
+
+        $pathCompleto = storage_path("app/public/{$aplicativo->arquivo}");
+
+        if (file_exists($pathCompleto)) {
+            return response()->download($pathCompleto);
+        } else {
+            // Lidar com o caso em que o arquivo não existe
+            return response()->json(['error' => 'O arquivo não existe'], 404);
+        }
     }
 
     public function curtir($id)
@@ -151,19 +189,20 @@ class MenuController extends Controller
             comentarios_Aplicativo::create([
                 'usuario_id' => auth()->id(),
                 'aplicativo_id' => $aplicativo->id,
-                'comentario' => ['required','string',
-                function ($attribute, $value, $fail) {
-            
-                    if (!empty($value)) {
-                        mb_internal_encoding('UTF-8');
-                        $wordCount = str_word_count($value);
-            
-                        if ($wordCount > 255) {
-                            $fail("O campo $attribute não pode ter mais de 255 palavras.");
+                'comentario' => [
+                    'required', 'string',
+                    function ($attribute, $value, $fail) {
+
+                        if (!empty($value)) {
+                            mb_internal_encoding('UTF-8');
+                            $wordCount = str_word_count($value);
+
+                            if ($wordCount > 255) {
+                                $fail("O campo $attribute não pode ter mais de 255 palavras.");
+                            }
                         }
-                    }
-                },
-            ],
+                    },
+                ],
             ]);
 
             // Incrementar o número de comentários no aplicativo

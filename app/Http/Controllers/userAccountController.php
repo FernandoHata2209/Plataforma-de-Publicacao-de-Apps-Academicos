@@ -71,7 +71,7 @@ class userAccountController extends Controller
         if ($request->hasFile('imagem')) {
             $media = $request->file('imagem');
             $mediaName = $media->getClientOriginalName();
-            $media->move(public_path('mediaProject'), $mediaName);
+            $media->move(public_path('imagesProject'), $mediaName);
 
             // Atualiza o campo de imagem no banco de dados
             $usuario->update(['imagem' => $mediaName]);

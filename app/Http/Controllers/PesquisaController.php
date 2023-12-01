@@ -13,6 +13,7 @@ class PesquisaController extends Controller
     {
         $termoPesquisa = $request->input('q');
         $tipoFiltro = $request->input('tipo');
+        $cursoFiltro = $request->input('curso');
         $statusFiltro = $request->input('status');
 
         // Pesquisar aplicativos
@@ -39,8 +40,8 @@ class PesquisaController extends Controller
             $queryUsuarios->where('nome', 'LIKE', '%' . $termoPesquisa . '%');
         }
 
-        if ($tipoFiltro) {
-            $queryUsuarios->where('curso', $statusFiltro);;
+        if ($cursoFiltro) {
+            $queryUsuarios->where('curso', $cursoFiltro);
         }
 
         $usuarios = $queryUsuarios->get();
@@ -49,7 +50,9 @@ class PesquisaController extends Controller
         return view('menu.pesquisa', [
             'aplicativos' => $aplicativos,
             'usuarios' => $usuarios,
-            'termoPesquisa' => $termoPesquisa
+            'termoPesquisa' => $termoPesquisa,
+            'mostrarAplicativos' => $tipoFiltro ? true : false,
+            'mostrarUsuarios' => $cursoFiltro ? true : false,
         ]);
     }
 }

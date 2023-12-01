@@ -411,4 +411,23 @@
     text-align: center;
 }
 
+.btn-dowload{
+    background-color: DodgerBlue;
+    width: 50px;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    transition: .3s;
+  }
+
+  #dowload{
+    text-decoration: none;
+  }
+  
+  /* Darker background on mouse-over */
+  .btn-dowload:hover {
+    background-color: RoyalBlue;
+    color: black;
+  }
+
 

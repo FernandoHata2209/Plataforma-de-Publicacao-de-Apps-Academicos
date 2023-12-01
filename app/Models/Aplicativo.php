@@ -29,6 +29,7 @@ class Aplicativo extends Model
         'qtd_Curtidas',
         'qtd_Comentarios',
         'media',
+        'arquivo',
         'descricao',
         'tipo',
         'link_Projeto',

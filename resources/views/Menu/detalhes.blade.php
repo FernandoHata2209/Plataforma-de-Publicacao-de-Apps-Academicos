@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Menu - Plataforma de Publicação de Apps Acadêmicos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @vite(['resources/css/style.css', 'resources/js/script.js'])
 </head>
 
@@ -361,11 +362,11 @@
             @if (pathinfo($aplicativos->arquivo, PATHINFO_EXTENSION) == 'mp4')
                 <!-- Se o arquivo é um vídeo -->
                 <video width="320" height="240" controls>
-                    <source src="{{ asset('mediaProject/' . $aplicativos->media) }}" type="video/mp4">
+                    <source src="{{ asset('imagesProject/' . $aplicativos->media) }}" type="video/mp4">
                     Seu navegador não suporta o elemento de vídeo.
                 </video>
             @else
-                <img class="card-img-top" whidth="30" src="{{ asset('mediaProject/' . $aplicativos->media) }}"
+                <img class="card-img-top" whidth="30" src="{{ asset('imagesProject/' . $aplicativos->media) }}"
                     alt="">
             @endif
             <div class="card-body">
@@ -380,6 +381,12 @@
                 </h5>
                 <p class="text-muted">{{ $aplicativos->criadorRelacao->curso }}</p>
                 <p class="card-text">{{ $aplicativos->descricao }}</p>
+                @if($aplicativos->arquivo == null)
+                            @else
+                            <a href="{{ route('download.arquivo', ['id' => $aplicativos->id]) }}" id="dowload">
+                            <button class="btn-dowload"><i class="fa fa-download"></i></button>
+                            </a>
+                            @endif
                 <a href="{{ $aplicativos->link_Projeto }}" target="_blank">
                     <button id="btn-link-project">Link do Projeto</button>
                 </a>
@@ -427,7 +434,7 @@
                         @if ($aplicativos->comentarios->count() > 0)
                             @foreach($aplicativos->comentarios as $comentario)
                                 <div class="media mt-3">
-                                <img src="{{ $aplicativos->criadorRelacao->imagem ? asset('mediaProject/' . $aplicativos->criadorRelacao->imagem) : 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' }}" alt="avatar" class="rounded-circle img-fluid" style="width: 100px;">
+                                <img src="{{ $aplicativos->criadorRelacao->imagem ? asset('imagesProject/' . $aplicativos->criadorRelacao->imagem) : 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' }}" alt="avatar" class="rounded-circle img-fluid" style="width: 100px;">
                                     <div class="media-body">
                                         <h5 class="mt-0">{{ $comentario->usuario->nome }}
                                             {{ $comentario->usuario->sobrenome }}</h5>

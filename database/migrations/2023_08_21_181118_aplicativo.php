@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('qtd_Curtidas')->nullable();
             $table->integer('qtd_Comentarios')->nullable();
             $table->string('media');
+            $table->string('arquivo')->nullable();
             $table->text('descricao');
             $table->string('status')->default('Em verificação');
             $table->string('tipo');

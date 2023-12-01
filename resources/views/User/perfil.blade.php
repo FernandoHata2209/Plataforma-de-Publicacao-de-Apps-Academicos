@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/style.css', 'resources/js/script.js'])
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Perfil Usuario - PPAA</title>
 </head>
 
@@ -28,7 +29,7 @@
                                 </svg>
                                 Voltar ao Menu
                             </a>
-                            <img src="{{ $usuarios->imagem ? asset('mediaProject/' . $usuarios->imagem) : 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' }}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                            <img src="{{ $usuarios->imagem ? asset('imagesProject/' . $usuarios->imagem) : 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp' }}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
                             <h5 class="my-3">{{ $usuarios->nome }}</h5>
                             <p class="text-muted mb-1">{{ $usuarios->curso }}</p>
                             <p class="text-muted mb-1">{{ $usuarios->cargo }}</p>
@@ -155,6 +156,12 @@
                                                     <p>{{ $aplicativo->descricao }}</p>
                                                 </div>
                                                 <div id="more-infos-project">
+                                                    @if($aplicativo->arquivo == null)
+                                                    @else
+                                                    <a href="{{ route('download.arquivo', ['id' => $aplicativo->id]) }}" id="dowload">
+                                                        <button class="btn-dowload"><i class="fa fa-download"></i></button>
+                                                    </a>
+                                                    @endif
                                                     <a href="{{ $aplicativo->link_Projeto }}" target="_blank">
                                                         <button id="btn-link-project">Link do Projeto</button>
                                                     </a>
@@ -254,11 +261,11 @@
                                                 @if (pathinfo($aplicativo->arquivo, PATHINFO_EXTENSION) == 'mp4')
                                                 <!-- Se o arquivo é um vídeo -->
                                                 <video width="320" height="240" controls>
-                                                    <source src="{{ asset('mediaProject/' . $aplicativo->media) }}" type="video/mp4">
+                                                    <source src="{{ asset('imagesProject/' . $aplicativo->media) }}" type="video/mp4">
                                                     Seu navegador não suporta o elemento de vídeo.
                                                 </video>
                                                 @else
-                                                <img src="{{ asset('mediaProject/' . $aplicativo->media) }}" alt="">
+                                                <img src="{{ asset('imagesProject/' . $aplicativo->media) }}" alt="">
                                                 @endif
 
                                             </div>
